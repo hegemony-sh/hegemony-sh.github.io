@@ -1,0 +1,59 @@
+/**
+ * Hegemony brand theme overrides for VitePress default theme.
+ * Brand: dark base (#131313) with a blue → teal gradient accent
+ * matching the hedgehog logo.
+ */
+
+:root {
+  /* Brand accent — blue/teal gradient from the logo */
+  --vp-c-brand-1: #38bdf8;
+  --vp-c-brand-2: #22d3ee;
+  --vp-c-brand-3: #0ea5e9;
+  --vp-c-brand-soft: rgba(56, 189, 248, 0.14);
+}
+
+.dark {
+  --vp-c-bg: #131313;
+  --vp-c-bg-alt: #1a1a1a;
+  --vp-c-bg-soft: #1c1c1c;
+
+  --vp-c-brand-1: #38bdf8;
+  --vp-c-brand-2: #22d3ee;
+  --vp-c-brand-3: #0ea5e9;
+  --vp-c-brand-soft: rgba(56, 189, 248, 0.16);
+}
+
+/* Hero name gradient */
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #38bdf8 30%, #22d3ee);
+
+  --vp-home-hero-image-background-image: linear-gradient(
+    -45deg,
+    rgba(56, 189, 248, 0.35) 30%,
+    rgba(34, 211, 238, 0.35)
+  );
+  --vp-home-hero-image-filter: blur(48px);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(72px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(96px);
+  }
+}
+
+/* Brand button */
+:root {
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #0b1120;
+  --vp-button-brand-bg: var(--vp-c-brand-1);
+  --vp-button-brand-hover-text: #0b1120;
+  --vp-button-brand-hover-bg: var(--vp-c-brand-2);
+  --vp-button-brand-active-bg: var(--vp-c-brand-3);
+}
