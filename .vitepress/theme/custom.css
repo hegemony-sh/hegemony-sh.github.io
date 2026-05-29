@@ -57,3 +57,16 @@
   --vp-button-brand-hover-bg: var(--vp-c-brand-2);
   --vp-button-brand-active-bg: var(--vp-c-brand-3);
 }
+
+/* Feature tile SVG icons */
+.VPFeature .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vp-c-brand-1);
+}
+
+.VPFeature .icon svg {
+  width: 24px;
+  height: 24px;
+}
