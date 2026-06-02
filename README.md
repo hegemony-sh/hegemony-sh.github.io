@@ -7,6 +7,8 @@ workflows on Temporal.
 Built with [VitePress](https://vitepress.dev/) and deployed to GitHub Pages at
 **[hegemony.sh](https://hegemony.sh)**.
 
+The site is localized in English (default, `/`) and Czech (`/cs/`).
+
 ## Local development
 
 Requires Node.js 20+.
@@ -22,9 +24,10 @@ npm run docs:preview
 
 | Path                   | Purpose                                 |
 | ---------------------- | --------------------------------------- |
-| `index.md`             | Landing page (VitePress home layout)    |
-| `docs/`                | Documentation pages                     |
-| `.vitepress/config.ts` | Site config, nav, theme                 |
+| `index.md`             | English landing page (default locale)   |
+| `docs/`                | English documentation pages             |
+| `cs/`                  | Czech landing page and docs             |
+| `.vitepress/config.ts` | Site config, locales, nav, theme        |
 | `.vitepress/theme/`    | Brand theme overrides                   |
 | `public/`              | Static assets (brand, favicon, `CNAME`) |
 
