@@ -35,11 +35,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Audit dependencies (high/critical gate)
+      - name: Audit dependencies (moderate+ gate)
         run: npm run audit
 
-      - name: Verify formatting, linting, typechecking, and build
+      - name: Verify formatting, linting, typechecking, links, and build
         run: npm run verify
+
+      - name: Install Playwright Chromium browser
+        run: npm exec -- playwright install --with-deps chromium
+
+      - name: Run smoke E2E tests
+        run: npm run test:e2e:smoke
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'

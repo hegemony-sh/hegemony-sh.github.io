@@ -4,3 +4,6 @@ node_modules/
 *.log
 .DS_Store
 .task/
+.playwright/
+playwright-report/
+test-results/

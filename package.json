@@ -9,19 +9,25 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "audit": "npm audit --audit-level=high",
+    "audit": "npm audit --audit-level=moderate",
+    "linkcheck:internal": "node scripts/check-internal-links.mjs",
     "format": "oxfmt .",
     "format:check": "oxfmt . --check",
-    "lint": "oxlint .vitepress",
-    "lint:fix": "oxlint .vitepress --fix",
+    "lint": "oxlint .vitepress playwright.config.ts e2e scripts",
+    "lint:fix": "oxlint .vitepress playwright.config.ts e2e scripts --fix",
     "lint:css": "stylelint '.vitepress/theme/**/*.css'",
     "lint:css:fix": "stylelint '.vitepress/theme/**/*.css' --fix",
     "lint:md": "markdownlint-cli2 \"**/*.md\"",
     "lint:md:fix": "markdownlint-cli2 --fix \"**/*.md\"",
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test -g @smoke --project=chromium",
     "typecheck": "vue-tsc --noEmit",
-    "verify": "npm run format:check && npm run lint && npm run lint:css && npm run lint:md && npm run typecheck && npm run docs:build"
+    "typecheck:e2e": "tsc --noEmit -p tsconfig.e2e.json",
+    "verify": "npm run format:check && npm run lint && npm run lint:css && npm run lint:md && npm run typecheck && npm run typecheck:e2e && npm run docs:build && npm run linkcheck:internal"
   },
   "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "@types/node": "^22.19.19",
     "markdownlint-cli2": "^0.22.1",
     "oxfmt": "0.24.0",
     "oxlint": "0.16.6",
@@ -31,6 +37,10 @@
     "vitepress": "^1.6.3",
     "vue": "^3.5.13",
     "vue-tsc": "^2.2.0"
+  },
+  "overrides": {
+    "esbuild": "0.25.0",
+    "vite": "6.4.2"
   },
   "engines": {
     "node": ">=20"

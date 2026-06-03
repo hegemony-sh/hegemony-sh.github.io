@@ -18,6 +18,8 @@ npm install        # install dependencies
 npm run docs:dev   # start the dev server (http://localhost:5173)
 npm run docs:build # production build into .vitepress/dist
 npm run docs:preview
+npm run verify     # format/lint/typecheck/build + internal link checks
+npm run test:e2e:smoke # browser smoke tests for custom interactive behavior
 ```
 
 ## Quality tooling
@@ -25,38 +27,53 @@ npm run docs:preview
 The site now includes a lightweight quality gate for local development and CI, which includes:
 
 - `oxfmt` for formatting (`npm run format`, `npm run format:check`)
-- `oxlint` for VitePress TypeScript and Vue script-block linting (`npm run lint`)
+- `oxlint` for VitePress, Playwright, and local utility scripts (`npm run lint`)
 - `stylelint` for theme CSS (`npm run lint:css`)
 - `markdownlint-cli2` for docs and landing pages (`npm run lint:md`)
 - `vue-tsc` for VitePress theme and config type-checking (`npm run typecheck`)
-- `npm audit --audit-level=high` as a CI dependency gate (`npm run audit`)
-- `npm run verify` to run the full gate plus a production build
+- an internal built-site link checker (`npm run linkcheck:internal`)
+- Playwright smoke tests for custom website behavior (`npm run test:e2e:smoke`)
+- `npm audit --audit-level=moderate` as a CI dependency gate (`npm run audit`)
+- `npm run verify` to run the full gate plus a production build and link checks
 
 If you use [Task](https://taskfile.dev/), the same workflow is also available
-via `task fmt`, `task lint`, `task audit`, and `task check`.
+via `task fmt`, `task lint`, `task audit`, `task test`, and `task check`.
 
-`npm run audit` intentionally fails only on `high` and `critical`
-vulnerabilities. The current remaining `moderate` advisories come from the
-VitePress/Vite/esbuild toolchain upstream, so this keeps CI actionable without
-turning it into a permanent red light.
+The repo uses npm `overrides` to keep the current `vitepress@1.6.x` toolchain
+on patched `vite` and `esbuild` releases while upstream still depends on the
+older vulnerable range.
+
+## Contributing
+
+- Run `npm run verify` before opening a PR.
+- Run `npm run test:e2e:smoke` for changes touching `.vitepress/`, localized
+  routing, navigation, or static assets.
+- Keep English and Czech pages aligned when updating shared content, or note a
+  deliberate translation follow-up in the PR.
+- Use the PR and issue templates in `.github/` to capture screenshots,
+  affected URLs, and verification details.
 
 ## Structure
 
 | Path                   | Purpose                                 |
 | ---------------------- | --------------------------------------- |
+| `.github/`             | CI workflow, templates, Dependabot      |
 | `index.md`             | English landing page (default locale)   |
 | `docs/`                | English documentation pages             |
 | `cs/`                  | Czech landing page and docs             |
 | `.vitepress/config.ts` | Site config, locales, nav, theme        |
 | `.vitepress/theme/`    | Brand theme overrides                   |
+| `e2e/`                 | Playwright smoke tests                  |
 | `public/`              | Static assets (brand, favicon, `CNAME`) |
+| `scripts/`             | Local utility checks                    |
 | `Taskfile.yml`         | Local quality and verification tasks    |
 
 ## Deployment
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the
-site and publishes it to GitHub Pages. The custom domain is configured via
-`public/CNAME`.
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which audits
+dependencies, runs quality checks, validates internal links, executes smoke E2E
+tests, and then publishes the site to GitHub Pages. The custom domain is
+configured via `public/CNAME`.
 
 Brand assets in `public/brand/` are sourced from the Hegemony application
 (`apps/ui/public/brand`).

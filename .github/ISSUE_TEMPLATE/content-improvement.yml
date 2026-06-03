@@ -1,0 +1,59 @@
+name: Content or docs improvement
+description: Suggest a wording, structure, translation, or discoverability improvement for the website.
+title: "[Content]: "
+labels:
+  - documentation
+  - website
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Page or section
+      description: Which page should be improved?
+      placeholder: https://hegemony.sh/docs/
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Improvement type
+      options:
+        - Copy or wording
+        - Translation sync
+        - Navigation or information architecture
+        - SEO / metadata
+        - Example or quick-start clarity
+        - Other content improvement
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is unclear or missing?
+      placeholder: The intro explains X, but it never links to Y...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed improvement
+      placeholder: Suggest the wording, structure, or translation change you would like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: References, screenshots, or related pages.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues first.
+          required: true

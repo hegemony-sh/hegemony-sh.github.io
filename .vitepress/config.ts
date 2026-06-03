@@ -10,6 +10,7 @@ const descriptionCs =
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  srcExclude: ["README.md", "test-results/**"],
   title: browserTitle,
   titleTemplate: ":title - Hegemony.sh",
   description: descriptionEn,
