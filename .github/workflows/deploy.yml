@@ -35,21 +35,50 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Audit dependencies (high/critical gate)
+      - name: Audit dependencies (moderate+ gate)
         run: npm run audit
 
-      - name: Verify formatting, linting, typechecking, and build
+      - name: Verify formatting, linting, typechecking, links, and build
         run: npm run verify
+
+      - name: Install Playwright Chromium browser
+        run: npm exec -- playwright install --with-deps chromium
+
+      - name: Run smoke E2E tests
+        run: npm run test:e2e:smoke
+
+      - name: Upload Playwright HTML report
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: .playwright/report
+          retention-days: 7
+          if-no-files-found: ignore
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
 
-      - name: Upload artifact
+      - name: Archive Pages artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory .vitepress/dist \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            .
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          path: .vitepress/dist
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
   deploy:
     if: github.event_name != 'pull_request'

@@ -51,6 +51,13 @@ tasks:
     cmds:
       - npm run lint:css:fix
 
+  site:linkcheck:
+    desc: Check internal built-site links and asset references
+    deps: [install]
+    cmds:
+      - npm run docs:build
+      - npm run linkcheck:internal
+
   md:lint:
     desc: Lint Markdown (markdownlint-cli2)
     deps: [install]
@@ -69,14 +76,38 @@ tasks:
     cmds:
       - npm run typecheck
 
+  site:typecheck:e2e:
+    desc: Typecheck Playwright config and smoke tests (tsc)
+    deps: [install]
+    cmds:
+      - npm run typecheck:e2e
+
+  site:e2e:install:
+    desc: Install Playwright Chromium browser
+    deps: [install]
+    cmds:
+      - npm exec -- playwright install chromium
+
+  site:e2e:install:deps:
+    desc: Install Playwright Chromium browser and Linux OS dependencies
+    deps: [install]
+    cmds:
+      - npm exec -- playwright install --with-deps chromium
+
+  site:e2e:smoke:
+    desc: Run website smoke E2E tests
+    deps: [site:e2e:install]
+    cmds:
+      - npm run test:e2e:smoke
+
   site:audit:
-    desc: Audit dependencies for high/critical vulnerabilities (npm audit)
+    desc: Audit dependencies for moderate+ vulnerabilities (npm audit)
     deps: [install]
     cmds:
       - npm run audit
 
   site:verify:
-    desc: Verify formatting, linting, typechecking, and production build
+    desc: Verify formatting, linting, typechecking, internal links, and production build
     deps: [install]
     cmds:
       - npm run verify
@@ -96,14 +127,21 @@ tasks:
       - task: site:lint:css
       - task: md:lint
       - task: site:typecheck
+      - task: site:typecheck:e2e
 
   audit:
-    desc: Run dependency audit gate (high/critical)
+    desc: Run dependency audit gate (moderate+)
     cmds:
       - task: site:audit
 
+  test:
+    desc: Run website smoke E2E tests
+    cmds:
+      - task: site:e2e:smoke
+
   check:
-    desc: Full local verification, including dependency audit
+    desc: Full local verification, including audit and smoke E2E
     cmds:
       - task: site:verify
       - task: site:audit
+      - task: site:e2e:smoke

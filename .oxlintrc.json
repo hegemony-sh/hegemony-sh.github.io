@@ -1,6 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/crates/oxlint/schema.json",
-  "ignorePatterns": ["node_modules/**", ".vitepress/dist/**", ".vitepress/cache/**"],
+  "ignorePatterns": [
+    "node_modules/**",
+    ".vitepress/dist/**",
+    ".vitepress/cache/**",
+    "playwright-report/**",
+    "test-results/**"
+  ],
   "rules": {
     "correctness": "warn",
     "suspicious": "warn",

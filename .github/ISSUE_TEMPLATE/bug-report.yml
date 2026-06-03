@@ -1,0 +1,78 @@
+name: Website bug report
+description: Report a broken page, rendering issue, missing asset, or website regression.
+title: "[Bug]: "
+labels:
+  - bug
+  - website
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Affected page or URL
+      description: Which page is broken?
+      placeholder: https://hegemony.sh/docs/
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Issue category
+      options:
+        - Broken link or navigation
+        - Rendering or layout issue
+        - Missing or wrong asset
+        - Localization mismatch
+        - CI / deployment regression
+        - Other website bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem clearly.
+      placeholder: The Czech homepage redirects incorrectly after clicking...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open ...
+        2. Click ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or console output
+      description: Paste screenshots, logs, or network/console errors if available.
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / device
+      placeholder: Chrome 137 on Linux, Safari on iPhone, ...
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Checks
+      options:
+        - label: I checked that this issue is about the website/docs repository rather than the main Hegemony app.
+          required: true
+        - label: I searched existing issues first.
+          required: true
