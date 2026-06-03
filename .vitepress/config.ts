@@ -34,7 +34,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/brand/favicon-48.png',
     siteTitle,
-    socialLinks: [{ icon: 'github', link: githubRepoUrl }],
+    socialLinks: [{ icon: 'github', link: githubRepoUrl, ariaLabel: 'GitHub' }],
 
     search: {
       provider: 'local',
@@ -78,10 +78,6 @@ export default defineConfig({
         nav: [
           { text: 'Home', link: '/' },
           { text: 'Docs', link: '/docs/' },
-          {
-            text: 'GitHub',
-            link: githubRepoUrl,
-          },
         ],
         sidebar: {
           '/docs/': [
@@ -109,10 +105,6 @@ export default defineConfig({
         nav: [
           { text: 'Úvod', link: '/cs/' },
           { text: 'Dokumentace', link: '/cs/docs/' },
-          {
-            text: 'GitHub',
-            link: githubRepoUrl,
-          },
         ],
         sidebar: {
           '/cs/docs/': [
