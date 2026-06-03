@@ -1,0 +1,6 @@
+{
+  "ignores": ["**/node_modules/**", "**/.vitepress/dist/**", "**/.vitepress/cache/**"],
+  "config": {
+    "extends": ".markdownlint.jsonc",
+  },
+}

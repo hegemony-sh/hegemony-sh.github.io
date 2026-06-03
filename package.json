@@ -1,20 +1,38 @@
 {
   "name": "hegemony-site",
   "version": "1.0.0",
-  "description": "Project website for Hegemony — a proof-of-execution platform for deterministic, long-running infrastructure workflows on Temporal.",
   "private": true,
-  "type": "module",
+  "description": "Project website for Hegemony — a proof-of-execution platform for deterministic, long-running infrastructure workflows on Temporal.",
   "license": "AGPL-3.0-or-later",
-  "engines": {
-    "node": ">=20"
-  },
+  "type": "module",
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "docs:preview": "vitepress preview",
+    "audit": "npm audit --audit-level=high",
+    "format": "oxfmt .",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .vitepress",
+    "lint:fix": "oxlint .vitepress --fix",
+    "lint:css": "stylelint '.vitepress/theme/**/*.css'",
+    "lint:css:fix": "stylelint '.vitepress/theme/**/*.css' --fix",
+    "lint:md": "markdownlint-cli2 \"**/*.md\"",
+    "lint:md:fix": "markdownlint-cli2 --fix \"**/*.md\"",
+    "typecheck": "vue-tsc --noEmit",
+    "verify": "npm run format:check && npm run lint && npm run lint:css && npm run lint:md && npm run typecheck && npm run docs:build"
   },
   "devDependencies": {
+    "markdownlint-cli2": "^0.22.1",
+    "oxfmt": "0.24.0",
+    "oxlint": "0.16.6",
+    "stylelint": "^17.1.0",
+    "stylelint-config-standard": "^40.0.0",
+    "typescript": "~5.6.2",
     "vitepress": "^1.6.3",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-tsc": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

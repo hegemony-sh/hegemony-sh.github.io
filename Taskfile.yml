@@ -1,0 +1,109 @@
+# SPDX-FileCopyrightText: 2025-2026 Jakub Trávník <jakub.travnik@gmail.com>
+#
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+version: "3"
+
+tasks:
+  install:
+    desc: Install website dependencies (npm ci)
+    cmds:
+      - npm ci
+    sources:
+      - package.json
+      - package-lock.json
+    generates:
+      - node_modules/.package-lock.json
+
+  site:format:
+    desc: Format website sources (oxfmt)
+    deps: [install]
+    cmds:
+      - npm run format
+
+  site:format:check:
+    desc: Check website formatting (oxfmt)
+    deps: [install]
+    cmds:
+      - npm run format:check
+
+  site:lint:
+    desc: Lint TS/JS and Vue script blocks (oxlint)
+    deps: [install]
+    cmds:
+      - npm run lint
+
+  site:lint:fix:
+    desc: Lint+fix TS/JS and Vue script blocks (oxlint)
+    deps: [install]
+    cmds:
+      - npm run lint:fix
+
+  site:lint:css:
+    desc: Lint CSS (stylelint)
+    deps: [install]
+    cmds:
+      - npm run lint:css
+
+  site:lint:css:fix:
+    desc: Lint+fix CSS (stylelint)
+    deps: [install]
+    cmds:
+      - npm run lint:css:fix
+
+  md:lint:
+    desc: Lint Markdown (markdownlint-cli2)
+    deps: [install]
+    cmds:
+      - npm run lint:md
+
+  md:lint:fix:
+    desc: Lint+fix Markdown (markdownlint-cli2)
+    deps: [install]
+    cmds:
+      - npm run lint:md:fix
+
+  site:typecheck:
+    desc: Typecheck VitePress config and theme (vue-tsc)
+    deps: [install]
+    cmds:
+      - npm run typecheck
+
+  site:audit:
+    desc: Audit dependencies for high/critical vulnerabilities (npm audit)
+    deps: [install]
+    cmds:
+      - npm run audit
+
+  site:verify:
+    desc: Verify formatting, linting, typechecking, and production build
+    deps: [install]
+    cmds:
+      - npm run verify
+
+  fmt:
+    desc: Run formatters and safe auto-fixes
+    cmds:
+      - task: site:format
+      - task: site:lint:css:fix
+      - task: md:lint:fix
+
+  lint:
+    desc: Run all linters and typechecks
+    cmds:
+      - task: site:format:check
+      - task: site:lint
+      - task: site:lint:css
+      - task: md:lint
+      - task: site:typecheck
+
+  audit:
+    desc: Run dependency audit gate (high/critical)
+    cmds:
+      - task: site:audit
+
+  check:
+    desc: Full local verification, including dependency audit
+    cmds:
+      - task: site:verify
+      - task: site:audit

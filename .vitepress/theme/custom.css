@@ -9,53 +9,43 @@
   --vp-c-brand-1: #38bdf8;
   --vp-c-brand-2: #22d3ee;
   --vp-c-brand-3: #0ea5e9;
-  --vp-c-brand-soft: rgba(56, 189, 248, 0.14);
-}
-
-.dark {
-  --vp-c-bg: #131313;
-  --vp-c-bg-alt: #1a1a1a;
-  --vp-c-bg-soft: #1c1c1c;
-
-  --vp-c-brand-1: #38bdf8;
-  --vp-c-brand-2: #22d3ee;
-  --vp-c-brand-3: #0ea5e9;
-  --vp-c-brand-soft: rgba(56, 189, 248, 0.16);
-}
-
-/* Hero name gradient */
-:root {
+  --vp-c-brand-soft: rgb(56, 189, 248, 0.14);
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-name-background: linear-gradient(120deg, #38bdf8 30%, #22d3ee);
-
   --vp-home-hero-image-background-image: linear-gradient(
     -45deg,
-    rgba(56, 189, 248, 0.35) 30%,
-    rgba(34, 211, 238, 0.35)
+    rgb(56, 189, 248, 0.35) 30%,
+    rgb(34, 211, 238, 0.35)
   );
   --vp-home-hero-image-filter: blur(48px);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(72px);
-  }
-}
-
-@media (min-width: 960px) {
-  :root {
-    --vp-home-hero-image-filter: blur(96px);
-  }
-}
-
-/* Brand button */
-:root {
   --vp-button-brand-border: transparent;
   --vp-button-brand-text: #0b1120;
   --vp-button-brand-bg: var(--vp-c-brand-1);
   --vp-button-brand-hover-text: #0b1120;
   --vp-button-brand-hover-bg: var(--vp-c-brand-2);
   --vp-button-brand-active-bg: var(--vp-c-brand-3);
+}
+
+.dark {
+  --vp-c-bg: #131313;
+  --vp-c-bg-alt: #1a1a1a;
+  --vp-c-bg-soft: #1c1c1c;
+  --vp-c-brand-1: #38bdf8;
+  --vp-c-brand-2: #22d3ee;
+  --vp-c-brand-3: #0ea5e9;
+  --vp-c-brand-soft: rgb(56, 189, 248, 0.16);
+}
+
+@media (width >= 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(72px);
+  }
+}
+
+@media (width >= 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(96px);
+  }
 }
 
 /* Feature tile SVG icons */
@@ -77,13 +67,13 @@
   max-width: 1152px;
 }
 
-@media (min-width: 640px) {
+@media (width >= 640px) {
   .sponsor-section {
     padding: 40px 48px 72px;
   }
 }
 
-@media (min-width: 960px) {
+@media (width >= 960px) {
   .sponsor-section {
     padding: 48px 64px 80px;
   }
@@ -107,13 +97,13 @@
   border-radius: 24px;
   background: linear-gradient(
     135deg,
-    rgba(56, 189, 248, 0.12),
-    rgba(34, 211, 238, 0.08) 50%,
-    rgba(255, 255, 255, 0.02)
+    rgb(56, 189, 248, 0.12),
+    rgb(34, 211, 238, 0.08) 50%,
+    rgb(255, 255, 255, 0.02)
   );
 }
 
-@media (min-width: 760px) {
+@media (width >= 760px) {
   .sponsor-card {
     grid-template-columns: minmax(0, 1.6fr) auto;
     padding: 28px 32px;
@@ -145,16 +135,18 @@
   min-height: 112px;
   padding: 18px 22px;
   border-radius: 18px;
-  border: 1px solid rgba(15, 23, 42, 0.08);
+  border: 1px solid rgb(15, 23, 42, 0.08);
   background: #fff;
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 18px 36px rgb(0, 0, 0, 0.18);
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .sponsor-logo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 22px 44px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 22px 44px rgb(0, 0, 0, 0.22);
 }
 
 .sponsor-logo img {
@@ -170,10 +162,10 @@
   z-index: 60;
   width: min(420px, calc(100vw - 32px));
   padding: 20px;
-  border: 1px solid rgba(56, 189, 248, 0.22);
+  border: 1px solid rgb(56, 189, 248, 0.22);
   border-radius: 20px;
-  background: rgba(28, 28, 28, 0.94);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+  background: rgb(28, 28, 28, 0.94);
+  box-shadow: 0 24px 60px rgb(0, 0, 0, 0.28);
   backdrop-filter: blur(18px);
 }
 
@@ -241,7 +233,7 @@
 .locale-prompt__secondary:hover {
   transform: translateY(-1px);
   border-color: var(--vp-c-brand-1);
-  background: rgba(56, 189, 248, 0.08);
+  background: rgb(56, 189, 248, 0.08);
 }
 
 .locale-prompt-fade-enter-active,
@@ -263,17 +255,17 @@
 
 .VPNavBarTranslations,
 .VPNavScreenTranslations {
-  --hegemony-current-language-flag: url('/flags/gb.svg');
-  --hegemony-alternate-language-flag: url('/flags/cz.svg');
+  --hegemony-current-language-flag: url("/flags/gb.svg");
+  --hegemony-alternate-language-flag: url("/flags/cz.svg");
 }
 
-html[lang='cs-CZ'] .VPNavBarTranslations,
-html[lang='cs-CZ'] .VPNavScreenTranslations {
-  --hegemony-current-language-flag: url('/flags/cz.svg');
-  --hegemony-alternate-language-flag: url('/flags/gb.svg');
+html[lang="cs-CZ"] .VPNavBarTranslations,
+html[lang="cs-CZ"] .VPNavScreenTranslations {
+  --hegemony-current-language-flag: url("/flags/cz.svg");
+  --hegemony-alternate-language-flag: url("/flags/gb.svg");
 }
 
-@media (min-width: 768px) {
+@media (width >= 768px) {
   .VPNavBarTranslations {
     display: flex !important;
     align-items: center;
@@ -295,12 +287,12 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
     display: flex;
   }
 
-  .VPNavBarExtra .social-links-list .VPSocialLink[aria-label='GitHub'] {
+  .VPNavBarExtra .social-links-list .VPSocialLink[aria-label="GitHub"] {
     display: inline-flex;
   }
 }
 
-@media (min-width: 1280px) {
+@media (width >= 1280px) {
   .VPNavBarSocialLinks {
     display: flex !important;
     align-items: center;
@@ -320,12 +312,8 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   justify-content: flex-start;
 }
 
-:is(
-    .VPNavBarSocialLinks,
-    .VPNavBarExtra .social-links-list,
-    .VPNavScreenSocialLinks
-  )
-  .VPSocialLink[aria-label='GitHub'] {
+:is(.VPNavBarSocialLinks, .VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
+  .VPSocialLink[aria-label="GitHub"] {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -334,28 +322,23 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   color: var(--vp-c-text-1);
 }
 
-:is(.VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
-  .VPSocialLink[aria-label='GitHub'] {
+:is(.VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks) .VPSocialLink[aria-label="GitHub"] {
   justify-content: flex-start;
   width: 100%;
 }
 
-.VPNavBarSocialLinks .VPSocialLink[aria-label='GitHub'] {
+.VPNavBarSocialLinks .VPSocialLink[aria-label="GitHub"] {
   padding: 0 8px;
 }
 
-.VPNavBarExtra .social-links-list .VPSocialLink[aria-label='GitHub'],
-.VPNavScreenSocialLinks .VPSocialLink[aria-label='GitHub'] {
+.VPNavBarExtra .social-links-list .VPSocialLink[aria-label="GitHub"],
+.VPNavScreenSocialLinks .VPSocialLink[aria-label="GitHub"] {
   padding: 6px 0;
 }
 
-:is(
-    .VPNavBarSocialLinks,
-    .VPNavBarExtra .social-links-list,
-    .VPNavScreenSocialLinks
-  )
-  .VPSocialLink[aria-label='GitHub']::before {
-  content: 'GitHub';
+:is(.VPNavBarSocialLinks, .VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
+  .VPSocialLink[aria-label="GitHub"]::before {
+  content: "GitHub";
   order: 1;
   font-size: 14px;
   font-weight: 500;
@@ -363,13 +346,9 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   color: inherit;
 }
 
-:is(
-    .VPNavBarSocialLinks,
-    .VPNavBarExtra .social-links-list,
-    .VPNavScreenSocialLinks
-  )
-  .VPSocialLink[aria-label='GitHub']::after {
-  content: '';
+:is(.VPNavBarSocialLinks, .VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
+  .VPSocialLink[aria-label="GitHub"]::after {
+  content: "";
   order: 2;
   display: inline-block;
   width: 11px;
@@ -379,26 +358,20 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   background: currentColor;
   margin-top: -1px;
   margin-left: 4px;
+
   --icon: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' %3E%3Cpath d='M0 0h24v24H0V0z' fill='none' /%3E%3Cpath d='M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z' /%3E%3C/svg%3E");
-  -webkit-mask-image: var(--icon);
+
   mask-image: var(--icon);
-  /*rtl:raw:transform: scaleX(-1);*/
+
+  /* rtl:raw:transform: scaleX(-1); */
 }
 
-:is(
-    .VPNavBarSocialLinks,
-    .VPNavBarExtra .social-links-list,
-    .VPNavScreenSocialLinks
-  )
-  .VPSocialLink[aria-label='GitHub']
+:is(.VPNavBarSocialLinks, .VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
+  .VPSocialLink[aria-label="GitHub"]
   > :deep(svg),
-:is(
-    .VPNavBarSocialLinks,
-    .VPNavBarExtra .social-links-list,
-    .VPNavScreenSocialLinks
-  )
-  .VPSocialLink[aria-label='GitHub']
-  > :deep([class^='vpi-social-']) {
+:is(.VPNavBarSocialLinks, .VPNavBarExtra .social-links-list, .VPNavScreenSocialLinks)
+  .VPSocialLink[aria-label="GitHub"]
+  > :deep([class^="vpi-social-"]) {
   width: 18px;
   height: 18px;
   order: 0;
@@ -418,7 +391,7 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
 .VPNavBarTranslations .title::before,
 .VPNavBarTranslations .link::before,
 .VPNavScreenTranslations .link::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 18px;
   height: 12px;
@@ -426,7 +399,7 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 0 1px rgb(255, 255, 255, 0.12);
 }
 
 .VPNavBarTranslations .text::before,
@@ -457,7 +430,7 @@ html[lang='cs-CZ'] .VPNavScreenTranslations {
   gap: 8px;
 }
 
-@media (max-width: 639px) {
+@media (width <= 639px) {
   .locale-prompt {
     right: 12px;
     bottom: 12px;
