@@ -55,6 +55,7 @@ tasks:
     desc: Check internal built-site links and asset references
     deps: [install]
     cmds:
+      - npm run docs:build
       - npm run linkcheck:internal
 
   md:lint:
