@@ -26,10 +26,10 @@
     "verify": "npm run format:check && npm run lint && npm run lint:css && npm run lint:md && npm run typecheck && npm run typecheck:e2e && npm run docs:build && npm run linkcheck:internal"
   },
   "devDependencies": {
-    "@playwright/test": "1.57.0",
+    "@playwright/test": "1.60.0",
     "@types/node": "^22.19.19",
     "markdownlint-cli2": "^0.22.1",
-    "oxfmt": "0.24.0",
+    "oxfmt": "0.54.0",
     "oxlint": "0.16.6",
     "stylelint": "^17.1.0",
     "stylelint-config-standard": "^40.0.0",
