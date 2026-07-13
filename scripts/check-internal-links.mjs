@@ -10,22 +10,19 @@ const skippedProtocols = ["http:", "https:", "mailto:", "tel:", "data:", "javasc
 
 async function walkHtmlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
-  const files = [];
+  const files = await Promise.all(
+    entries.map(async (entry) => {
+      const entryPath = join(directory, entry.name);
 
-  for (const entry of entries) {
-    const entryPath = join(directory, entry.name);
+      if (entry.isDirectory()) {
+        return walkHtmlFiles(entryPath);
+      }
 
-    if (entry.isDirectory()) {
-      files.push(...(await walkHtmlFiles(entryPath)));
-      continue;
-    }
+      return entry.isFile() && entry.name.endsWith(".html") ? [entryPath] : [];
+    }),
+  );
 
-    if (entry.isFile() && entry.name.endsWith(".html")) {
-      files.push(entryPath);
-    }
-  }
-
-  return files;
+  return files.flat();
 }
 
 function isExternalReference(reference) {
@@ -76,13 +73,11 @@ async function resolveBuiltTarget(sourceFile, pathname) {
     candidates.push(`${baseTarget}.html`, join(baseTarget, "index.html"));
   }
 
-  for (const candidate of candidates) {
-    if (await isFile(candidate)) {
-      return candidate;
-    }
-  }
+  const existingCandidates = await Promise.all(
+    candidates.map(async (candidate) => ((await isFile(candidate)) ? candidate : null)),
+  );
 
-  return null;
+  return existingCandidates.find((candidate) => candidate !== null) ?? null;
 }
 
 function extractIds(html) {
@@ -113,59 +108,54 @@ async function main() {
   }
 
   const htmlFiles = await walkHtmlFiles(distDir);
-  const htmlCache = new Map();
-  const errors = [];
-  let checkedReferences = 0;
+  const htmlEntries = await Promise.all(
+    htmlFiles.map(async (htmlFile) => [htmlFile, await readFile(htmlFile, "utf8")]),
+  );
+  const htmlCache = new Map(htmlEntries);
+  const results = await Promise.all(
+    htmlEntries.flatMap(([htmlFile, html]) =>
+      [...html.matchAll(attributePattern)].map(async (match) => {
+        const reference = match[2];
 
-  for (const htmlFile of htmlFiles) {
-    const html = await readFile(htmlFile, "utf8");
-    htmlCache.set(htmlFile, html);
-
-    for (const match of html.matchAll(attributePattern)) {
-      const reference = match[2];
-
-      if (!reference || isExternalReference(reference)) {
-        continue;
-      }
-
-      const { pathname, fragment } = splitReference(reference);
-      const normalizedFragment = normalizeFragment(fragment);
-      checkedReferences += 1;
-
-      let targetFile;
-      try {
-        targetFile = await resolveBuiltTarget(htmlFile, pathname);
-      } catch (error) {
-        errors.push(`${relative(distDir, htmlFile)} -> ${reference} (${error.message})`);
-        continue;
-      }
-
-      if (!targetFile) {
-        errors.push(`${relative(distDir, htmlFile)} -> ${reference} (missing target)`);
-        continue;
-      }
-
-      if (normalizedFragment) {
-        const targetHtml =
-          htmlCache.get(targetFile) ?? (await readFile(targetFile, "utf8").catch(() => null));
-
-        if (!targetHtml) {
-          errors.push(
-            `${relative(distDir, htmlFile)} -> ${reference} (anchor target is not an HTML file)`,
-          );
-          continue;
+        if (!reference || isExternalReference(reference)) {
+          return null;
         }
 
-        htmlCache.set(targetFile, targetHtml);
+        const { pathname, fragment } = splitReference(reference);
+        const normalizedFragment = normalizeFragment(fragment);
 
-        if (!extractIds(targetHtml).has(normalizedFragment)) {
-          errors.push(
-            `${relative(distDir, htmlFile)} -> ${reference} (missing anchor #${normalizedFragment})`,
-          );
+        let targetFile;
+        try {
+          targetFile = await resolveBuiltTarget(htmlFile, pathname);
+        } catch (error) {
+          return `${relative(distDir, htmlFile)} -> ${reference} (${error.message})`;
         }
-      }
-    }
-  }
+
+        if (!targetFile) {
+          return `${relative(distDir, htmlFile)} -> ${reference} (missing target)`;
+        }
+
+        if (normalizedFragment) {
+          const targetHtml =
+            htmlCache.get(targetFile) ?? (await readFile(targetFile, "utf8").catch(() => null));
+
+          if (!targetHtml) {
+            return `${relative(distDir, htmlFile)} -> ${reference} (anchor target is not an HTML file)`;
+          }
+
+          htmlCache.set(targetFile, targetHtml);
+
+          if (!extractIds(targetHtml).has(normalizedFragment)) {
+            return `${relative(distDir, htmlFile)} -> ${reference} (missing anchor #${normalizedFragment})`;
+          }
+        }
+
+        return null;
+      }),
+    ),
+  );
+  const errors = results.filter((result) => result !== null);
+  const checkedReferences = results.length;
 
   if (errors.length > 0) {
     console.error("Internal link check failed:\n");

@@ -7,7 +7,7 @@
     "playwright-report/**",
     "test-results/**"
   ],
-  "rules": {
+  "categories": {
     "correctness": "warn",
     "suspicious": "warn",
     "perf": "warn"
