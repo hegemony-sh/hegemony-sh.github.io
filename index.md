@@ -17,6 +17,9 @@ hero:
     - theme: alt
       text: View on GitHub
       link: https://github.com/hegemony-sh/Hegemony
+    - theme: alt
+      text: Try the demo
+      link: "#try-the-demo"
 
 features:
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>'
@@ -55,6 +58,35 @@ features:
     title: Notifications &amp; Webhooks
     details: Event-driven notifications and webhooks integrate Hegemony with your existing alerting and automation pipelines.
 ---
+
+<div class="demo-section" id="try-the-demo">
+  <p class="demo-eyebrow">Try the demo</p>
+  <div class="demo-card">
+
+## Run the full demo locally
+
+One command brings up the whole Hegemony stack with a pre-loaded demo
+scenario — inventory, secrets, schedules, webhooks, and flows for the
+fictional operator “Meridian Networks”, including a self-contained virtual
+lab flow that provisions and tears down a multi-router OSPF datacenter:
+
+```sh
+curl -fsSL https://hegemony.sh/install.sh | sh
+```
+
+The installer clones the platform and demo-data repositories and starts
+everything (API, worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) at
+`http://localhost:8080`. You need `curl`, `git` (with access to the platform
+repository), `docker` with the Compose v2 plugin,
+[go-task](https://taskfile.dev/), and a `docker login ghcr.io` session.
+Lifecycle commands and demo details are in
+[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data).
+
+<p class="demo-note">Demo credentials are hard-coded defaults for local
+evaluation only — never expose the stack to a network.</p>
+
+  </div>
+</div>
 
 <div class="sponsor-section">
   <p class="sponsor-eyebrow">Open source, backed by Rexonix</p>

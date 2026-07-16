@@ -6,6 +6,10 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  schedule:
+    # Daily republish so a new hegemony-demo-data installer release
+    # propagates to https://hegemony.sh/install.sh within a day
+    - cron: "17 6 * * *"
   workflow_dispatch:
 
 # Allow GITHUB_TOKEN to deploy to Pages
@@ -55,6 +59,24 @@ jobs:
           path: .playwright/report
           retention-days: 7
           if-no-files-found: ignore
+
+      # Serve the demo installer at /install.sh (and /install) without
+      # committing it to this repo: fetch it from the latest
+      # tvarohohlavy/hegemony-demo-data release and verify it against the
+      # release's SHA256SUMS before it enters the Pages artifact. Must run
+      # after `npm run verify` because `vitepress build` cleans dist.
+      - name: Fetch and verify demo installer
+        run: |
+          set -euo pipefail
+          base="https://github.com/tvarohohlavy/hegemony-demo-data/releases/latest/download"
+          curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \
+            -o .vitepress/dist/install.sh "$base/install.sh"
+          curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \
+            -o "$RUNNER_TEMP/SHA256SUMS" "$base/SHA256SUMS"
+          cd .vitepress/dist
+          grep ' install.sh$' "$RUNNER_TEMP/SHA256SUMS" | sha256sum -c -
+          sh -n install.sh
+          cp install.sh install
 
       - name: Setup Pages
         if: github.event_name != 'pull_request'
