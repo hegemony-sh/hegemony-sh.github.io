@@ -22,6 +22,7 @@ test.describe("Website smoke @smoke", () => {
 
     await expect(page.getByRole("link", { name: "Docs" })).toBeVisible();
     await expect(page.getByRole("link", { name: "View on GitHub" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Run the full demo locally" })).toBeVisible();
     await expect(page.getByText("Open source project. Sponsored by Rexonix.")).toBeVisible();
   });
 
@@ -64,5 +65,6 @@ test.describe("Website smoke @smoke", () => {
     await page.waitForURL("**/cs/");
     await expect(page.getByRole("link", { name: "Dokumentace" })).toBeVisible();
     await expect(page.getByText("Deterministické workflow pro infrastrukturu")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Spusťte si celé demo lokálně" })).toBeVisible();
   });
 });

@@ -16,6 +16,9 @@ hero:
     - theme: alt
       text: GitHub repozitář
       link: https://github.com/hegemony-sh/Hegemony
+    - theme: alt
+      text: Vyzkoušet demo
+      link: "#try-the-demo"
 
 features:
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>'
@@ -52,6 +55,35 @@ features:
     title: Notifikace a webhooky
     details: Událostmi řízené notifikace a webhooky propojí Hegemony s vašimi stávajícími nástroji pro alerting i automatizaci.
 ---
+
+<div class="demo-section" id="try-the-demo">
+  <p class="demo-eyebrow">Vyzkoušejte demo</p>
+  <div class="demo-card">
+
+## Spusťte si celé demo lokálně
+
+Jediný příkaz spustí celý Hegemony stack s předpřipraveným demo scénářem —
+inventářem, tajemstvími, časovými plány, webhooky a workflow fiktivního
+operátora „Meridian Networks“, včetně samostatné virtuální laboratoře, která
+vytvoří a zase odstraní datacentrum s několika OSPF routery:
+
+```sh
+curl -fsSL https://hegemony.sh/install.sh | sh
+```
+
+Instalátor naklonuje repozitáře platformy a demo dat a spustí vše (API,
+worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) na
+`http://localhost:8080`. Budete potřebovat `curl`, `git` (s přístupem k
+repozitáři platformy), `docker` s pluginem Compose v2,
+[go-task](https://taskfile.dev/) a přihlášení přes `docker login ghcr.io`.
+Detaily a příkazy pro správu najdete v repozitáři
+[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data).
+
+<p class="demo-note">Přihlašovací údaje dema jsou pevně dané výchozí hodnoty
+určené jen pro lokální vyzkoušení — stack nikdy nevystavujte do sítě.</p>
+
+  </div>
+</div>
 
 <div class="sponsor-section">
   <p class="sponsor-eyebrow">Open source projekt se sponzorovaným vývojem</p>

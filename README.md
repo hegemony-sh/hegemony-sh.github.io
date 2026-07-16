@@ -75,5 +75,11 @@ dependencies, runs quality checks, validates internal links, executes smoke E2E
 tests, and then publishes the site to GitHub Pages. The custom domain is
 configured via `public/CNAME`.
 
+The workflow also fetches the demo installer from the latest
+[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data)
+release, verifies it against the release's `SHA256SUMS`, and publishes it at
+`/install.sh` (and `/install`) — the installer is never committed to this repo.
+A daily scheduled run keeps the published copy current.
+
 Brand assets in `public/brand/` are sourced from the Hegemony application
 (`apps/ui/public/brand`).
