@@ -39,6 +39,44 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The platform documentation's source of truth lives in the platform
+      # repository, changed atomically with code (Pillar 4 of its
+      # documentation-system design record); the site pulls it at build time.
+      # The daily scheduled run above keeps the published docs at most a day
+      # behind the platform's default branch.
+      #
+      # Deploy-only: pull request builds (fork PRs get no secrets) build the
+      # site without the platform docs, and the internal link check skips the
+      # synced trees when they are absent. While the platform repository is
+      # private outside the org, point the sync at it with the repository
+      # variables PLATFORM_REPO (owner/name) and PLATFORM_REPO_REF (branch)
+      # plus the secret PLATFORM_REPO_TOKEN (fine-grained PAT, contents:read
+      # on that repository); once it is public at hegemony-sh/Hegemony, the
+      # defaults take over and all three can be removed.
+      #
+      # --allow-missing-docs: with the variables unset, the default checkout
+      # is the public hegemony-sh/Hegemony, whose main does not carry docs/
+      # until the platform sources land there. The flag turns that state into
+      # a clean skip - the site deploys without the platform section (pages
+      # render links into it only when the synced artifacts exist) instead of
+      # every push, scheduled, and manual deploy failing outright.
+      - name: Checkout platform repository (documentation source)
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ vars.PLATFORM_REPO || 'hegemony-sh/Hegemony' }}
+          ref: ${{ vars.PLATFORM_REPO_REF || '' }}
+          token: ${{ secrets.PLATFORM_REPO_TOKEN || github.token }}
+          path: .platform
+          fetch-depth: 1
+
+      - name: Sync platform documentation and API reference
+        if: github.event_name != 'pull_request'
+        env:
+          PLATFORM_REPO: ${{ vars.PLATFORM_REPO || 'hegemony-sh/Hegemony' }}
+          PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'main' }}
+        run: node scripts/sync-platform-docs.mjs .platform --allow-missing-docs
+
       - name: Audit dependencies (moderate+ gate)
         run: npm run audit
 

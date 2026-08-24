@@ -22,6 +22,17 @@ npm run verify     # format/lint/typecheck/build + internal link checks
 npm run test:e2e:smoke # browser smoke tests for custom interactive behavior
 ```
 
+The platform documentation and the API reference are synced from a checkout
+of the [Hegemony](https://github.com/hegemony-sh/Hegemony) repository at
+build time (deploys always do this; see `.github/workflows/deploy.yml`). A
+plain checkout of this repo builds and verifies without them — pages render
+links into the synced trees only when the artifacts exist. To preview or
+verify the full site locally, sync first:
+
+```bash
+node scripts/sync-platform-docs.mjs ../Hegemony  # then docs:build / verify
+```
+
 ## Quality tooling
 
 The site now includes a lightweight quality gate for local development and CI, which includes:

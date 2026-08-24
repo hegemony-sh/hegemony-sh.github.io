@@ -1,5 +1,11 @@
 {
-  "ignores": ["**/node_modules/**", "**/.vitepress/dist/**", "**/.vitepress/cache/**"],
+  "ignores": [
+    "**/node_modules/**",
+    "**/.vitepress/dist/**",
+    "**/.vitepress/cache/**",
+    "docs/platform/**",
+    "**/.platform/**",
+  ],
   "config": {
     "extends": ".markdownlint.jsonc",
   },
