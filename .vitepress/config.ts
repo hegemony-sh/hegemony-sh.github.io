@@ -13,6 +13,10 @@ const platformSidebarPath = fileURLToPath(
 const platformSidebar: DefaultTheme.SidebarItem[] = existsSync(platformSidebarPath)
   ? JSON.parse(readFileSync(platformSidebarPath, "utf8"))
   : [];
+const platformDocsSynced = platformSidebar.length > 0;
+const apiReferenceSynced = existsSync(
+  fileURLToPath(new URL("../public/api/index.html", import.meta.url)),
+);
 
 const siteTitle = "Hegemony";
 const browserTitle = "Hegemony.sh";
@@ -44,6 +48,14 @@ export default withMermaid(
     vite: {
       optimizeDeps: {
         include: ["mermaid", "fastdom"],
+      },
+      // Build-time flags for pages that link into the synced trees (the
+      // docs index "Where to go" tip): those links render only when the
+      // artifacts actually exist in this build, so an unsynced build
+      // publishes no dead references.
+      define: {
+        __PLATFORM_DOCS_SYNCED__: JSON.stringify(platformDocsSynced),
+        __API_REFERENCE_SYNCED__: JSON.stringify(apiReferenceSynced),
       },
     },
 
@@ -143,7 +155,10 @@ export default withMermaid(
           nav: [
             { text: "Home", link: "/" },
             { text: "Docs", link: "/docs/" },
-            { text: "API Reference", link: "/api/", target: "_self" },
+            // Served from public/api/ only after the sync has run.
+            ...(apiReferenceSynced
+              ? [{ text: "API Reference", link: "/api/", target: "_self" }]
+              : []),
           ],
           sidebar: {
             "/docs/": [
