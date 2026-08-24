@@ -48,6 +48,30 @@
   }
 }
 
+/*
+ * Docs layout width. The default theme caps the layout frame at 1440px and
+ * the doc text column at 688px, which cramps the platform docs' wide
+ * reference tables, code blocks, and mermaid diagrams.
+ *
+ * The frame cap must never exceed the viewport: the theme's >= 1440px rules
+ * derive the side gutters from (100% - max-width) / 2, which goes negative
+ * when max-width is larger than the screen and collapses the sidebar onto
+ * the content. min(100vw, ...) keeps the cap viewport-bound, and the media
+ * query leaves narrower screens on the stock value, where the navbar
+ * container is the only consumer of this variable.
+ */
+@media (width >= 1440px) {
+  :root {
+    --vp-layout-max-width: min(100vw, 1680px);
+  }
+}
+
+/* The stock rule lives in a Vue scoped style whose data attribute outranks
+   any plain selector, so the override needs !important. */
+.VPDoc.has-aside .content-container {
+  max-width: 920px !important;
+}
+
 /* Feature tile SVG icons */
 .VPFeature .icon {
   display: flex;
