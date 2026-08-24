@@ -7,6 +7,10 @@ const distDir = join(repoRoot, ".vitepress", "dist");
 const attributePattern = /\b(?:href|src)=(["'])(.*?)\1/g;
 const idPattern = /\bid=(["'])(.*?)\1/g;
 const skippedProtocols = ["http:", "https:", "mailto:", "tel:", "data:", "javascript:"];
+// The language switcher fabricates /cs/ URLs for every page, but the synced
+// platform documentation is English-only by policy (see the platform's
+// documentation-system design record) - those alternates 404 by design.
+const skippedPathPrefixes = ["/cs/docs/platform/"];
 
 async function walkHtmlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -28,6 +32,7 @@ async function walkHtmlFiles(directory) {
 function isExternalReference(reference) {
   return (
     skippedProtocols.some((protocol) => reference.startsWith(protocol)) ||
+    skippedPathPrefixes.some((prefix) => reference.startsWith(prefix)) ||
     reference.startsWith("//")
   );
 }

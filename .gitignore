@@ -7,3 +7,9 @@ node_modules/
 .playwright/
 playwright-report/
 test-results/
+
+# Build-time artifacts of scripts/sync-platform-docs.mjs
+docs/platform/
+.vitepress/generated/
+public/api/
+.platform/

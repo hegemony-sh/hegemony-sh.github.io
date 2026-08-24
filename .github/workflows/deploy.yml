@@ -39,6 +39,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # The platform documentation's source of truth lives in the platform
+      # repository, changed atomically with code (Pillar 4 of its
+      # documentation-system design record); the site pulls it at build time.
+      # The daily scheduled run above keeps the published docs at most a day
+      # behind the platform's default branch.
+      - name: Checkout platform repository (documentation source)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: hegemony-sh/Hegemony
+          path: .platform
+          fetch-depth: 1
+
+      - name: Sync platform documentation and API reference
+        run: node scripts/sync-platform-docs.mjs .platform
+
       - name: Audit dependencies (moderate+ gate)
         run: npm run audit
 

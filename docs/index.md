@@ -9,10 +9,12 @@ Hegemony is open source under the `AGPL-3.0-or-later` license. Ongoing
 development is sponsored by [Rexonix s.r.o.](https://rexonix.cz/).
 :::
 
-::: tip Work in progress
-The full documentation is being prepared. In the meantime, the source,
-architecture notes, and feature guides live in the
-[Hegemony repository](https://github.com/hegemony-sh/Hegemony).
+::: tip Where to go
+The [platform documentation](/docs/platform/) - guides, features,
+reference, and architecture - is published here straight from the
+[Hegemony repository](https://github.com/hegemony-sh/Hegemony), and the
+[API reference](/api/){target="_self"} renders the platform's OpenAPI
+contract.
 :::
 
 ## Quick Start
