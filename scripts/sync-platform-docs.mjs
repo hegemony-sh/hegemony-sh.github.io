@@ -9,6 +9,11 @@
 //
 // Usage: node scripts/sync-platform-docs.mjs <path-to-platform-checkout>
 //
+// PLATFORM_REPO (owner/name) and PLATFORM_REPO_REF (branch) override where
+// rewritten out-of-docs links point, for as long as the platform repository
+// lives somewhere other than its public home. Links into a private
+// repository 404 for site visitors regardless of what they point at.
+//
 // What it produces (all build-time artifacts, none committed):
 // - docs/platform/**            every docs/**/*.md page, links adjusted
 // - .vitepress/generated/platform-sidebar.json   the sidebar tree
@@ -28,8 +33,10 @@ import { fileURLToPath } from "node:url";
 
 const siteRoot = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const platformRoot = process.argv[2] ? resolve(process.argv[2]) : null;
-const repoUrl = "https://github.com/hegemony-sh/Hegemony";
-const rawUrl = "https://raw.githubusercontent.com/hegemony-sh/Hegemony/main";
+const platformRepo = process.env.PLATFORM_REPO || "hegemony-sh/Hegemony";
+const platformRef = process.env.PLATFORM_REPO_REF || "main";
+const repoUrl = `https://github.com/${platformRepo}`;
+const rawUrl = `https://raw.githubusercontent.com/${platformRepo}/${platformRef}`;
 
 if (!platformRoot || !existsSync(join(platformRoot, "docs"))) {
   console.error("usage: node scripts/sync-platform-docs.mjs <path-to-platform-checkout>");
@@ -84,7 +91,7 @@ function rewriteTarget(pageRel, target, isImage) {
     return `${rawUrl}/${resolved}`;
   }
   const suffix = fragment ? `#${fragment}` : "";
-  return `${repoUrl}/blob/main/${resolved}${suffix}`;
+  return `${repoUrl}/blob/${platformRef}/${resolved}${suffix}`;
 }
 
 function transformPage(pageRel, markdown) {

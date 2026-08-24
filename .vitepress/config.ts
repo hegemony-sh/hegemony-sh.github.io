@@ -35,6 +35,18 @@ export default withMermaid(
       /^https?:\/\/(localhost|127\.0\.0\.1)/,
     ],
 
+    // mermaid lazy-loads its diagram renderers, so the dev server's dependency
+    // scan misses their CommonJS imports (fastdom in particular has no ESM
+    // default export until Vite pre-bundles it, which breaks every page in dev
+    // mode and the e2e suite with it). Force both through optimization;
+    // withMermaid appends its own additions to this list. Production builds
+    // are unaffected either way (rollup does CJS interop itself).
+    vite: {
+      optimizeDeps: {
+        include: ["mermaid", "fastdom"],
+      },
+    },
+
     markdown: {
       anchor: {
         // GitHub's slug algorithm, so anchors written against GitHub rendering

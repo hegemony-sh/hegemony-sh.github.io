@@ -11,6 +11,12 @@ const skippedProtocols = ["http:", "https:", "mailto:", "tel:", "data:", "javasc
 // platform documentation is English-only by policy (see the platform's
 // documentation-system design record) - those alternates 404 by design.
 const skippedPathPrefixes = ["/cs/docs/platform/"];
+// The platform documentation and the API reference exist only when
+// scripts/sync-platform-docs.mjs ran before the build (deploys always sync;
+// pull request builds cannot, because the platform checkout needs
+// credentials that fork PRs do not get). An unsynced build intentionally
+// lacks those trees, so links into them are skipped rather than failed.
+const syncOnlyPathPrefixes = ["/docs/platform/", "/api/"];
 
 async function walkHtmlFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -110,6 +116,16 @@ async function main() {
     await access(join(distDir, "index.html"));
   } catch {
     throw new Error("Build output not found. Run `npm run docs:build` before link checking.");
+  }
+
+  try {
+    await access(join(distDir, "docs", "platform", "index.html"));
+  } catch {
+    skippedPathPrefixes.push(...syncOnlyPathPrefixes);
+    console.log(
+      "Platform documentation not synced into this build - skipping references into " +
+        `${syncOnlyPathPrefixes.join(", ")} (deploys sync and check them).`,
+    );
   }
 
   const htmlFiles = await walkHtmlFiles(distDir);
