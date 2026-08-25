@@ -4,7 +4,9 @@
     "**/.vitepress/dist/**",
     "**/.vitepress/cache/**",
     "docs/platform/**",
+    "docs/plugins/**",
     "**/.platform/**",
+    "**/.plugins/**",
   ],
   "config": {
     "extends": ".markdownlint.jsonc",

@@ -17,6 +17,15 @@ const platformDocsSynced = platformSidebar.length > 0;
 const apiReferenceSynced = existsSync(
   fileURLToPath(new URL("../public/api/index.html", import.meta.url)),
 );
+// Same pattern for the plugin documentation (scripts/sync-plugin-docs.mjs):
+// the step-plugin repository owns those pages; absent means unsynced.
+const pluginSidebarPath = fileURLToPath(
+  new URL("./generated/plugin-docs-sidebar.json", import.meta.url),
+);
+const pluginSidebar: DefaultTheme.SidebarItem[] = existsSync(pluginSidebarPath)
+  ? JSON.parse(readFileSync(pluginSidebarPath, "utf8"))
+  : [];
+const pluginDocsSynced = pluginSidebar.length > 0;
 
 const siteTitle = "Hegemony";
 const browserTitle = "Hegemony.sh";
@@ -29,11 +38,12 @@ const descriptionCs =
 // https://vitepress.dev/reference/site-config
 export default withMermaid(
   defineConfig({
-    srcExclude: ["README.md", "test-results/**", ".platform/**"],
+    srcExclude: ["README.md", "test-results/**", ".platform/**", ".plugins/**"],
     // /docs/platform/ pages exist only after the sync script has run; the
     // built-HTML link check in CI verifies them strictly there.
     ignoreDeadLinks: [
       /^\/docs\/platform\//,
+      /^\/docs\/plugins\//,
       // Example/default URLs in the synced reference pages (settings defaults
       // like the local Keycloak issuer) are illustrations, not links to check.
       /^https?:\/\/(localhost|127\.0\.0\.1)/,
@@ -56,6 +66,7 @@ export default withMermaid(
       define: {
         __PLATFORM_DOCS_SYNCED__: JSON.stringify(platformDocsSynced),
         __API_REFERENCE_SYNCED__: JSON.stringify(apiReferenceSynced),
+        __PLUGIN_DOCS_SYNCED__: JSON.stringify(pluginDocsSynced),
       },
     },
 
@@ -174,8 +185,17 @@ export default withMermaid(
                     },
                   ]
                 : []),
+              ...(pluginDocsSynced
+                ? [
+                    {
+                      text: "Step Plugins",
+                      items: [{ text: "Browse the plugin docs", link: "/docs/plugins/" }],
+                    },
+                  ]
+                : []),
             ],
             "/docs/platform/": platformSidebar,
+            "/docs/plugins/": pluginSidebar,
           },
           langMenuLabel: "Languages",
           footer: {
