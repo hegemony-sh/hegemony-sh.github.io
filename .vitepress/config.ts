@@ -215,6 +215,10 @@ export default withMermaid(
           nav: [
             { text: "Úvod", link: "/cs/" },
             { text: "Dokumentace", link: "/cs/docs/" },
+            // The API reference exists only in English; say so in the label.
+            ...(apiReferenceSynced
+              ? [{ text: "API reference (anglicky)", link: "/api/", target: "_self" }]
+              : []),
           ],
           sidebar: {
             "/cs/docs/": [
@@ -222,6 +226,25 @@ export default withMermaid(
                 text: "První kroky",
                 items: [{ text: "Úvod", link: "/cs/docs/" }],
               },
+              // The synced documentation sections are English-only; the
+              // labels say so, and the links lead straight to the English
+              // pages rather than to nonexistent /cs/ alternates.
+              ...(platformDocsSynced
+                ? [
+                    {
+                      text: "Dokumentace platformy (anglicky)",
+                      items: [{ text: "Procházet dokumentaci platformy", link: "/docs/platform/" }],
+                    },
+                  ]
+                : []),
+              ...(pluginDocsSynced
+                ? [
+                    {
+                      text: "Pluginy kroků (anglicky)",
+                      items: [{ text: "Procházet dokumentaci pluginů", link: "/docs/plugins/" }],
+                    },
+                  ]
+                : []),
             ],
           },
           langMenuLabel: "Jazyky",
