@@ -75,9 +75,9 @@ for (const pluginEntry of readdirSync(pluginsDir, { withFileTypes: true })
   if (!existsSync(srcDir)) continue;
 
   const pages = [];
-  for (const packageEntry of readdirSync(srcDir, { withFileTypes: true }).filter((entry) =>
-    entry.isDirectory(),
-  )) {
+  for (const packageEntry of readdirSync(srcDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .sort((a, b) => a.name.localeCompare(b.name))) {
     const docsDir = join(srcDir, packageEntry.name, "docs");
     if (!existsSync(docsDir)) continue;
     for (const file of readdirSync(docsDir).sort()) {
@@ -175,9 +175,8 @@ if (existsSync(referencePath)) {
   }
   let reference = readFileSync(referencePath, "utf8");
   let linked = 0;
-  for (const [handlerId, link] of linkFor) {
-    const pattern = new RegExp(`(?<!\\[)\`${handlerId.replace(/\./g, "\\.")}\``, "g");
-    reference = reference.replace(pattern, () => {
+    const escapedHandlerId = handlerId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const pattern = new RegExp(`(?<!\\[)\`${escapedHandlerId}\``, "g");
       linked += 1;
       return `[\`${handlerId}\`](${link})`;
     });
