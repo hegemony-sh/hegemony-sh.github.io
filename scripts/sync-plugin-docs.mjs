@@ -175,8 +175,10 @@ if (existsSync(referencePath)) {
   }
   let reference = readFileSync(referencePath, "utf8");
   let linked = 0;
+  for (const [handlerId, link] of linkFor) {
     const escapedHandlerId = handlerId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const pattern = new RegExp(`(?<!\\[)\`${escapedHandlerId}\``, "g");
+    reference = reference.replace(pattern, () => {
       linked += 1;
       return `[\`${handlerId}\`](${link})`;
     });
