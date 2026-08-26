@@ -55,6 +55,21 @@ test.describe("Website smoke @smoke", () => {
     await expect(page.getByRole("heading", { name: "Preferujete češtinu?" })).toHaveCount(0);
   });
 
+  test("Czech URLs into English-only docs explain themselves", async ({ page }) => {
+    // The language switcher offers Czech on every page, but the platform
+    // docs exist only in English - the not-found view must say so in Czech
+    // and hand over the English link instead of a bare 404.
+    await page.goto("/cs/docs/platform/");
+
+    await expect(
+      page.getByRole("heading", { name: "Tato stránka je k dispozici pouze v angličtině" }),
+    ).toBeVisible();
+    await expect(page.getByRole("link", { name: "Otevřít anglickou verzi" })).toHaveAttribute(
+      "href",
+      "/docs/platform/",
+    );
+  });
+
   test("stored Czech preference redirects the visitor to the Czech locale", async ({ page }) => {
     await page.addInitScript((storageKey) => {
       window.localStorage.setItem(storageKey, "cs");

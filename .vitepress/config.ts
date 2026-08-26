@@ -17,6 +17,15 @@ const platformDocsSynced = platformSidebar.length > 0;
 const apiReferenceSynced = existsSync(
   fileURLToPath(new URL("../public/api/index.html", import.meta.url)),
 );
+// Same pattern for the plugin documentation (scripts/sync-plugin-docs.mjs):
+// the step-plugin repository owns those pages; absent means unsynced.
+const pluginSidebarPath = fileURLToPath(
+  new URL("./generated/plugin-docs-sidebar.json", import.meta.url),
+);
+const pluginSidebar: DefaultTheme.SidebarItem[] = existsSync(pluginSidebarPath)
+  ? JSON.parse(readFileSync(pluginSidebarPath, "utf8"))
+  : [];
+const pluginDocsSynced = pluginSidebar.length > 0;
 
 const siteTitle = "Hegemony";
 const browserTitle = "Hegemony.sh";
@@ -29,11 +38,12 @@ const descriptionCs =
 // https://vitepress.dev/reference/site-config
 export default withMermaid(
   defineConfig({
-    srcExclude: ["README.md", "test-results/**", ".platform/**"],
+    srcExclude: ["README.md", "test-results/**", ".platform/**", ".plugins/**"],
     // /docs/platform/ pages exist only after the sync script has run; the
     // built-HTML link check in CI verifies them strictly there.
     ignoreDeadLinks: [
       /^\/docs\/platform\//,
+      /^\/docs\/plugins\//,
       // Example/default URLs in the synced reference pages (settings defaults
       // like the local Keycloak issuer) are illustrations, not links to check.
       /^https?:\/\/(localhost|127\.0\.0\.1)/,
@@ -56,6 +66,7 @@ export default withMermaid(
       define: {
         __PLATFORM_DOCS_SYNCED__: JSON.stringify(platformDocsSynced),
         __API_REFERENCE_SYNCED__: JSON.stringify(apiReferenceSynced),
+        __PLUGIN_DOCS_SYNCED__: JSON.stringify(pluginDocsSynced),
       },
     },
 
@@ -174,8 +185,17 @@ export default withMermaid(
                     },
                   ]
                 : []),
+              ...(pluginDocsSynced
+                ? [
+                    {
+                      text: "Step Plugins",
+                      items: [{ text: "Browse the plugin docs", link: "/docs/plugins/" }],
+                    },
+                  ]
+                : []),
             ],
             "/docs/platform/": platformSidebar,
+            "/docs/plugins/": pluginSidebar,
           },
           langMenuLabel: "Languages",
           footer: {
@@ -195,6 +215,10 @@ export default withMermaid(
           nav: [
             { text: "Úvod", link: "/cs/" },
             { text: "Dokumentace", link: "/cs/docs/" },
+            // The API reference exists only in English; say so in the label.
+            ...(apiReferenceSynced
+              ? [{ text: "API reference (anglicky)", link: "/api/", target: "_self" }]
+              : []),
           ],
           sidebar: {
             "/cs/docs/": [
@@ -202,6 +226,25 @@ export default withMermaid(
                 text: "První kroky",
                 items: [{ text: "Úvod", link: "/cs/docs/" }],
               },
+              // The synced documentation sections are English-only; the
+              // labels say so, and the links lead straight to the English
+              // pages rather than to nonexistent /cs/ alternates.
+              ...(platformDocsSynced
+                ? [
+                    {
+                      text: "Dokumentace platformy (anglicky)",
+                      items: [{ text: "Procházet dokumentaci platformy", link: "/docs/platform/" }],
+                    },
+                  ]
+                : []),
+              ...(pluginDocsSynced
+                ? [
+                    {
+                      text: "Pluginy kroků (anglicky)",
+                      items: [{ text: "Procházet dokumentaci pluginů", link: "/docs/plugins/" }],
+                    },
+                  ]
+                : []),
             ],
           },
           langMenuLabel: "Jazyky",

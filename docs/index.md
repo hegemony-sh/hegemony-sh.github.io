@@ -1,10 +1,11 @@
 <script setup>
 // Build-time flags injected by .vitepress/config.ts (vite define): the
-// platform documentation and the API reference exist only in builds where
-// scripts/sync-platform-docs.mjs ran first, so the links below render only
-// when their targets do.
+// platform documentation, the API reference, and the plugin documentation
+// exist only in builds where the sync scripts ran first, so the links below
+// render only when their targets do.
 const platformDocsSynced = __PLATFORM_DOCS_SYNCED__;
 const apiReferenceSynced = __API_REFERENCE_SYNCED__;
+const pluginDocsSynced = __PLUGIN_DOCS_SYNCED__;
 </script>
 
 # Documentation
@@ -18,7 +19,7 @@ Hegemony is open source under the `AGPL-3.0-or-later` license. Ongoing
 development is sponsored by [Rexonix s.r.o.](https://rexonix.cz/).
 :::
 
-<div v-if="platformDocsSynced || apiReferenceSynced">
+<div v-if="platformDocsSynced || apiReferenceSynced || pluginDocsSynced">
 
 ::: tip Where to go
 <span v-if="platformDocsSynced">The [platform documentation](/docs/platform/) - guides, features,
@@ -26,6 +27,8 @@ reference, and architecture - is published here straight from the
 [Hegemony repository](https://github.com/hegemony-sh/Hegemony).</span>
 <span v-if="apiReferenceSynced">The [API reference](/api/){target="_self"} renders the platform's
 OpenAPI contract.</span>
+<span v-if="pluginDocsSynced">The [step plugin documentation](/docs/plugins/) publishes every
+plugin's own handler pages straight from the plugin repository.</span>
 :::
 
 </div>

@@ -21,7 +21,10 @@
 // repository 404 for site visitors regardless of what they point at.
 //
 // What it produces (all build-time artifacts, none committed):
-// - docs/platform/**            every docs/**/*.md page, links adjusted
+// - docs/platform/**            every docs/**/*.md page, links adjusted,
+//                               plus docs/assets/** copied verbatim so
+//                               in-docs images (generated screenshots)
+//                               serve from the site itself
 // - .vitepress/generated/platform-sidebar.json   the sidebar tree
 // - public/api/openapi.json     the committed OpenAPI spec
 // - public/api/index.html + redoc.standalone.js  the API reference (ReDoc)
@@ -142,7 +145,10 @@ function rewriteTarget(pageRel, target, isImage) {
   }
   const extension = posix.extname(resolved).toLowerCase();
   if (isImage || imageExtensions.has(extension)) {
-    return `${rawUrl}/${resolved}`;
+    // In-docs images travel with the pages (docs/assets/** is copied below),
+    // so their relative links keep working; only out-of-docs images fall
+    // back to raw GitHub URLs.
+    return inDocs ? null : `${rawUrl}/${resolved}`;
   }
   const suffix = fragment ? `#${fragment}` : "";
   return `${repoUrl}/blob/${platformRef}/${resolved}${suffix}`;
@@ -233,6 +239,10 @@ for (const pageRel of walkMarkdown(sourceDocs)) {
   mkdirSync(dirname(outPath), { recursive: true });
   writeFileSync(outPath, transformPage(pageRel, markdown));
   pages.push({ rel: pageRel, title: titleOf(markdown, pageRel) });
+}
+const sourceAssets = join(sourceDocs, "assets");
+if (existsSync(sourceAssets)) {
+  cpSync(sourceAssets, join(targetDocs, "assets"), { recursive: true });
 }
 console.log(`synced ${pages.length} pages into docs/platform/`);
 

@@ -77,6 +77,27 @@ jobs:
           PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'main' }}
         run: node scripts/sync-platform-docs.mjs .platform --allow-missing-docs
 
+      # Plugin documentation is owned by the step-plugin repository: every
+      # wheel ships one page per handler, and the site publishes those pages
+      # straight from that repository (scripts/sync-plugin-docs.mjs). While
+      # it is private, the same PLATFORM_REPO_TOKEN PAT must also carry
+      # contents:read on it (or point PLUGINS_REPO elsewhere); --allow-missing
+      # keeps deploys green until that is configured. Must run after the
+      # platform sync: it cross-links the synced step-handler reference page.
+      - name: Checkout step-plugins repository (plugin documentation source)
+        if: github.event_name != 'pull_request'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ vars.PLUGINS_REPO || 'hegemony-sh/hegemony-step-plugins' }}
+          ref: ${{ vars.PLUGINS_REPO_REF || '' }}
+          token: ${{ secrets.PLATFORM_REPO_TOKEN || github.token }}
+          path: .plugins
+          fetch-depth: 1
+
+      - name: Sync plugin documentation
+        if: github.event_name != 'pull_request'
+        run: node scripts/sync-plugin-docs.mjs .plugins --allow-missing
+
       - name: Audit dependencies (moderate+ gate)
         run: npm run audit
 
