@@ -47,25 +47,27 @@ jobs:
       #
       # Deploy-only: pull request builds (fork PRs get no secrets) build the
       # site without the platform docs, and the internal link check skips the
-      # synced trees when they are absent. While the platform repository is
-      # private outside the org, point the sync at it with the repository
-      # variables PLATFORM_REPO (owner/name) and PLATFORM_REPO_REF (branch)
-      # plus the secret PLATFORM_REPO_TOKEN (fine-grained PAT, contents:read
-      # on that repository); once it is public at hegemony-sh/Hegemony, the
-      # defaults take over and all three can be removed.
+      # synced trees when they are absent. The platform repository now lives
+      # at its final home, hegemony-sh/hegemony (default branch develop), but
+      # is private until launch, so this checkout needs the secret
+      # PLATFORM_REPO_TOKEN (fine-grained PAT, contents:read on that
+      # repository); the repository variables PLATFORM_REPO (owner/name) and
+      # PLATFORM_REPO_REF (branch) remain optional overrides. Once the
+      # repository is public the default github.token suffices and the
+      # secret can be removed.
       #
-      # --allow-missing-docs: with the variables unset, the default checkout
-      # is the public hegemony-sh/Hegemony, whose main does not carry docs/
-      # until the platform sources land there. The flag turns that state into
-      # a clean skip - the site deploys without the platform section (pages
+      # --allow-missing-docs: turns a checkout without a docs/ tree into a
+      # clean skip - the site deploys without the platform section (pages
       # render links into it only when the synced artifacts exist) instead of
       # every push, scheduled, and manual deploy failing outright.
       - name: Checkout platform repository (documentation source)
         if: github.event_name != 'pull_request'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          repository: ${{ vars.PLATFORM_REPO || 'hegemony-sh/Hegemony' }}
-          ref: ${{ vars.PLATFORM_REPO_REF || '' }}
+          repository: ${{ vars.PLATFORM_REPO || 'hegemony-sh/hegemony' }}
+          # Same fallback as the sync step below, so the checked-out revision
+          # and the links the sync script generates always name the same ref.
+          ref: ${{ vars.PLATFORM_REPO_REF || 'develop' }}
           token: ${{ secrets.PLATFORM_REPO_TOKEN || github.token }}
           path: .platform
           fetch-depth: 1
@@ -73,8 +75,8 @@ jobs:
       - name: Sync platform documentation and API reference
         if: github.event_name != 'pull_request'
         env:
-          PLATFORM_REPO: ${{ vars.PLATFORM_REPO || 'hegemony-sh/Hegemony' }}
-          PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'main' }}
+          PLATFORM_REPO: ${{ vars.PLATFORM_REPO || 'hegemony-sh/hegemony' }}
+          PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'develop' }}
         run: node scripts/sync-platform-docs.mjs .platform --allow-missing-docs
 
       # Plugin documentation is owned by the step-plugin repository: every
@@ -121,13 +123,23 @@ jobs:
 
       # Serve the demo installer at /install.sh (and /install) without
       # committing it to this repo: fetch it from the latest
-      # tvarohohlavy/hegemony-demo-data release and verify it against the
+      # hegemony-sh/hegemony-demo-data release and verify it against the
       # release's SHA256SUMS before it enters the Pages artifact. Must run
       # after `npm run verify` because `vitepress build` cleans dist.
+      #
+      # Private period: while hegemony-demo-data is private, this anonymous
+      # release download returns 404, which would fail every push, scheduled,
+      # and manual deploy at this step. The public `curl | sh` installer
+      # cannot work against private repositories anyway, so it is dormant
+      # until launch: set the repository variable INSTALLER_PUBLISH=off to
+      # skip this step and let the site deploy without /install.sh. Revert
+      # at launch by deleting the variable - the fetch below is unchanged
+      # and takes over again.
       - name: Fetch and verify demo installer
+        if: vars.INSTALLER_PUBLISH != 'off'
         run: |
           set -euo pipefail
-          base="https://github.com/tvarohohlavy/hegemony-demo-data/releases/latest/download"
+          base="https://github.com/hegemony-sh/hegemony-demo-data/releases/latest/download"
           curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \
             -o .vitepress/dist/install.sh "$base/install.sh"
           curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \

@@ -1,8 +1,8 @@
 blank_issues_enabled: false
 contact_links:
   - name: Hegemony platform feature request
-    url: https://github.com/hegemony-sh/Hegemony/issues/new/choose
+    url: https://github.com/hegemony-sh/hegemony/issues/new/choose
     about: Product and platform feature requests belong in the main Hegemony repository.
   - name: Security policy
-    url: https://github.com/hegemony-sh/Hegemony/security/policy
+    url: https://github.com/hegemony-sh/hegemony/security/policy
     about: Please report security issues according to the security policy, not in a public issue.

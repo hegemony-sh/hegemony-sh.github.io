@@ -16,7 +16,7 @@ hero:
       link: /docs/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/hegemony-sh/Hegemony
+      link: https://github.com/hegemony-sh/hegemony
     - theme: alt
       text: Try the demo
       link: "#try-the-demo"
@@ -70,6 +70,12 @@ scenario — inventory, secrets, schedules, webhooks, and flows for the
 fictional operator “Meridian Networks”, including a self-contained virtual
 lab flow that provisions and tears down a multi-router OSPF datacenter:
 
+<!-- TEMPORARY pre-launch note: delete this paragraph when the repositories
+go public and INSTALLER_PUBLISH is switched back on. -->
+<p class="demo-note">Pre-launch note: the installer is not published yet and
+the repositories stay private until launch, so the command below does not
+work yet. It goes live with the public launch.</p>
+
 ```sh
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```
@@ -80,7 +86,7 @@ everything (API, worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) at
 repository), `docker` with the Compose v2 plugin,
 [go-task](https://taskfile.dev/), and a `docker login ghcr.io` session.
 Lifecycle commands and demo details are in
-[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data).
+[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
 
 <p class="demo-note">Demo credentials are hard-coded defaults for local
 evaluation only — never expose the stack to a network.</p>
