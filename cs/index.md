@@ -67,6 +67,12 @@ inventářem, tajemstvími, časovými plány, webhooky a workflow fiktivního
 operátora „Meridian Networks“, včetně samostatné virtuální laboratoře, která
 vytvoří a zase odstraní datacentrum s několika OSPF routery:
 
+<!-- DOČASNÁ poznámka před spuštěním: tento odstavec smažte, až budou
+repozitáře veřejné a INSTALLER_PUBLISH znovu zapnutý. -->
+<p class="demo-note">Poznámka před spuštěním: instalátor zatím není
+publikovaný a repozitáře jsou do veřejného spuštění soukromé, takže příkaz
+níže zatím nefunguje. Zprovozníme ho při veřejném spuštění projektu.</p>
+
 ```sh
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```

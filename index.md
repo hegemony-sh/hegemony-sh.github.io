@@ -70,6 +70,12 @@ scenario — inventory, secrets, schedules, webhooks, and flows for the
 fictional operator “Meridian Networks”, including a self-contained virtual
 lab flow that provisions and tears down a multi-router OSPF datacenter:
 
+<!-- TEMPORARY pre-launch note: delete this paragraph when the repositories
+go public and INSTALLER_PUBLISH is switched back on. -->
+<p class="demo-note">Pre-launch note: the installer is not published yet and
+the repositories stay private until launch, so the command below does not
+work yet. It goes live with the public launch.</p>
+
 ```sh
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```

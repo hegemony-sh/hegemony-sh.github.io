@@ -65,7 +65,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: ${{ vars.PLATFORM_REPO || 'hegemony-sh/hegemony' }}
-          ref: ${{ vars.PLATFORM_REPO_REF || '' }}
+          # Same fallback as the sync step below, so the checked-out revision
+          # and the links the sync script generates always name the same ref.
+          ref: ${{ vars.PLATFORM_REPO_REF || 'develop' }}
           token: ${{ secrets.PLATFORM_REPO_TOKEN || github.token }}
           path: .platform
           fetch-depth: 1
