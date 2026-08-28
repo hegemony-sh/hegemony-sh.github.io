@@ -59,8 +59,8 @@ const args = process.argv.slice(2);
 const allowMissingDocs = args.includes("--allow-missing-docs");
 const pathArg = args.find((arg) => !arg.startsWith("--"));
 const platformRoot = pathArg ? resolve(pathArg) : null;
-const platformRepo = process.env.PLATFORM_REPO || "hegemony-sh/Hegemony";
-const platformRef = process.env.PLATFORM_REPO_REF || "main";
+const platformRepo = process.env.PLATFORM_REPO || "hegemony-sh/hegemony";
+const platformRef = process.env.PLATFORM_REPO_REF || "develop";
 const repoUrl = `https://github.com/${platformRepo}`;
 const rawUrl = `https://raw.githubusercontent.com/${platformRepo}/${platformRef}`;
 

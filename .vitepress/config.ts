@@ -29,7 +29,7 @@ const pluginDocsSynced = pluginSidebar.length > 0;
 
 const siteTitle = "Hegemony";
 const browserTitle = "Hegemony.sh";
-const githubRepoUrl = "https://github.com/hegemony-sh/Hegemony";
+const githubRepoUrl = "https://github.com/hegemony-sh/hegemony";
 const descriptionEn =
   "A proof-of-execution platform for deterministic, long-running infrastructure workflows on Temporal.";
 const descriptionCs =

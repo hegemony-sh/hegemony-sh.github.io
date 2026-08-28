@@ -16,7 +16,7 @@ hero:
       link: /docs/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/hegemony-sh/Hegemony
+      link: https://github.com/hegemony-sh/hegemony
     - theme: alt
       text: Try the demo
       link: "#try-the-demo"
@@ -80,7 +80,7 @@ everything (API, worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) at
 repository), `docker` with the Compose v2 plugin,
 [go-task](https://taskfile.dev/), and a `docker login ghcr.io` session.
 Lifecycle commands and demo details are in
-[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data).
+[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
 
 <p class="demo-note">Demo credentials are hard-coded defaults for local
 evaluation only — never expose the stack to a network.</p>

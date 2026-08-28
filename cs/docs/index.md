@@ -54,4 +54,4 @@ Webové rozhraní pak poběží na `http://localhost:8080` — přihlaste se jak
 
 </div>
 
-- [Repozitář Hegemony na GitHubu](https://github.com/hegemony-sh/Hegemony)
+- [Repozitář Hegemony na GitHubu](https://github.com/hegemony-sh/hegemony)

@@ -24,7 +24,7 @@ development is sponsored by [Rexonix s.r.o.](https://rexonix.cz/).
 ::: tip Where to go
 <span v-if="platformDocsSynced">The [platform documentation](/docs/platform/) - guides, features,
 reference, and architecture - is published here straight from the
-[Hegemony repository](https://github.com/hegemony-sh/Hegemony).</span>
+[Hegemony repository](https://github.com/hegemony-sh/hegemony).</span>
 <span v-if="apiReferenceSynced">The [API reference](/api/){target="_self"} renders the platform's
 OpenAPI contract.</span>
 <span v-if="pluginDocsSynced">The [step plugin documentation](/docs/plugins/) publishes every
@@ -47,6 +47,6 @@ The UI is then available at `http://localhost:8080` — log in with
 
 ## Learn more
 
-- [Architecture & System Design](https://github.com/hegemony-sh/Hegemony/blob/main/docs/architecture/overview.md)
-- [Feature Guides](https://github.com/hegemony-sh/Hegemony/tree/main/docs/features)
-- [Contributing Guide](https://github.com/hegemony-sh/Hegemony/blob/main/CONTRIBUTING.md)
+- [Architecture & System Design](https://github.com/hegemony-sh/hegemony/blob/develop/docs/architecture/overview.md)
+- [Feature Guides](https://github.com/hegemony-sh/hegemony/tree/develop/docs/features)
+- [Contributing Guide](https://github.com/hegemony-sh/hegemony/blob/develop/CONTRIBUTING.md)

@@ -15,7 +15,7 @@ hero:
       link: /cs/docs/
     - theme: alt
       text: GitHub repozitář
-      link: https://github.com/hegemony-sh/Hegemony
+      link: https://github.com/hegemony-sh/hegemony
     - theme: alt
       text: Vyzkoušet demo
       link: "#try-the-demo"
@@ -77,7 +77,7 @@ worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) na
 repozitáři platformy), `docker` s pluginem Compose v2,
 [go-task](https://taskfile.dev/) a přihlášení přes `docker login ghcr.io`.
 Detaily a příkazy pro správu najdete v repozitáři
-[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data).
+[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
 
 <p class="demo-note">Přihlašovací údaje dema jsou pevně dané výchozí hodnoty
 určené jen pro lokální vyzkoušení — stack nikdy nevystavujte do sítě.</p>

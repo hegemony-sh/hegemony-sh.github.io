@@ -1,6 +1,6 @@
 # hegemony-sh.github.io
 
-Project website for **[Hegemony](https://github.com/hegemony-sh/Hegemony)** — a
+Project website for **[Hegemony](https://github.com/hegemony-sh/hegemony)** — a
 proof-of-execution platform for deterministic, long-running infrastructure
 workflows on Temporal.
 
@@ -23,14 +23,14 @@ npm run test:e2e:smoke # browser smoke tests for custom interactive behavior
 ```
 
 The platform documentation and the API reference are synced from a checkout
-of the [Hegemony](https://github.com/hegemony-sh/Hegemony) repository at
+of the [Hegemony](https://github.com/hegemony-sh/hegemony) repository at
 build time (deploys always do this; see `.github/workflows/deploy.yml`). A
 plain checkout of this repo builds and verifies without them — pages render
 links into the synced trees only when the artifacts exist. To preview or
 verify the full site locally, sync first:
 
 ```bash
-node scripts/sync-platform-docs.mjs ../Hegemony  # then docs:build / verify
+node scripts/sync-platform-docs.mjs ../hegemony  # then docs:build / verify
 ```
 
 ## Quality tooling
@@ -87,10 +87,16 @@ tests, and then publishes the site to GitHub Pages. The custom domain is
 configured via `public/CNAME`.
 
 The workflow also fetches the demo installer from the latest
-[tvarohohlavy/hegemony-demo-data](https://github.com/tvarohohlavy/hegemony-demo-data)
+[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data)
 release, verifies it against the release's `SHA256SUMS`, and publishes it at
 `/install.sh` (and `/install`) — the installer is never committed to this repo.
 A daily scheduled run keeps the published copy current.
+
+While the Hegemony repositories are private (pre-launch), that release
+download is unavailable anonymously: set the repository variable
+`INSTALLER_PUBLISH=off` so deploys skip the installer step, and expect
+platform-repo links on the published site to 404 for anonymous visitors.
+Delete the variable at launch to resume publishing `/install.sh`.
 
 Brand assets in `public/brand/` are sourced from the Hegemony application
 (`apps/ui/public/brand`).
