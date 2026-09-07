@@ -50,7 +50,7 @@ features:
     details: Podnikové přihlášení přes Keycloak OIDC a centralizované řízení přístupu podle rolí (admin, operator, auditor, viewer, approver).
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6"/><path d="m15.5 7.5 3 3L22 7l-3-3"/></svg>'
     title: Správa tajemství
-    details: Podpora různých backendů pro správu tajemství včetně HashiCorp Vaultu. Do databáze se ukládají jen reference — samotné hodnoty tajemství se do ní nikdy nezapisují.
+    details: Podpora různých backendů pro správu tajemství, s vestavěným OpenBao. Do databáze se ukládají jen reference — samotné hodnoty tajemství se do ní nikdy nezapisují.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>'
     title: Notifikace a webhooky
     details: Událostmi řízené notifikace a webhooky propojí Hegemony s vašimi stávajícími nástroji pro alerting i automatizaci.
@@ -78,7 +78,7 @@ curl -fsSL https://hegemony.sh/install.sh | sh
 ```
 
 Instalátor naklonuje repozitáře platformy a demo dat a spustí vše (API,
-worker, scheduler, UI, Temporal, Keycloak, Vault, MinIO) na
+worker, scheduler, UI, Temporal, Keycloak, OpenBao, Versity S3 Gateway) na
 `http://localhost:8080`. Budete potřebovat `curl`, `git` (s přístupem k
 repozitáři platformy), `docker` s pluginem Compose v2,
 [go-task](https://taskfile.dev/) a přihlášení přes `docker login ghcr.io`.
