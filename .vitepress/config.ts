@@ -200,7 +200,7 @@ export default withMermaid(
           langMenuLabel: "Languages",
           footer: {
             message:
-              'Released as open source under the AGPL-3.0-or-later license. Development is sponsored by <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>. Commercial licensing is available — <a href="mailto:contact@hegemony.sh">contact@hegemony.sh</a>.',
+              'Released as open source under the AGPL-3.0-or-later license. Development is sponsored by <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>. Contact — <a href="mailto:contact@hegemony.sh">contact@hegemony.sh</a>.',
             copyright: "Copyright © 2025–2026 Jakub Trávník",
           },
         },
@@ -250,7 +250,7 @@ export default withMermaid(
           langMenuLabel: "Jazyky",
           footer: {
             message:
-              'Open source projekt pod licencí AGPL-3.0-or-later. Vývoj projektu finančně podporuje <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>. K dispozici je i komerční licence — <a href="mailto:contact@hegemony.sh">contact@hegemony.sh</a>.',
+              'Open source projekt pod licencí AGPL-3.0-or-later. Vývoj projektu finančně podporuje <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>. Kontakt — <a href="mailto:contact@hegemony.sh">contact@hegemony.sh</a>.',
             copyright: "Copyright © 2025–2026 Jakub Trávník",
           },
         },
