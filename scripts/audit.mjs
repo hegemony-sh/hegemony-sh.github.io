@@ -3,9 +3,9 @@ import { spawnSync } from "node:child_process";
 // Dependency audit gate: fail on any moderate-or-worse advisory, like
 // `npm audit --audit-level=moderate`, except the advisories listed below.
 // An entry is only for an advisory that has no patched release to upgrade or
-// override to. It stops applying when it expires or when `npm audit fix` can
-// fix the advisory without a breaking change, so the gate fails again and the
-// entry gets resolved instead of lingering.
+// override to. It stops applying when it expires or when npm audit reports a
+// fix without a breaking change, so the gate fails again and the entry gets
+// resolved instead of lingering.
 const gatedSeverities = new Set(["moderate", "high", "critical"]);
 const allowlist = [
   {
@@ -37,6 +37,16 @@ if (report.error) {
   process.exit(1);
 }
 
+// npm reports `true` for a fix within the declared ranges, `false` for none,
+// and {name, version, isSemVerMajor} for a fix that needs --force; only the
+// last one with isSemVerMajor set is a breaking change.
+function isNonBreakingFix(fixAvailable) {
+  if (fixAvailable === true) {
+    return true;
+  }
+  return typeof fixAvailable === "object" && fixAvailable !== null && !fixAvailable.isSemVerMajor;
+}
+
 const today = new Date().toISOString().slice(0, 10);
 const failures = [];
 const allowed = new Set();
@@ -60,8 +70,8 @@ for (const vulnerability of Object.values(report.vulnerabilities ?? {})) {
     matchedEntries.add(entry);
     if (entry.expires < today) {
       failures.push(`${label} (allowlist entry expired on ${entry.expires})`);
-    } else if (vulnerability.fixAvailable === true) {
-      failures.push(`${label} (a non-breaking fix is available: run npm audit fix)`);
+    } else if (isNonBreakingFix(vulnerability.fixAvailable)) {
+      failures.push(`${label} (npm audit reports a non-breaking fix)`);
     } else {
       allowed.add(`${id} in ${advisory.name} until ${entry.expires}: ${entry.reason}`);
     }
