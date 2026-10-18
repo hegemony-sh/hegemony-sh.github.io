@@ -9,7 +9,7 @@
     "docs:dev": "vitepress dev",
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview",
-    "audit": "npm audit --audit-level=moderate",
+    "audit": "node scripts/audit.mjs",
     "linkcheck:internal": "node scripts/check-internal-links.mjs",
     "format": "oxfmt .",
     "format:check": "oxfmt . --check",
@@ -43,6 +43,8 @@
   },
   "overrides": {
     "esbuild": "0.25.0",
+    "katex": "0.18.10",
+    "smol-toml": "1.9.1",
     "vite": "6.4.3"
   },
   "engines": {

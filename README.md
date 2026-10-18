@@ -44,15 +44,20 @@ The site now includes a lightweight quality gate for local development and CI, w
 - `vue-tsc` for VitePress theme and config type-checking (`npm run typecheck`)
 - an internal built-site link checker (`npm run linkcheck:internal`)
 - Playwright smoke tests for custom website behavior (`npm run test:e2e:smoke`)
-- `npm audit --audit-level=moderate` as a CI dependency gate (`npm run audit`)
+- `npm audit` as a CI dependency gate for moderate-or-worse advisories
+  (`npm run audit`, `scripts/audit.mjs`); advisories with no patched release
+  can be allowlisted there with a reason and an expiry date
 - `npm run verify` to run the full gate plus a production build and link checks
 
 If you use [Task](https://taskfile.dev/), the same workflow is also available
 via `task fmt`, `task lint`, `task audit`, `task test`, and `task check`.
 
-The repo uses npm `overrides` to keep the current `vitepress@1.6.x` toolchain
-on patched `vite` and `esbuild` releases while upstream still depends on the
-older vulnerable range.
+The repo uses npm `overrides` to keep dependencies on patched releases while
+upstream still depends on an older vulnerable range: `vite` and `esbuild` for
+the current `vitepress@1.6.x` toolchain, `katex` for `mermaid@11` and
+`markdownlint` (through `micromark-extension-math`), and `smol-toml` for
+`markdownlint-cli2`. Drop an override once upstream requires the patched
+release.
 
 ## Contributing
 
