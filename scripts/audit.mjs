@@ -21,7 +21,9 @@ const allowlist = [
   },
 ];
 
-const result = spawnSync("npm", ["audit", "--json"], { encoding: "utf8" });
+// A shell resolves npm on every platform (npm.cmd on Windows); the command is
+// a fixed string, so nothing is interpolated into it.
+const result = spawnSync("npm audit --json", { encoding: "utf8", shell: true });
 let report;
 try {
   report = JSON.parse(result.stdout ?? "");
