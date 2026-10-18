@@ -44,7 +44,9 @@ The site now includes a lightweight quality gate for local development and CI, w
 - `vue-tsc` for VitePress theme and config type-checking (`npm run typecheck`)
 - an internal built-site link checker (`npm run linkcheck:internal`)
 - Playwright smoke tests for custom website behavior (`npm run test:e2e:smoke`)
-- `npm audit --audit-level=moderate` as a CI dependency gate (`npm run audit`)
+- `npm audit` as a CI dependency gate for moderate-or-worse advisories
+  (`npm run audit`, `scripts/audit.mjs`); advisories with no patched release
+  can be allowlisted there with a reason and an expiry date
 - `npm run verify` to run the full gate plus a production build and link checks
 
 If you use [Task](https://taskfile.dev/), the same workflow is also available
