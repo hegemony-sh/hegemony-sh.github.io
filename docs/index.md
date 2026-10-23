@@ -16,7 +16,7 @@ declarative Flow Engine.
 
 ::: info Open source and sponsored development
 Hegemony is open source under the `AGPL-3.0-or-later` license. Ongoing
-development is sponsored by [Rexonix s.r.o.](https://rexonix.cz/).
+development is sponsored by [Rexonix s.r.o.](https://rexonix.cz/)
 :::
 
 <div v-if="platformDocsSynced || apiReferenceSynced || pluginDocsSynced">

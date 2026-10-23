@@ -103,7 +103,7 @@ evaluation only — never expose the stack to a network.</p>
       <p>
         Hegemony is released as open source software under the AGPL-3.0-or-later
         license. Ongoing development is sponsored by
-        <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>.
+        <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>
       </p>
     </div>
     <a

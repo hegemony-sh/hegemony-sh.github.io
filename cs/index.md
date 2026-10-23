@@ -99,7 +99,7 @@ určené jen pro lokální vyzkoušení — stack nikdy nevystavujte do sítě.<
       <p>
         Hegemony je open source projekt pod licencí AGPL-3.0-or-later.
         Průběžný vývoj finančně podporuje
-        <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>.
+        <a href="https://rexonix.cz/" target="_blank" rel="noreferrer">Rexonix s.r.o.</a>
       </p>
     </div>
     <a
