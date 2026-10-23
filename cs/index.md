@@ -67,21 +67,14 @@ inventářem, tajemstvími, časovými plány, webhooky a workflow fiktivního
 operátora „Meridian Networks“, včetně samostatné virtuální laboratoře, která
 vytvoří a zase odstraní datacentrum s několika OSPF routery:
 
-<!-- DOČASNÁ poznámka před spuštěním: tento odstavec smažte, až budou
-repozitáře veřejné a INSTALLER_PUBLISH znovu zapnutý. -->
-<p class="demo-note">Poznámka před spuštěním: instalátor zatím není
-publikovaný a repozitáře jsou do veřejného spuštění soukromé, takže příkaz
-níže zatím nefunguje. Zprovozníme ho při veřejném spuštění projektu.</p>
-
 ```sh
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```
 
 Instalátor naklonuje repozitáře platformy a demo dat a spustí vše (API,
 worker, scheduler, UI, Temporal, Keycloak, OpenBao, Versity S3 Gateway) na
-`http://localhost:8080`. Budete potřebovat `curl`, `git` (s přístupem k
-repozitáři platformy), `docker` s pluginem Compose v2,
-[go-task](https://taskfile.dev/) a přihlášení přes `docker login ghcr.io`.
+`http://localhost:8080`. Budete potřebovat `curl`, `git`, `docker` s pluginem
+Compose v2 a [go-task](https://taskfile.dev/).
 Detaily a příkazy pro správu najdete v repozitáři
 [hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
 
