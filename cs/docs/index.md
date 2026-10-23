@@ -6,7 +6,7 @@ dlouhotrvající infrastrukturní workflow postavená na
 
 ::: info Open source a sponzorovaný vývoj
 Hegemony je open source projekt pod licencí `AGPL-3.0-or-later`. Průběžný vývoj
-finančně podporuje [Rexonix s.r.o.](https://rexonix.cz/).
+finančně podporuje [Rexonix s.r.o.](https://rexonix.cz/)
 :::
 
 <script setup>
