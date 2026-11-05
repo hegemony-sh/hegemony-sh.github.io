@@ -7,19 +7,7 @@ import { spawnSync } from "node:child_process";
 // fix without a breaking change, so the gate fails again and the entry gets
 // resolved instead of lingering.
 const gatedSeverities = new Set(["moderate", "high", "critical"]);
-const allowlist = [
-  {
-    id: "GHSA-vfj7-8cjw-p6xm",
-    package: "braces",
-    expires: "2027-01-18",
-    // No patched release: every braces version (<=3.0.3) is affected and the
-    // upstream issue (micromatch/braces#70) has no fix planned. braces is
-    // reached only through micromatch in markdownlint-cli2 and stylelint,
-    // which expand the glob patterns from this repository's own scripts and
-    // config; it is not part of the built site.
-    reason: "no patched braces release; dev-only lint tooling on repository-owned globs",
-  },
-];
+const allowlist = [];
 
 // A shell resolves npm on every platform (npm.cmd on Windows); the command is
 // a fixed string, so nothing is interpolated into it.
