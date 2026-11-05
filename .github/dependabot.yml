@@ -11,6 +11,12 @@ updates:
       prefix: chore(deps)
     labels:
       - dependencies
+    ignore:
+      # vitepress-plugin-mermaid (latest 2.0.17) only supports mermaid 10 or 11
+      # as a peer dependency; a mermaid 12 bump breaks `npm ci`. Remove this
+      # once the plugin accepts mermaid 12.
+      - dependency-name: mermaid
+        update-types: ["version-update:semver-major"]
     groups:
       npm-minor-patch:
         patterns:
