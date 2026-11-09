@@ -26,15 +26,15 @@
     "verify": "npm run format:check && npm run lint && npm run lint:css && npm run lint:md && npm run typecheck && npm run typecheck:e2e && npm run docs:build && npm run linkcheck:internal"
   },
   "devDependencies": {
-    "@playwright/test": "1.64.1",
+    "@playwright/test": "1.65.0",
     "@types/node": "^26.1.1",
     "markdownlint-cli2": "^0.24.0",
     "mermaid": "^11.17.2",
-    "oxfmt": "0.75.0",
-    "oxlint": "1.90.0",
+    "oxfmt": "0.76.0",
+    "oxlint": "1.91.0",
     "redoc": "^3.0.1",
-    "stylelint": "^17.1.0",
-    "stylelint-config-standard": "^40.0.0",
+    "stylelint": "^18.0.0",
+    "stylelint-config-standard": "^41.0.0",
     "typescript": "5.9.3",
     "vitepress": "^1.6.3",
     "vitepress-plugin-mermaid": "^2.0.17",
@@ -50,6 +50,6 @@
     "vite": "6.4.5"
   },
   "engines": {
-    "node": ">=20"
+    "node": "^24.15.0 || >=26.0.0"
   }
 }

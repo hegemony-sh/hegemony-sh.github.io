@@ -18,6 +18,10 @@ updates:
       - dependency-name: mermaid
         update-types: ["version-update:semver-major"]
     groups:
+      stylelint:
+        patterns:
+          - stylelint
+          - stylelint-config-standard
       npm-minor-patch:
         patterns:
           - "*"
