@@ -305,7 +305,7 @@ if (existsSync(spec)) {
   </head>
   <body>
     <redoc spec-url="/api/openapi.json"></redoc>
-    <script src="/api/redoc.standalone.js"></script>
+    <script type="module" src="/api/redoc.standalone.js"></script>
   </body>
 </html>
 `,
