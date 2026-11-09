@@ -62,10 +62,13 @@ features:
 
 ## Spusťte si celé demo lokálně
 
-Jediný příkaz spustí celý Hegemony stack s předpřipraveným demo scénářem —
-inventářem, tajemstvími, časovými plány, webhooky a workflow fiktivního
-operátora „Meridian Networks“, včetně samostatné virtuální laboratoře, která
-vytvoří a zase odstraní datacentrum s několika OSPF routery:
+Jediný příkaz spustí platformu Hegemony na vašem počítači vedle malé
+laboratoře: sítě fiktivního operátora se simulovanými routery a servery, Git
+serverem a zachytávačem pošty. Operátor „Amphictyon Networks“ provozuje síť
+pro městské státy starověkého Řecka a pět krátkých příběhů ukazuje, k čemu
+Hegemony slouží: změny, které potřebují druhý pár očí, dlouhé běhy, které
+přežijí restart, mnoho zákazníků na jedné platformě, OpenTofu se schvalováním
+a zálohy přes Ansible do Gitu:
 
 <!-- DOČASNÁ poznámka před spuštěním: tento odstavec smažte, až budou
 repozitáře veřejné a INSTALLER_PUBLISH znovu zapnutý. -->
@@ -77,16 +80,17 @@ níže zatím nefunguje. Zprovozníme ho při veřejném spuštění projektu.</
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```
 
-Instalátor naklonuje repozitáře platformy a demo dat a spustí vše (API,
-worker, scheduler, UI, Temporal, Keycloak, OpenBao, Versity S3 Gateway) na
-`http://localhost:8080`. Budete potřebovat `curl`, `git` (s přístupem k
-repozitáři platformy), `docker` s pluginem Compose v2,
-[go-task](https://taskfile.dev/) a přihlášení přes `docker login ghcr.io`.
-Detaily a příkazy pro správu najdete v repozitáři
-[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
+Instalátor stáhne platformu a demo, zkontroluje výsledek a vypíše, kde se
+přihlásit: Hegemony běží na `http://localhost:8080`. Budete potřebovat Linux
+(nebo macOS s Docker Desktop, případně WSL 2 ve Windows), Docker s pluginem
+Compose 2.24 nebo novějším, asi 8 GiB paměti pro Docker, `git`, `curl` a
+`bash`; [go-task](https://taskfile.dev/) je volitelný. Příkazy pro správu a
+průvodce demem najdete v repozitáři
+[hegemony-sh/hegemony-demo](https://github.com/hegemony-sh/hegemony-demo).
 
-<p class="demo-note">Přihlašovací údaje dema jsou pevně dané výchozí hodnoty
-určené jen pro lokální vyzkoušení — stack nikdy nevystavujte do sítě.</p>
+<p class="demo-note">Demo vygeneruje na vašem počítači jedno heslo pro
+všechny své uživatele. Je určené jen pro lokální vyzkoušení — stack nikdy
+nevystavujte do sítě.</p>
 
   </div>
 </div>

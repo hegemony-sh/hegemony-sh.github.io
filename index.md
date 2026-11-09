@@ -65,10 +65,13 @@ features:
 
 ## Run the full demo locally
 
-One command brings up the whole Hegemony stack with a pre-loaded demo
-scenario — inventory, secrets, schedules, webhooks, and flows for the
-fictional operator “Meridian Networks”, including a self-contained virtual
-lab flow that provisions and tears down a multi-router OSPF datacenter:
+One command starts the Hegemony platform on your machine next to a small
+lab: a fictional operator's network of simulated routers and servers, a Git
+server and a mail sink. The operator, “Amphictyon Networks”, runs the network
+for the city-states of ancient Greece, and five short stories show what
+Hegemony is for: changes that need a second pair of eyes, long runs that
+survive a restart, many customers on one platform, OpenTofu with approvals,
+and Ansible backups into Git:
 
 <!-- TEMPORARY pre-launch note: delete this paragraph when the repositories
 go public and INSTALLER_PUBLISH is switched back on. -->
@@ -80,17 +83,17 @@ work yet. It goes live with the public launch.</p>
 curl -fsSL https://hegemony.sh/install.sh | sh
 ```
 
-The installer clones the platform and demo-data repositories and starts
-everything (API, worker, scheduler, UI, Temporal, Keycloak, OpenBao, Versity
-S3 Gateway) at
-`http://localhost:8080`. You need `curl`, `git` (with access to the platform
-repository), `docker` with the Compose v2 plugin,
-[go-task](https://taskfile.dev/), and a `docker login ghcr.io` session.
-Lifecycle commands and demo details are in
-[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data).
+The installer fetches the platform and the demo, checks the result and
+prints where to log in: Hegemony runs at `http://localhost:8080`. You need
+Linux (or macOS with Docker Desktop, or WSL 2 on Windows), Docker with the
+Compose plugin 2.24 or newer, about 8 GiB of memory for Docker, `git`, `curl`
+and `bash`; [go-task](https://taskfile.dev/) is optional. Lifecycle commands
+and the walkthrough are in
+[hegemony-sh/hegemony-demo](https://github.com/hegemony-sh/hegemony-demo).
 
-<p class="demo-note">Demo credentials are hard-coded defaults for local
-evaluation only — never expose the stack to a network.</p>
+<p class="demo-note">The demo generates one password for all its users on
+your machine. It is for local evaluation only — never expose the stack to a
+network.</p>
 
   </div>
 </div>

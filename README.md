@@ -96,7 +96,7 @@ tests, and then publishes the site to GitHub Pages. The custom domain is
 configured via `public/CNAME`.
 
 The workflow also fetches the demo installer from the latest
-[hegemony-sh/hegemony-demo-data](https://github.com/hegemony-sh/hegemony-demo-data)
+[hegemony-sh/hegemony-demo](https://github.com/hegemony-sh/hegemony-demo)
 release, verifies it against the release's `SHA256SUMS`, and publishes it at
 `/install.sh` (and `/install`) — the installer is never committed to this repo.
 A daily scheduled run keeps the published copy current.
