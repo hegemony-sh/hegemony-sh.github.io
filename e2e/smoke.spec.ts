@@ -23,7 +23,9 @@ test.describe("Website smoke @smoke", () => {
     await expect(page.getByRole("link", { name: "Docs" })).toBeVisible();
     await expect(page.getByRole("link", { name: "View on GitHub" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Run the full demo locally" })).toBeVisible();
-    await expect(page.getByText("Open source project. Sponsored by Rexonix.")).toBeVisible();
+    const sponsorHeading = page.getByText("Open source project. Sponsored by Rexonix.");
+    await sponsorHeading.scrollIntoViewIfNeeded();
+    await expect(sponsorHeading).toBeVisible();
   });
 
   test("preferred-language banner appears for Czech browsers on the English homepage", async ({
