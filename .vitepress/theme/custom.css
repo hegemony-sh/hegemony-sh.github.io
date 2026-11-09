@@ -175,7 +175,8 @@
 
 .sponsor-logo img {
   display: block;
-  width: min(100%, 260px);
+  width: 260px;
+  max-width: 100%;
   height: auto;
 }
 
