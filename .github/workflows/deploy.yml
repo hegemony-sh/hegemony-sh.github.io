@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    # Daily republish so a new hegemony-demo-data installer release
+    # Daily republish so a new hegemony-demo installer release
     # propagates to https://hegemony.sh/install.sh within a day
     - cron: "17 6 * * *"
   workflow_dispatch:
@@ -123,23 +123,23 @@ jobs:
 
       # Serve the demo installer at /install.sh (and /install) without
       # committing it to this repo: fetch it from the latest
-      # hegemony-sh/hegemony-demo-data release and verify it against the
+      # hegemony-sh/hegemony-demo release and verify it against the
       # release's SHA256SUMS before it enters the Pages artifact. Must run
       # after `npm run verify` because `vitepress build` cleans dist.
       #
-      # Private period: while hegemony-demo-data is private, this anonymous
-      # release download returns 404, which would fail every push, scheduled,
-      # and manual deploy at this step. The public `curl | sh` installer
-      # cannot work against private repositories anyway, so it is dormant
-      # until launch: set the repository variable INSTALLER_PUBLISH=off to
-      # skip this step and let the site deploy without /install.sh. Revert
-      # at launch by deleting the variable - the fetch below is unchanged
-      # and takes over again.
+      # Until hegemony-demo has published its first usable release, and while
+      # the repositories are private, this anonymous release download returns
+      # 404, which would fail every push, scheduled, and manual deploy at this
+      # step. The public `curl | sh` installer cannot work before then anyway,
+      # so it is dormant: set the repository variable INSTALLER_PUBLISH=off to
+      # skip this step and let the site deploy without /install.sh. Turn it
+      # back on by deleting the variable once that release exists and is
+      # public - the fetch below is unchanged and takes over again.
       - name: Fetch and verify demo installer
         if: vars.INSTALLER_PUBLISH != 'off'
         run: |
           set -euo pipefail
-          base="https://github.com/hegemony-sh/hegemony-demo-data/releases/latest/download"
+          base="https://github.com/hegemony-sh/hegemony-demo/releases/latest/download"
           curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \
             -o .vitepress/dist/install.sh "$base/install.sh"
           curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --connect-timeout 10 \
