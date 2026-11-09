@@ -34,7 +34,7 @@
     "oxlint": "1.90.0",
     "redoc": "^3.0.1",
     "stylelint": "^17.1.0",
-    "stylelint-config-standard": "^40.0.0",
+    "stylelint-config-standard": "^41.0.0",
     "typescript": "5.9.3",
     "vitepress": "^1.6.3",
     "vitepress-plugin-mermaid": "^2.0.17",
