@@ -11,7 +11,7 @@ The site is localized in English (default, `/`) and Czech (`/cs/`).
 
 ## Local development
 
-Requires Node.js 20+.
+Requires Node.js 24.15+ (24.x), or 26+. CI uses Node.js 24.
 
 ```bash
 npm install        # install dependencies
