@@ -37,7 +37,7 @@ vyzkoušejte v laboratoři.
 - **Schvalování.** Běh se může zastavit, dokud ho člověk neschválí nebo
   nezamítne. Čekající žádosti najdete ve schránce schvalování.
 - **Kroky v kontejnerech.** Libovolný nástroj spustíte v izolovaném
-  kontejneru a určíte, kam se smí připojit po síti.
+  kontejneru. Můžete omezit, na které síťové adresy a porty se smí připojit.
 - **Hotové kroky.** Příkazy přes SSH, příkazy na síťových zařízeních, Ansible
   playbooky, plan a apply pro Terraform a OpenTofu, HTTP požadavky, operace
   v NetBoxu a kontroly DNS, HTTP, TLS a dostupnosti.
@@ -49,7 +49,7 @@ vyzkoušejte v laboratoři.
 - **Živý průběh.** Výstup každého kroku sledujete už během běhu.
 - **Důkazy.** U každého kroku zůstává záznam toho, co se na kterém zařízení
   skutečně provedlo, včetně vytvořených souborů.
-- **Auditní log.** Prohledávatelný záznam o tom, kdo co udělal.
+- **Auditní log.** Záznam o tom, kdo co udělal, s možností filtrování.
 - **Monitoring konektivity.** Kontroly zařízení na pozadí během běhu, zobrazené
   v živých tabulkách a grafech.
 
@@ -64,22 +64,26 @@ vyzkoušejte v laboratoři.
 - **Jednotné přihlášení.** Přihlášení přes Keycloak pomocí OpenID Connect
   (OIDC), standardního přihlašovacího protokolu.
 - **Role.** Admin, editor, operator, approver, auditor a viewer.
-  Administrátoři mohou upravit, co která role smí.
+  Administrátoři mohou změnit, jakou roli která akce vyžaduje.
 - **Organizace.** Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá
-  organizace má vlastní workflow, zařízení, tajemství a role.
+  organizace má vlastní workflow, zařízení, tajemství a členy.
 - **Tajemství.** Hodnoty tajemství zůstávají v úložišti tajemství; v databázi
-  jsou jen reference. Součástí je OpenBao a pluginy připojí HashiCorp Vault a
-  1Password. Ve výstupu kroků jsou hodnoty tajemství skryté.
-- **SSH klíče hostitelů a certifikační autority.** Každá organizace si
-  spravuje SSH klíče hostitelů a certifikační autority, kterým důvěřuje.
-- **API tokeny.** Osobní přístupové tokeny pro skripty a další nástroje.
+  jsou jen reference. OpenBao je k dispozici jako volitelná přibalená služba
+  a pluginy připojí HashiCorp Vault a 1Password. Tajemství, která platforma
+  pro krok načte, jsou v jeho výstupu skrytá.
+- **Důvěryhodní hostitelé a certifikáty.** Každá organizace si spravuje SSH
+  klíče hostitelů, kterým důvěřuje, a soukromé certifikační autority, kterým
+  důvěřuje pro spojení přes TLS.
+- **API tokeny.** Administrátoři vydávají tokeny, kterými skripty a další
+  nástroje volají API.
 
 ### Integrace
 
 - **Git.** Workflow a jejich přílohy můžete mít v Git repozitářích, s podporou
   push a pull.
-- **Import a export konfigurace.** Celou konfiguraci platformy lze exportovat
-  a importovat jako YAML a podle plánu ji exportovat do Gitu jako zálohu.
+- **Import a export konfigurace.** Konfiguraci platformy lze exportovat a
+  importovat jako YAML a podle plánu ji exportovat do Gitu jako zálohu.
+  Hodnoty tajemství, historie běhů a uložené soubory součástí nejsou.
 - **Notifikace.** E-mail, Slack, Microsoft Teams, Webex, Discord, Telegram,
   Pushover a odchozí webhooky, odesílané při událostech běhů a schvalování.
 - **Úložiště souborů.** Soubory pro workflow uložíte do úložiště kompatibilního
@@ -98,11 +102,12 @@ v repozitáři Hegemony (anglicky).
 
 - Kroky pro upgrade softwaru zařízení: nahrání obrazu, instalace, ověření
   běžící verze a návrat k předchozí verzi při chybě.
-- Podpora dalších platforem síťových zařízení. Dnes kroky pro síťová zařízení
-  podporují Cisco IOS XE.
+- Otestovaná podpora dalších platforem síťových zařízení. Dnes jsou kroky pro
+  síťová zařízení vyvinuté a otestované pro Cisco IOS XE.
 - WinRM (Windows Remote Management) pro spouštění příkazů na počítačích
   s Windows.
-- Krátkodobé SSH certifikáty místo uložených hesel a klíčů.
+- Krátkodobé SSH certifikáty pro přestupní servery (jump hosty) a linuxové
+  servery.
 
 ### Workflow
 
@@ -114,26 +119,29 @@ v repozitáři Hegemony (anglicky).
 ### Kontroly a monitoring
 
 - Kontrolní krok pro SNMP (Simple Network Management Protocol).
-- Další kontroly konektivity, například TLS handshake, SSH banner, DNS dotaz,
-  odchylka NTP a NETCONF.
+- Další kontroly pro monitoring konektivity, například TLS handshake, SSH
+  banner, odchylka NTP a NETCONF. Dnes monitoring kontroluje TCP, ping, HTTP
+  a DNS.
 
 ### Tajemství a přístup
 
 - Dynamická tajemství: přihlašovací údaje vydané pro jeden běh, například
-  jednorázová SSH hesla a dočasní databázoví uživatelé.
+  jednorázová SSH hesla pro linuxové servery a dočasní databázoví uživatelé.
 - Samostatné úložiště tajemství pro každou organizaci.
 - Pravidla přístupu podle vlastností zdrojů, nejen podle rolí.
 
 ### Propojení s dalšími systémy
 
-- Schválení nebo zamítnutí čekajícího běhu z jiného systému, například ze
-  ServiceNow, Jiry nebo chatu.
-- Mapování a validace dat z příchozích webhooků.
-- Vlastní šablony notifikací.
+- Schválení nebo zamítnutí čekajícího běhu příchozím webhookem z jiného
+  systému, například ze ServiceNow, Jiry nebo chatu.
+- Pravidla, která z dat příchozího webhooku vytvoří vstupy běhu, a validace
+  těchto dat.
+- Více možností, jak upravit text notifikací.
 - Import a export konfigurace pro jednu organizaci.
 
 ### Provoz
 
-- Plná podpora provozu několika instancí API vedle sebe.
+- Limity počtu požadavků na webhooky, které platí napříč několika instancemi
+  API.
 - Kvóty a limity pro každou organizaci.
 - Dokumentace ke stažení pro prostředí bez přístupu k internetu.

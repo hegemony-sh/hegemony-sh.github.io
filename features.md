@@ -32,8 +32,8 @@ Hegemony is lab-proven, not yet proven in production. Try it in a lab first.
   wait for days — for a maintenance window, an approval or a device reload.
 - **Approvals.** A run can pause until a person approves or rejects it.
   Pending requests wait in an approvals inbox.
-- **Container steps.** Run any tool in an isolated container, with control
-  over which network destinations it may reach.
+- **Container steps.** Run any tool in an isolated container. You can limit
+  which network addresses and ports it may reach.
 - **Ready-made steps.** Shell commands over SSH, network device commands,
   Ansible playbooks, Terraform and OpenTofu plan and apply, HTTP requests,
   NetBox operations, and DNS, HTTP, TLS and reachability checks.
@@ -45,7 +45,7 @@ Hegemony is lab-proven, not yet proven in production. Try it in a lab first.
 - **Live progress.** Watch each step's output while the run is in progress.
 - **Evidence.** Each step keeps what actually ran on each device, including
   files it produced.
-- **Audit log.** A searchable record of who did what.
+- **Audit log.** A record of who did what, with filters.
 - **Connectivity monitors.** Background checks against devices during a run,
   shown as live tables and graphs.
 
@@ -60,22 +60,26 @@ Hegemony is lab-proven, not yet proven in production. Try it in a lab first.
 - **Single sign-on.** Login through Keycloak using OpenID Connect (OIDC), a
   standard login protocol.
 - **Roles.** Admin, editor, operator, approver, auditor and viewer.
-  Administrators can adjust what each role may do.
+  Administrators can change which role each action requires.
 - **Organizations.** Keep several teams or customers apart on one
-  installation. Each has its own flows, devices, secrets and roles.
+  installation. Each has its own flows, devices, secrets and members.
 - **Secrets.** Secret values stay in a secret store; the database keeps only
-  references. OpenBao is bundled, and plugins connect HashiCorp Vault and
-  1Password. Secret values are hidden in step output.
-- **SSH host keys and certificate authorities.** Each organization manages
-  the SSH host keys and the certificate authorities it trusts.
-- **API tokens.** Personal access tokens for scripts and other tools.
+  references. OpenBao comes as an optional bundled service, and plugins
+  connect HashiCorp Vault and 1Password. Secrets that the platform looks up
+  for a step are hidden in its output.
+- **Trusted hosts and certificates.** Each organization manages the SSH
+  host keys it trusts, and the private certificate authorities it trusts for
+  TLS connections.
+- **API tokens.** Administrators issue tokens that scripts and other tools
+  use to call the API.
 
 ### Integrations
 
 - **Git.** Keep flows and their attached files in Git repositories, with push
   and pull.
-- **Configuration Exchange.** Export and import the whole platform
-  configuration as YAML, and export it to Git on a schedule as a backup.
+- **Configuration Exchange.** Export and import the platform configuration
+  as YAML, and export it to Git on a schedule as a backup. Secret values, run
+  history and stored files are not included.
 - **Notifications.** Email, Slack, Microsoft Teams, Webex, Discord, Telegram,
   Pushover and outgoing webhooks, sent on run and approval events.
 - **File repositories.** Store files for your flows on S3-compatible storage.
@@ -93,10 +97,10 @@ Hegemony repository.
 
 - Steps that upgrade device software: stage an image, install it, verify the
   running version, and roll back on failure.
-- Support for more network device platforms. Today the network device steps
-  support Cisco IOS XE.
+- Tested support for more network device platforms. Today the network device
+  steps are built and tested for Cisco IOS XE.
 - WinRM (Windows Remote Management), for running commands on Windows hosts.
-- Short-lived SSH certificates in place of stored passwords and keys.
+- Short-lived SSH certificates for jump hosts and Linux hosts.
 
 ### Workflows
 
@@ -108,26 +112,27 @@ Hegemony repository.
 ### Checks and monitoring
 
 - An SNMP (Simple Network Management Protocol) check step.
-- More connectivity checks, such as TLS handshake, SSH banner, DNS query,
-  NTP offset and NETCONF.
+- More checks for connectivity monitors, such as TLS handshake, SSH banner,
+  NTP offset and NETCONF. Monitors check TCP, ping, HTTP and DNS today.
 
 ### Secrets and access
 
 - Dynamic secrets: credentials issued for one run, such as one-time SSH
-  passwords and temporary database users.
+  passwords for Linux hosts and temporary database users.
 - A separate secret store for each organization.
 - Access rules based on resource attributes, not only on roles.
 
 ### Connections to other systems
 
-- Approve or reject a waiting run from another system, such as ServiceNow,
-  Jira or a chat tool.
-- Mapping and validation of incoming webhook data.
-- Custom notification templates.
+- Approve or reject a waiting run through an incoming webhook from another
+  system, such as ServiceNow, Jira or a chat tool.
+- Rules that turn incoming webhook data into run inputs, and validation of
+  that data.
+- More ways to customize notification text.
 - Configuration Exchange for a single organization.
 
 ### Operations
 
-- Full support for running several API instances side by side.
+- Webhook rate limits that hold across several API instances.
 - Quotas and rate limits for each organization.
 - A downloadable copy of the documentation for sites without internet access.
