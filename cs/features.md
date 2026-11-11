@@ -102,8 +102,7 @@ v repozitáři Hegemony (anglicky).
 
 - Kroky pro upgrade softwaru zařízení: nahrání obrazu, instalace, ověření
   běžící verze a návrat k předchozí verzi při chybě.
-- Otestovaná podpora dalších platforem síťových zařízení. Dnes jsou kroky pro
-  síťová zařízení vyvinuté a otestované pro Cisco IOS XE.
+- Podpora dalších platforem síťových zařízení.
 - WinRM (Windows Remote Management) pro spouštění příkazů na počítačích
   s Windows.
 - Krátkodobé SSH certifikáty pro přestupní servery (jump hosty) a linuxové

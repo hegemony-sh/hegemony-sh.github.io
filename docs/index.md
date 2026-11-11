@@ -35,15 +35,13 @@ plugin's own handler pages straight from the plugin repository.</span>
 
 ## Quick Start
 
-The fastest way to try Hegemony pulls pre-built images, brings up the full
-stack, and seeds a small demo dataset:
+The fastest way to try Hegemony is the local demo. One command starts the
+platform on your machine next to a small lab of simulated routers and
+servers. The command and the requirements are in
+[Try the demo](/#try-the-demo) on the home page.
 
-```bash
-task compose:demo:up
-```
-
-The UI is then available at `http://localhost:8080` — log in with
-`admin` / `hegemony`.
+The UI then runs at `http://localhost:8080`. Log in as `noc` with the
+password the installer prints.
 
 ## Learn more
 

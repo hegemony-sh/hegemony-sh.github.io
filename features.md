@@ -97,8 +97,7 @@ Hegemony repository.
 
 - Steps that upgrade device software: stage an image, install it, verify the
   running version, and roll back on failure.
-- Tested support for more network device platforms. Today the network device
-  steps are built and tested for Cisco IOS XE.
+- Support for more network device platforms.
 - WinRM (Windows Remote Management), for running commands on Windows hosts.
 - Short-lived SSH certificates for jump hosts and Linux hosts.
 
