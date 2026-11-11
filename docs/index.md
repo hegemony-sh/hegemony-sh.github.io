@@ -47,6 +47,6 @@ The UI is then available at `http://localhost:8080` — log in with
 
 ## Learn more
 
-- [Architecture & System Design](https://github.com/hegemony-sh/hegemony/blob/develop/docs/architecture/overview.md)
-- [Feature Guides](https://github.com/hegemony-sh/hegemony/tree/develop/docs/features)
-- [Contributing Guide](https://github.com/hegemony-sh/hegemony/blob/develop/CONTRIBUTING.md)
+- [Architecture & System Design](https://github.com/hegemony-sh/hegemony/blob/main/docs/architecture/overview.md)
+- [Feature Guides](https://github.com/hegemony-sh/hegemony/tree/main/docs/features)
+- [Contributing Guide](https://github.com/hegemony-sh/hegemony/blob/main/CONTRIBUTING.md)
