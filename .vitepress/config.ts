@@ -39,7 +39,11 @@ const descriptionCs =
 // A page's public URL path from its source path: "cs/docs/index.md" ->
 // "/cs/docs/", "features.md" -> "/features" (cleanUrls).
 function pagePath(relativePath: string): string {
-  return `/${relativePath}`.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
+  const path = `/${relativePath}`.replace(/(^|\/)index\.md$/, "$1").replace(/\.md$/, "");
+  // A dotted page name (the plugin handler pages, "container.run.md") reads
+  // as a file extension to the web server, so its clean URL does not
+  // resolve; those pages are linked with ".html" (scripts/sync-plugin-docs.mjs).
+  return /\.[^/]*$/.test(path) ? `${path}.html` : path;
 }
 
 function sourceExists(relativePath: string): boolean {
@@ -117,7 +121,16 @@ export default withMermaid(
     appearance: "dark",
 
     // sitemap.xml for search engines; public/robots.txt points at it.
-    sitemap: { hostname: siteUrl },
+    sitemap: {
+      hostname: siteUrl,
+      // Same rule as pagePath: a dotted page name needs its ".html".
+      transformItems: (items) =>
+        items.map((item) =>
+          /\.[^/]*$/.test(item.url) && !item.url.endsWith(".html")
+            ? { ...item, url: `${item.url}.html` }
+            : item,
+        ),
+    },
 
     // Per-page head tags: the canonical URL, the link-preview (Open Graph)
     // tags in the page's own language, and - for a page that exists in both
