@@ -26,9 +26,10 @@
       "groupName": "npm minor and patch"
     },
     {
-      "description": "stylelint and its standard config move together.",
+      "description": "stylelint and its standard config move together, majors included, as the former Dependabot group did. separateMajorMinor is off here because Renovate would otherwise put a major update on a branch of its own.",
       "matchPackageNames": ["stylelint", "stylelint-config-standard"],
-      "groupName": "stylelint"
+      "groupName": "stylelint",
+      "separateMajorMinor": false
     },
     {
       "description": "vitepress-plugin-mermaid (latest 2.0.17) only supports mermaid 10 or 11 as a peer dependency, so a mermaid 12 bump breaks `npm ci`. Remove this once the plugin accepts mermaid 12.",
