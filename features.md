@@ -12,7 +12,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <p class="features-lead">Hegemony runs long infrastructure changes as workflows: with approvals, with a record of what ran on every device, and without losing its place when something restarts.</p>
 
-<p class="features-group">Build workflows</p>
+<h2 class="features-group">Build workflows</h2>
 
 <div class="features-grid">
 <FeatureCard icon="workflow" title="Visual flow editor">Draw a workflow as a graph of steps, or edit it as YAML. Work in a draft, commit it as a version, and compare versions.</FeatureCard>
@@ -23,7 +23,7 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard icon="filter" title="Run limits">Limit how many runs of a flow are active at once and how often they may start.</FeatureCard>
 </div>
 
-<p class="features-group">Run them reliably</p>
+<h2 class="features-group">Run them reliably</h2>
 
 <div class="features-grid">
 <FeatureCard icon="repeat" title="Runs that survive restarts">Runs execute on Temporal. They continue after a restart and can wait for days for a maintenance window or a device reload.</FeatureCard>
@@ -35,7 +35,7 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard icon="chart" title="Connectivity monitors">Watch devices in the background during a change, with live tables and graphs.</FeatureCard>
 </div>
 
-<p class="features-group">See and prove what happened</p>
+<h2 class="features-group">See and prove what happened</h2>
 
 <div class="features-grid">
 <FeatureCard icon="activity" title="Live progress">Follow the output of every step while the run is in progress.</FeatureCard>
@@ -43,7 +43,7 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard icon="search" title="Audit log">A record of who did what and when, with filters.</FeatureCard>
 </div>
 
-<p class="features-group">Security and access</p>
+<h2 class="features-group">Security and access</h2>
 
 <div class="features-grid">
 <FeatureCard icon="shield" title="Single sign-on and roles">Log in through Keycloak. Six roles separate building, running, approving and auditing. Sensitive actions ask for a fresh sign-in.</FeatureCard>
@@ -53,7 +53,7 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard icon="code" title="API tokens">Tokens let scripts and other tools call the API.</FeatureCard>
 </div>
 
-<p class="features-group">Inventory and integrations</p>
+<h2 class="features-group">Inventory and integrations</h2>
 
 <div class="features-grid">
 <FeatureCard icon="server" title="Inventory">Manage devices and sites in Hegemony, or bring them in from NetBox or a Git repository. Target devices by hand or by a query.</FeatureCard>
@@ -64,11 +64,9 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard icon="zap" title="Plugins">Steps, inventory sources, notification channels and secret stores are plugins. Add your own.</FeatureCard>
 </div>
 
-<h2 id="roadmap">Roadmap</h2>
+<h2 id="roadmap" class="features-heading">Roadmap</h2>
 
 <p class="features-note">Where Hegemony is heading. These items are planned, not built yet, and the list is not a schedule or a commitment.</p>
-
-<p class="features-group">Planned</p>
 
 <div class="features-grid">
 <FeatureCard planned icon="upload" title="Device software upgrades">Steps that stage an image, install it, verify the running version, and roll back on failure.</FeatureCard>

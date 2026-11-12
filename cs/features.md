@@ -12,7 +12,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <p class="features-lead">Hegemony spouští dlouhé změny infrastruktury jako workflow: se schvalováním, se záznamem toho, co se provedlo na každém zařízení, a bez ztráty rozdělané práce při restartu.</p>
 
-<p class="features-group">Tvorba workflow</p>
+<h2 class="features-group">Tvorba workflow</h2>
 
 <div class="features-grid">
 <FeatureCard icon="workflow" title="Vizuální editor">Workflow nakreslíte jako graf kroků, nebo ho upravíte jako YAML. Pracujete v konceptu, potvrdíte ho jako verzi a verze můžete porovnat.</FeatureCard>
@@ -23,7 +23,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="filter" title="Limity běhů">Omezíte, kolik běhů jednoho workflow je aktivních současně a jak často smí začínat.</FeatureCard>
 </div>
 
-<p class="features-group">Spolehlivé provádění</p>
+<h2 class="features-group">Spolehlivé provádění</h2>
 
 <div class="features-grid">
 <FeatureCard icon="repeat" title="Běhy, které přežijí restart">Běhy se provádějí na Temporal. Po restartu pokračují a mohou čekat i několik dní na servisní okno nebo restart zařízení.</FeatureCard>
@@ -35,7 +35,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="chart" title="Monitoring konektivity">Během změny sledujete zařízení na pozadí v živých tabulkách a grafech.</FeatureCard>
 </div>
 
-<p class="features-group">Přehled a důkazy</p>
+<h2 class="features-group">Přehled a důkazy</h2>
 
 <div class="features-grid">
 <FeatureCard icon="activity" title="Živý průběh">Výstup každého kroku sledujete už během běhu.</FeatureCard>
@@ -43,7 +43,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="search" title="Auditní log">Záznam o tom, kdo co a kdy udělal, s možností filtrování.</FeatureCard>
 </div>
 
-<p class="features-group">Zabezpečení a přístup</p>
+<h2 class="features-group">Zabezpečení a přístup</h2>
 
 <div class="features-grid">
 <FeatureCard icon="shield" title="Jednotné přihlášení a role">Přihlášení přes Keycloak. Šest rolí odděluje tvorbu, spouštění, schvalování a audit. Citlivé akce vyžadují nové přihlášení.</FeatureCard>
@@ -53,7 +53,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="code" title="API tokeny">Tokeny umožní skriptům a dalším nástrojům volat API.</FeatureCard>
 </div>
 
-<p class="features-group">Inventář a integrace</p>
+<h2 class="features-group">Inventář a integrace</h2>
 
 <div class="features-grid">
 <FeatureCard icon="server" title="Inventář">Zařízení a lokality spravujete v Hegemony, nebo je načtete z NetBoxu či z Git repozitáře. Cílová zařízení vyberete ručně nebo dotazem.</FeatureCard>
@@ -64,11 +64,9 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="zap" title="Pluginy">Kroky, zdroje inventáře, notifikační kanály i úložiště tajemství jsou pluginy. Přidejte vlastní.</FeatureCard>
 </div>
 
-<h2 id="roadmap">Plány</h2>
+<h2 id="roadmap" class="features-heading">Plány</h2>
 
 <p class="features-note">Kam Hegemony směřuje. Tyto položky jsou v plánu, zatím nejsou hotové a seznam není harmonogram ani závazek.</p>
-
-<p class="features-group">V plánu</p>
 
 <div class="features-grid">
 <FeatureCard planned icon="upload" title="Upgrade softwaru zařízení">Kroky, které nahrají obraz, nainstalují ho, ověří běžící verzi a při chybě se vrátí k předchozí.</FeatureCard>
