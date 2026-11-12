@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Úvod
+title: Deterministické workflow pro infrastrukturu
 
 hero:
   name: Hegemony
