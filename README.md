@@ -77,7 +77,7 @@ release.
 
 | Path                   | Purpose                                 |
 | ---------------------- | --------------------------------------- |
-| `.github/`             | CI workflow, templates, Dependabot      |
+| `.github/`             | CI workflow, templates, Renovate        |
 | `index.md`             | English landing page (default locale)   |
 | `docs/`                | English documentation pages             |
 | `cs/`                  | Czech landing page and docs             |

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Renovate maintains the npm dependencies and the GitHub Actions pins, replacing the Dependabot version updates this repository used, as in the other hegemony-sh repositories. The groups and the mermaid exception carry over from the former .github/dependabot.yml. Third-party releases wait a week before they are proposed (minimumReleaseAge); security fixes do not.",
+  "extends": ["config:recommended", ":semanticCommits", ":semanticCommitTypeAll(chore)"],
+  "timezone": "Etc/UTC",
+  "schedule": ["before 05:00 on monday"],
+  "semanticCommitScope": "deps",
+  "labels": ["dependencies"],
+  "prConcurrentLimit": 3,
+  "prHourlyLimit": 2,
+  "minimumReleaseAge": "7 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
+  "enabledManagers": ["npm", "github-actions"],
+  "npm": {
+    "description": "Change a version range only when the new version falls outside it, as Dependabot's increase-if-necessary did; otherwise update the lockfile alone.",
+    "rangeStrategy": "update-lockfile"
+  },
+  "github-actions": {
+    "pinDigests": true
+  },
+  "packageRules": [
+    {
+      "description": "One pull request for every npm minor and patch update.",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "npm minor and patch"
+    },
+    {
+      "description": "stylelint and its standard config move together.",
+      "matchPackageNames": ["stylelint", "stylelint-config-standard"],
+      "groupName": "stylelint"
+    },
+    {
+      "description": "vitepress-plugin-mermaid (latest 2.0.17) only supports mermaid 10 or 11 as a peer dependency, so a mermaid 12 bump breaks `npm ci`. Remove this once the plugin accepts mermaid 12.",
+      "matchPackageNames": ["mermaid"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    },
+    {
+      "description": "Action updates are CI changes, grouped for minor and patch.",
+      "matchManagers": ["github-actions"],
+      "semanticCommitScope": "ci",
+      "addLabels": ["ci"]
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "github actions minor and patch"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "description": "A known vulnerability is not weekly business: these bypass the schedule and are labelled so they stand out.",
+    "labels": ["dependencies", "security"],
+    "schedule": ["at any time"]
+  },
+  "osvVulnerabilityAlerts": true
+}
