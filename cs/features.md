@@ -1,146 +1,82 @@
 ---
-description: Co Hegemony umí už dnes a co je v plánu, ale zatím není hotové.
-aside: true
+layout: page
+title: Funkce
+description: Co Hegemony umí už dnes a kam směřuje.
 ---
 
-# Funkce a plány
+<div class="features-page">
 
-Hegemony spouští dlouhé a rizikové změny infrastruktury jako workflow. Na této
-stránce najdete, co umí už dnes a co je v plánu, ale zatím není hotové.
+<p class="features-eyebrow">Funkce</p>
 
-::: info Stav projektu
-Hegemony je ověřené v laboratoři, zatím ne v produkčním provozu. Nejdřív si ho
-vyzkoušejte v laboratoři.
-:::
+<h1>Vše, co riziková změna potřebuje, na jedné platformě</h1>
 
-## Co Hegemony umí dnes
+<p class="features-lead">Hegemony spouští dlouhé změny infrastruktury jako workflow: se schvalováním, se záznamem toho, co se provedlo na každém zařízení, a bez ztráty rozdělané práce při restartu.</p>
 
-### Tvorba workflow
+<p class="features-group">Tvorba workflow</p>
 
-- **Vizuální editor.** Workflow nakreslíte jako graf kroků. Změny zůstávají
-  v konceptu, dokud je nepotvrdíte, a každé potvrzení je verze, kterou lze
-  porovnat s jinou.
-- **Řízení průběhu.** Větvení, cykly (postupné i paralelní) a fork/join.
-- **Opakované použití.** Jedno workflow může jako krok spustit jiné workflow.
-- **Formuláře pro spuštění.** Navrhnete formulář, který operátor vyplní při
-  spuštění běhu.
-- **Spouštěče.** Běh spustíte ručně, podle plánu nebo příchozím webhookem
-  (HTTP voláním z jiného systému).
-- **Limity běhů.** Omezíte, kolik běhů jednoho workflow smí běžet současně a
-  jak často.
+<div class="features-grid">
+<FeatureCard icon="workflow" title="Vizuální editor">Workflow nakreslíte jako graf kroků, nebo ho upravíte jako YAML. Pracujete v konceptu, potvrdíte ho jako verzi a verze můžete porovnat.</FeatureCard>
+<FeatureCard icon="git" title="Větvení, cykly a paralelní větve">V jednom workflow se můžete rozhodovat, opakovat kroky i větvit práci. Cykly běží postupně nebo paralelně.</FeatureCard>
+<FeatureCard icon="copy" title="Opakované použití workflow">Jedno workflow spustíte jako krok jiného, takže běžné postupy stačí vytvořit jednou.</FeatureCard>
+<FeatureCard icon="form" title="Formuláře pro spuštění">Navrhnete formulář, který operátor vyplní při spuštění běhu, včetně kontroly každého pole.</FeatureCard>
+<FeatureCard icon="play" title="Tři způsoby spuštění">Běh spustíte ručně, podle plánu nebo z jiného systému příchozím webhookem.</FeatureCard>
+<FeatureCard icon="filter" title="Limity běhů">Omezíte, kolik běhů jednoho workflow je aktivních současně a jak často smí začínat.</FeatureCard>
+</div>
 
-### Spolehlivé provádění
+<p class="features-group">Spolehlivé provádění</p>
 
-- **Běhy, které přežijí restart.** Běhy se provádějí na
-  [Temporal](https://temporal.io/), takže po restartu pokračují a mohou čekat
-  i několik dní — na servisní okno, schválení nebo restart zařízení.
-- **Schvalování.** Běh se může zastavit, dokud ho člověk neschválí nebo
-  nezamítne. Čekající žádosti najdete ve schránce schvalování.
-- **Kroky v kontejnerech.** Libovolný nástroj spustíte v izolovaném
-  kontejneru. Můžete omezit, na které síťové adresy a porty se smí připojit.
-- **Hotové kroky.** Příkazy přes SSH, příkazy na síťových zařízeních, Ansible
-  playbooky, plan a apply pro Terraform a OpenTofu, HTTP požadavky, operace
-  v NetBoxu a kontroly DNS, HTTP, TLS a dostupnosti.
-- **Spravovaný stav Terraformu a OpenTofu.** Platforma stav ukládá, zamyká,
-  verzuje a šifruje.
+<div class="features-grid">
+<FeatureCard icon="repeat" title="Běhy, které přežijí restart">Běhy se provádějí na Temporal. Po restartu pokračují a mohou čekat i několik dní na servisní okno nebo restart zařízení.</FeatureCard>
+<FeatureCard icon="clock" title="Servisní okna">Běh spustíte a schválíte předem. Práci provede jen v servisním okně, které nastavíte.</FeatureCard>
+<FeatureCard icon="check" title="Schvalování">Běh se zastaví, dokud ho člověk neschválí nebo nezamítne. Čekající žádosti jsou na jednom místě.</FeatureCard>
+<FeatureCard icon="terminal" title="Hotové kroky">Příkazy přes SSH, příkazy na síťových zařízeních, Ansible, Terraform a OpenTofu, HTTP požadavky, NetBox a kontroly DNS, HTTP a TLS.</FeatureCard>
+<FeatureCard icon="box" title="Libovolný nástroj v kontejneru">Jakýkoli nástroj spustíte v izolovaném kontejneru a omezíte, na které síťové adresy se smí připojit.</FeatureCard>
+<FeatureCard icon="layers" title="Spravovaný stav Terraformu">Platforma ukládá, zamyká, verzuje a šifruje stav Terraformu a OpenTofu.</FeatureCard>
+<FeatureCard icon="chart" title="Monitoring konektivity">Během změny sledujete zařízení na pozadí v živých tabulkách a grafech.</FeatureCard>
+</div>
 
-### Přehled a důkazy
+<p class="features-group">Přehled a důkazy</p>
 
-- **Živý průběh.** Výstup každého kroku sledujete už během běhu.
-- **Důkazy.** U každého kroku zůstává záznam toho, co se na kterém zařízení
-  skutečně provedlo, včetně vytvořených souborů.
-- **Auditní log.** Záznam o tom, kdo co udělal, s možností filtrování.
-- **Monitoring konektivity.** Kontroly zařízení na pozadí během běhu, zobrazené
-  v živých tabulkách a grafech.
+<div class="features-grid">
+<FeatureCard icon="activity" title="Živý průběh">Výstup každého kroku sledujete už během běhu.</FeatureCard>
+<FeatureCard icon="file" title="Důkazy">Zůstává záznam toho, co se na kterém zařízení skutečně provedlo, i soubory, které krok vytvořil.</FeatureCard>
+<FeatureCard icon="search" title="Auditní log">Záznam o tom, kdo co a kdy udělal, s možností filtrování.</FeatureCard>
+</div>
 
-### Inventář
+<p class="features-group">Zabezpečení a přístup</p>
 
-- **Vestavěný inventář.** Zařízení a lokality spravované přímo v Hegemony.
-- **Externí zdroje.** Zařízení a lokality lze načítat z NetBoxu nebo z Git
-  repozitáře pomocí pluginů inventáře.
+<div class="features-grid">
+<FeatureCard icon="shield" title="Jednotné přihlášení a role">Přihlášení přes Keycloak. Šest rolí odděluje tvorbu, spouštění, schvalování a audit. Citlivé akce vyžadují nové přihlášení.</FeatureCard>
+<FeatureCard icon="users" title="Organizace">Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá organizace má vlastní workflow, zařízení a tajemství. Workflow lze mezi organizacemi kopírovat.</FeatureCard>
+<FeatureCard icon="key" title="Tajemství zůstávají v úložišti tajemství">V databázi jsou jen reference. Použijete přibalené OpenBao, HashiCorp Vault nebo 1Password. Ve výstupu kroků jsou tajemství skrytá.</FeatureCard>
+<FeatureCard icon="lock" title="Důvěryhodní hostitelé a certifikáty">Každá organizace si spravuje SSH klíče hostitelů a soukromé certifikační autority, kterým důvěřuje.</FeatureCard>
+<FeatureCard icon="code" title="API tokeny">Tokeny umožní skriptům a dalším nástrojům volat API.</FeatureCard>
+</div>
 
-### Zabezpečení a přístup
+<p class="features-group">Inventář a integrace</p>
 
-- **Jednotné přihlášení.** Přihlášení přes Keycloak pomocí OpenID Connect
-  (OIDC), standardního přihlašovacího protokolu.
-- **Role.** Admin, editor, operator, approver, auditor a viewer.
-  Administrátoři mohou změnit, jakou roli která akce vyžaduje.
-- **Organizace.** Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá
-  organizace má vlastní workflow, zařízení, tajemství a členy.
-- **Tajemství.** Hodnoty tajemství zůstávají v úložišti tajemství; v databázi
-  jsou jen reference. OpenBao je k dispozici jako volitelná přibalená služba
-  a pluginy připojí HashiCorp Vault a 1Password. Tajemství, která platforma
-  pro krok načte, jsou v jeho výstupu skrytá.
-- **Důvěryhodní hostitelé a certifikáty.** Každá organizace si spravuje SSH
-  klíče hostitelů, kterým důvěřuje, a soukromé certifikační autority, kterým
-  důvěřuje pro spojení přes TLS.
-- **API tokeny.** Administrátoři vydávají tokeny, kterými skripty a další
-  nástroje volají API.
+<div class="features-grid">
+<FeatureCard icon="server" title="Inventář">Zařízení a lokality spravujete v Hegemony, nebo je načtete z NetBoxu či z Git repozitáře. Cílová zařízení vyberete ručně nebo dotazem.</FeatureCard>
+<FeatureCard icon="download" title="Git">Workflow a jejich přílohy můžete mít v Git repozitářích, s podporou push a pull.</FeatureCard>
+<FeatureCard icon="exchange" title="Import a export konfigurace">Konfiguraci platformy exportujete a importujete jako YAML a podle plánu zálohujete do Gitu.</FeatureCard>
+<FeatureCard icon="bell" title="Notifikace">E-mail, Slack, Microsoft Teams, Webex, Discord, Telegram, Pushover a odchozí webhooky.</FeatureCard>
+<FeatureCard icon="storage" title="Úložiště souborů">Velké soubory uložíte do úložiště kompatibilního s S3.</FeatureCard>
+<FeatureCard icon="zap" title="Pluginy">Kroky, zdroje inventáře, notifikační kanály i úložiště tajemství jsou pluginy. Přidejte vlastní.</FeatureCard>
+</div>
 
-### Integrace
+<h2 id="roadmap">Plány</h2>
 
-- **Git.** Workflow a jejich přílohy můžete mít v Git repozitářích, s podporou
-  push a pull.
-- **Import a export konfigurace.** Konfiguraci platformy lze exportovat a
-  importovat jako YAML a podle plánu ji exportovat do Gitu jako zálohu.
-  Hodnoty tajemství, historie běhů a uložené soubory součástí nejsou.
-- **Notifikace.** E-mail, Slack, Microsoft Teams, Webex, Discord, Telegram,
-  Pushover a odchozí webhooky, odesílané při událostech běhů a schvalování.
-- **Úložiště souborů.** Soubory pro workflow uložíte do úložiště kompatibilního
-  s S3.
-- **Pluginy.** Kroky, zdroje inventáře, notifikační kanály i úložiště tajemství
-  jsou pluginy, takže můžete přidat vlastní.
+<p class="features-note">Kam Hegemony směřuje. Tyto položky jsou v plánu, zatím nejsou hotové a seznam není harmonogram ani závazek.</p>
 
-## Plány
+<p class="features-group">V plánu</p>
 
-Tyto položky jsou v plánu, ale zatím nejsou hotové. Seznam není harmonogram
-ani závazek. Úplný seznam je v souboru
-[TODO.md](https://github.com/hegemony-sh/hegemony/blob/develop/TODO.md)
-v repozitáři Hegemony (anglicky).
+<div class="features-grid">
+<FeatureCard planned icon="upload" title="Upgrade softwaru zařízení">Kroky, které nahrají obraz, nainstalují ho, ověří běžící verzi a při chybě se vrátí k předchozí.</FeatureCard>
+<FeatureCard planned icon="server" title="Další platformy zařízení">Podpora dalších platforem síťových zařízení.</FeatureCard>
+<FeatureCard planned icon="monitor" title="Počítače s Windows">Windows Remote Management (WinRM) jako vestavěný způsob spouštění příkazů na počítačích s Windows.</FeatureCard>
+<FeatureCard planned icon="key" title="Krátkodobé přihlašovací údaje">Přihlašovací údaje vydané pro jeden běh, například krátkodobé SSH certifikáty a jednorázová hesla.</FeatureCard>
+<FeatureCard planned icon="message" title="Schvalování z jiných nástrojů">Čekající běh schválíte nebo zamítnete ze ServiceNow, Jiry nebo chatu.</FeatureCard>
+<FeatureCard planned icon="chart" title="Další kontroly">Kontrola SNMP a další kontroly konektivity, například TLS handshake, SSH banner a NETCONF.</FeatureCard>
+</div>
 
-### Zařízení
-
-- Kroky pro upgrade softwaru zařízení: nahrání obrazu, instalace, ověření
-  běžící verze a návrat k předchozí verzi při chybě.
-- Podpora dalších platforem síťových zařízení.
-- WinRM (Windows Remote Management) pro spouštění příkazů na počítačích
-  s Windows.
-- Krátkodobé SSH certifikáty pro přestupní servery (jump hosty) a linuxové
-  servery.
-
-### Workflow
-
-- Velmi dlouhé běhy, které si automaticky zkracují historii.
-- Volba, co cyklus udělá, když jeden průchod selže: ukončí se, nebo pokračuje
-  dalším průchodem.
-- Méně omezení pro to, co může běžet uvnitř paralelních cyklů.
-
-### Kontroly a monitoring
-
-- Kontrolní krok pro SNMP (Simple Network Management Protocol).
-- Další kontroly pro monitoring konektivity, například TLS handshake, SSH
-  banner, odchylka NTP a NETCONF. Dnes monitoring kontroluje TCP, ping, HTTP
-  a DNS.
-
-### Tajemství a přístup
-
-- Dynamická tajemství: přihlašovací údaje vydané pro jeden běh, například
-  jednorázová SSH hesla pro linuxové servery a dočasní databázoví uživatelé.
-- Samostatné úložiště tajemství pro každou organizaci.
-- Pravidla přístupu podle vlastností zdrojů, nejen podle rolí.
-
-### Propojení s dalšími systémy
-
-- Schválení nebo zamítnutí čekajícího běhu příchozím webhookem z jiného
-  systému, například ze ServiceNow, Jiry nebo chatu.
-- Pravidla, která z dat příchozího webhooku vytvoří vstupy běhu, a validace
-  těchto dat.
-- Více možností, jak upravit text notifikací.
-- Import a export konfigurace pro jednu organizaci.
-
-### Provoz
-
-- Limity počtu požadavků na webhooky, které platí napříč několika instancemi
-  API.
-- Kvóty a limity pro každou organizaci.
-- Dokumentace ke stažení pro prostředí bez přístupu k internetu.
+</div>

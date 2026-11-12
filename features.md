@@ -1,137 +1,82 @@
 ---
-description: What Hegemony can do today, and what is planned but not built yet.
-aside: true
+layout: page
+title: Features
+description: What Hegemony can do today, and where it is heading.
 ---
 
-# Features and roadmap
+<div class="features-page">
 
-Hegemony runs long, risky infrastructure changes as workflows. This page lists
-what it can do today and what is planned but not built yet.
+<p class="features-eyebrow">Features</p>
 
-::: info Project status
-Hegemony is lab-proven, not yet proven in production. Try it in a lab first.
-:::
+<h1>Everything a risky change needs, in one platform</h1>
 
-## What Hegemony does today
+<p class="features-lead">Hegemony runs long infrastructure changes as workflows: with approvals, with a record of what ran on every device, and without losing its place when something restarts.</p>
 
-### Build workflows
+<p class="features-group">Build workflows</p>
 
-- **Visual flow editor.** Draw a workflow as a graph of steps. Changes stay in
-  a draft until you commit them, and every commit is a version you can compare.
-- **Control flow.** Branches, loops (sequential or parallel) and fork/join.
-- **Reusable flows.** One flow can run another flow as a step.
-- **Run forms.** Design the form an operator fills in when starting a run.
-- **Triggers.** Start a run by hand, on a schedule, or from an incoming
-  webhook (an HTTP call from another system).
-- **Run limits.** Cap how many runs of a flow may run at once, and how often.
+<div class="features-grid">
+<FeatureCard icon="workflow" title="Visual flow editor">Draw a workflow as a graph of steps, or edit it as YAML. Work in a draft, commit it as a version, and compare versions.</FeatureCard>
+<FeatureCard icon="git" title="Branches, loops and parallel paths">Decide, repeat and fan out inside one workflow. Loops can run one by one or in parallel.</FeatureCard>
+<FeatureCard icon="copy" title="Reusable flows">Run one flow as a step of another, so common procedures are built once.</FeatureCard>
+<FeatureCard icon="form" title="Run forms">Design the form an operator fills in to start a run, with checks on every field.</FeatureCard>
+<FeatureCard icon="play" title="Three ways to start">Start a run by hand, on a schedule, or from another system with an incoming webhook.</FeatureCard>
+<FeatureCard icon="filter" title="Run limits">Limit how many runs of a flow are active at once and how often they may start.</FeatureCard>
+</div>
 
-### Run them reliably
+<p class="features-group">Run them reliably</p>
 
-- **Runs that survive restarts.** Runs execute on
-  [Temporal](https://temporal.io/), so they continue after a restart and can
-  wait for days — for a maintenance window, an approval or a device reload.
-- **Approvals.** A run can pause until a person approves or rejects it.
-  Pending requests wait in an approvals inbox.
-- **Container steps.** Run any tool in an isolated container. You can limit
-  which network addresses and ports it may reach.
-- **Ready-made steps.** Shell commands over SSH, network device commands,
-  Ansible playbooks, Terraform and OpenTofu plan and apply, HTTP requests,
-  NetBox operations, and DNS, HTTP, TLS and reachability checks.
-- **Managed Terraform and OpenTofu state.** State is stored, locked, versioned
-  and encrypted by the platform.
+<div class="features-grid">
+<FeatureCard icon="repeat" title="Runs that survive restarts">Runs execute on Temporal. They continue after a restart and can wait for days for a maintenance window or a device reload.</FeatureCard>
+<FeatureCard icon="clock" title="Maintenance windows">Start and approve a run ahead of time. It does its work only inside the maintenance window you set.</FeatureCard>
+<FeatureCard icon="check" title="Approvals">Pause a run until a person approves or rejects it. Pending requests wait in one inbox.</FeatureCard>
+<FeatureCard icon="terminal" title="Ready-made steps">SSH commands, network device commands, Ansible, Terraform and OpenTofu, HTTP requests, NetBox, and DNS, HTTP and TLS checks.</FeatureCard>
+<FeatureCard icon="box" title="Any tool in a container">Run any tool in an isolated container, and limit which network addresses it may reach.</FeatureCard>
+<FeatureCard icon="layers" title="Managed Terraform state">The platform stores, locks, versions and encrypts Terraform and OpenTofu state.</FeatureCard>
+<FeatureCard icon="chart" title="Connectivity monitors">Watch devices in the background during a change, with live tables and graphs.</FeatureCard>
+</div>
 
-### See and prove what happened
+<p class="features-group">See and prove what happened</p>
 
-- **Live progress.** Watch each step's output while the run is in progress.
-- **Evidence.** Each step keeps what actually ran on each device, including
-  files it produced.
-- **Audit log.** A record of who did what, with filters.
-- **Connectivity monitors.** Background checks against devices during a run,
-  shown as live tables and graphs.
+<div class="features-grid">
+<FeatureCard icon="activity" title="Live progress">Follow the output of every step while the run is in progress.</FeatureCard>
+<FeatureCard icon="file" title="Evidence">Keep what actually ran on each device, together with the files a step produced.</FeatureCard>
+<FeatureCard icon="search" title="Audit log">A record of who did what and when, with filters.</FeatureCard>
+</div>
 
-### Inventory
+<p class="features-group">Security and access</p>
 
-- **Built-in inventory.** Devices and sites managed in Hegemony.
-- **External sources.** Bring devices and sites in from NetBox or from a Git
-  repository through inventory plugins.
+<div class="features-grid">
+<FeatureCard icon="shield" title="Single sign-on and roles">Log in through Keycloak. Six roles separate building, running, approving and auditing. Sensitive actions ask for a fresh sign-in.</FeatureCard>
+<FeatureCard icon="users" title="Organizations">Keep several teams or customers apart on one installation, each with its own flows, devices and secrets. Copy flows from one to another.</FeatureCard>
+<FeatureCard icon="key" title="Secrets stay in a secret store">The database keeps only references. Use the bundled OpenBao, HashiCorp Vault or 1Password. Secrets are hidden in step output.</FeatureCard>
+<FeatureCard icon="lock" title="Trusted hosts and certificates">Each organization manages the SSH host keys and the private certificate authorities it trusts.</FeatureCard>
+<FeatureCard icon="code" title="API tokens">Tokens let scripts and other tools call the API.</FeatureCard>
+</div>
 
-### Security and access
+<p class="features-group">Inventory and integrations</p>
 
-- **Single sign-on.** Login through Keycloak using OpenID Connect (OIDC), a
-  standard login protocol.
-- **Roles.** Admin, editor, operator, approver, auditor and viewer.
-  Administrators can change which role each action requires.
-- **Organizations.** Keep several teams or customers apart on one
-  installation. Each has its own flows, devices, secrets and members.
-- **Secrets.** Secret values stay in a secret store; the database keeps only
-  references. OpenBao comes as an optional bundled service, and plugins
-  connect HashiCorp Vault and 1Password. Secrets that the platform looks up
-  for a step are hidden in its output.
-- **Trusted hosts and certificates.** Each organization manages the SSH
-  host keys it trusts, and the private certificate authorities it trusts for
-  TLS connections.
-- **API tokens.** Administrators issue tokens that scripts and other tools
-  use to call the API.
+<div class="features-grid">
+<FeatureCard icon="server" title="Inventory">Manage devices and sites in Hegemony, or bring them in from NetBox or a Git repository. Target devices by hand or by a query.</FeatureCard>
+<FeatureCard icon="download" title="Git">Keep flows and their attached files in Git repositories, with push and pull.</FeatureCard>
+<FeatureCard icon="exchange" title="Configuration Exchange">Export and import the platform configuration as YAML, and back it up to Git on a schedule.</FeatureCard>
+<FeatureCard icon="bell" title="Notifications">Email, Slack, Microsoft Teams, Webex, Discord, Telegram, Pushover and outgoing webhooks.</FeatureCard>
+<FeatureCard icon="storage" title="File repositories">Keep large files on S3-compatible storage.</FeatureCard>
+<FeatureCard icon="zap" title="Plugins">Steps, inventory sources, notification channels and secret stores are plugins. Add your own.</FeatureCard>
+</div>
 
-### Integrations
+<h2 id="roadmap">Roadmap</h2>
 
-- **Git.** Keep flows and their attached files in Git repositories, with push
-  and pull.
-- **Configuration Exchange.** Export and import the platform configuration
-  as YAML, and export it to Git on a schedule as a backup. Secret values, run
-  history and stored files are not included.
-- **Notifications.** Email, Slack, Microsoft Teams, Webex, Discord, Telegram,
-  Pushover and outgoing webhooks, sent on run and approval events.
-- **File repositories.** Store files for your flows on S3-compatible storage.
-- **Plugins.** Steps, inventory sources, notification channels and secret
-  stores are plugins, so you can add your own.
+<p class="features-note">Where Hegemony is heading. These items are planned, not built yet, and the list is not a schedule or a commitment.</p>
 
-## Roadmap
+<p class="features-group">Planned</p>
 
-These items are planned but not built yet. The list is not a schedule or a
-commitment. The full backlog is
-[TODO.md](https://github.com/hegemony-sh/hegemony/blob/develop/TODO.md) in the
-Hegemony repository.
+<div class="features-grid">
+<FeatureCard planned icon="upload" title="Device software upgrades">Steps that stage an image, install it, verify the running version, and roll back on failure.</FeatureCard>
+<FeatureCard planned icon="server" title="More device platforms">Support for more network device platforms.</FeatureCard>
+<FeatureCard planned icon="monitor" title="Windows hosts">Windows Remote Management (WinRM) as a built-in way to run commands on Windows hosts.</FeatureCard>
+<FeatureCard planned icon="key" title="Short-lived credentials">Credentials issued for one run, such as short-lived SSH certificates and one-time passwords.</FeatureCard>
+<FeatureCard planned icon="message" title="Approvals from other tools">Approve or reject a waiting run from ServiceNow, Jira or a chat tool.</FeatureCard>
+<FeatureCard planned icon="chart" title="More checks">An SNMP check, and more connectivity checks such as TLS handshake, SSH banner and NETCONF.</FeatureCard>
+</div>
 
-### Devices
-
-- Steps that upgrade device software: stage an image, install it, verify the
-  running version, and roll back on failure.
-- Support for more network device platforms.
-- WinRM (Windows Remote Management), for running commands on Windows hosts.
-- Short-lived SSH certificates for jump hosts and Linux hosts.
-
-### Workflows
-
-- Very long runs that roll over their history automatically.
-- A choice of what a loop does when one pass fails: stop the loop or continue
-  with the next pass.
-- Fewer restrictions on what can run inside parallel loops.
-
-### Checks and monitoring
-
-- An SNMP (Simple Network Management Protocol) check step.
-- More checks for connectivity monitors, such as TLS handshake, SSH banner,
-  NTP offset and NETCONF. Monitors check TCP, ping, HTTP and DNS today.
-
-### Secrets and access
-
-- Dynamic secrets: credentials issued for one run, such as one-time SSH
-  passwords for Linux hosts and temporary database users.
-- A separate secret store for each organization.
-- Access rules based on resource attributes, not only on roles.
-
-### Connections to other systems
-
-- Approve or reject a waiting run through an incoming webhook from another
-  system, such as ServiceNow, Jira or a chat tool.
-- Rules that turn incoming webhook data into run inputs, and validation of
-  that data.
-- More ways to customize notification text.
-- Configuration Exchange for a single organization.
-
-### Operations
-
-- Webhook rate limits that hold across several API instances.
-- Quotas and rate limits for each organization.
-- A downloadable copy of the documentation for sites without internet access.
+</div>
