@@ -23,7 +23,7 @@ hero:
 features:
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>'
     title: Deklarativní Flow Engine
-    details: Workflow definujete v YAML nebo JSON a skládáte je do fork/join grafů s rozšiřitelnými handlery — bez ručního psaní orchestrace.
+    details: Workflow definujete v YAML a skládáte je do fork/join grafů s rozšiřitelnými handlery — bez ručního psaní orchestrace.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>'
     title: Deterministické běhy
     details: Spolehlivé, obnovitelné a odolné běhy na Temporal. I dlouhotrvající operace přežijí restart a navážou přesně tam, kde skončily.
@@ -32,16 +32,16 @@ features:
     details: Pomocí Server-Sent Events se do rozhraní přenáší průběh krok za krokem a vše doplňuje trvalá auditní stopa pro dohledatelnost i ladění.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>'
     title: Spouštějte cokoli v kontejnerech
-    details: Libovolné nástroje můžete spouštět v izolovaných kontejnerech pomocí kroků run_container — s připojenými přílohami workflow i generovanou konfigurací, bez psaní vlastních handlerů.
+    details: Libovolné nástroje můžete spouštět v izolovaných kontejnerech pomocí kroků container.run — s připojenými přílohami workflow, bez psaní vlastních handlerů.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>'
     title: Rozšiřitelný inventář
-    details: Cílová zařízení můžete brát z lokálního inventáře i z externích systémů, jako jsou NetBox, pomocí rozšiřitelných zdrojů inventáře.
+    details: Cílová zařízení můžete brát z lokálního inventáře i z externích systémů, jako je NetBox, pomocí rozšiřitelných zdrojů inventáře.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>'
     title: Workflow v Gitu
     details: Definice workflow můžete verzovat v Git repozitářích — jednotlivá workflow i jejich přílohy lze pushovat, pullovat nebo průběžně synchronizovat.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>'
     title: Import a export konfigurace
-    details: Celou konfiguraci platformy lze importovat i exportovat jako YAML a celý stav synchronizovat nebo zálohovat do Gitu.
+    details: Konfiguraci platformy lze importovat i exportovat jako YAML a podle plánu zálohovat do Gitu.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>'
     title: Monitoring konektivity
     details: Na pozadí můžete spouštět sondy dostupnosti a konektivity nad rolemi zařízení i adresami; výsledky se ukládají jako časové řady a zobrazují v živých tabulkách a grafech.
@@ -83,8 +83,8 @@ curl -fsSL https://hegemony.sh/install.sh | sh
 Instalátor stáhne platformu a demo, zkontroluje výsledek a vypíše, kde se
 přihlásit: Hegemony běží na `http://localhost:8080`. Budete potřebovat Linux
 (nebo macOS s Docker Desktop, případně WSL 2 ve Windows), Docker s pluginem
-Compose 2.24 nebo novějším, asi 8 GiB paměti pro Docker, `git`, `curl` a
-`bash`; [go-task](https://taskfile.dev/) je volitelný. Příkazy pro správu a
+Compose 2.24 nebo novějším, asi 8 GiB paměti pro Docker, 25 GiB volného
+místa na disku, `git`, `curl` a `bash`; [go-task](https://taskfile.dev/) je volitelný. Příkazy pro správu a
 průvodce demem najdete v repozitáři
 [hegemony-sh/hegemony-demo](https://github.com/hegemony-sh/hegemony-demo).
 

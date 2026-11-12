@@ -24,7 +24,7 @@ hero:
 features:
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="8" x="3" y="3" rx="2"/><path d="M7 11v4a2 2 0 0 0 2 2h4"/><rect width="8" height="8" x="13" y="13" rx="2"/></svg>'
     title: Declarative Flow Engine
-    details: Define workflows in YAML or JSON and compose fork/join graphs with pluggable handlers — no orchestration glue to write.
+    details: Define workflows in YAML and compose fork/join graphs with pluggable handlers — no orchestration glue to write.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>'
     title: Deterministic Execution
     details: Reliable, resumable, fault-tolerant runs powered by Temporal. Long-running operations survive restarts and resume exactly where they left off.
@@ -33,7 +33,7 @@ features:
     details: Server-Sent Events stream live, step-by-step progress to the UI, backed by a persistent audit trail for compliance and debugging.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>'
     title: Run Anything in Containers
-    details: Execute arbitrary tooling in isolated containers via run_container steps — mount workflow attachments and render configs without bespoke handlers.
+    details: Execute arbitrary tooling in isolated containers via container.run steps — mount workflow attachments without bespoke handlers.
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>'
     title: Pluggable Inventory
     details: Target devices from the built-in inventory or external sources such as NetBox via pluggable inventory providers.
@@ -43,7 +43,7 @@ features:
 
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>'
     title: Configuration Exchange
-    details: Import and export the whole platform configuration as YAML, and sync or back up your entire platform state to Git.
+    details: Import and export the platform configuration as YAML, and back it up to Git on a schedule.
 
   - icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>'
     title: Connectivity Monitors
@@ -86,8 +86,8 @@ curl -fsSL https://hegemony.sh/install.sh | sh
 The installer fetches the platform and the demo, checks the result and
 prints where to log in: Hegemony runs at `http://localhost:8080`. You need
 Linux (or macOS with Docker Desktop, or WSL 2 on Windows), Docker with the
-Compose plugin 2.24 or newer, about 8 GiB of memory for Docker, `git`, `curl`
-and `bash`; [go-task](https://taskfile.dev/) is optional. Lifecycle commands
+Compose plugin 2.24 or newer, about 8 GiB of memory for Docker, 25 GiB of free
+disk, `git`, `curl` and `bash`; [go-task](https://taskfile.dev/) is optional. Lifecycle commands
 and the walkthrough are in
 [hegemony-sh/hegemony-demo](https://github.com/hegemony-sh/hegemony-demo).
 

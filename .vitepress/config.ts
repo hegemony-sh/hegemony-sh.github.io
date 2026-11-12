@@ -165,6 +165,7 @@ export default withMermaid(
         themeConfig: {
           nav: [
             { text: "Home", link: "/" },
+            { text: "Features", link: "/features" },
             { text: "Docs", link: "/docs/" },
             // Served from public/api/ only after the sync has run.
             ...(apiReferenceSynced
@@ -214,6 +215,7 @@ export default withMermaid(
         themeConfig: {
           nav: [
             { text: "Úvod", link: "/cs/" },
+            { text: "Funkce", link: "/cs/features" },
             { text: "Dokumentace", link: "/cs/docs/" },
             // The API reference exists only in English; say so in the label.
             ...(apiReferenceSynced

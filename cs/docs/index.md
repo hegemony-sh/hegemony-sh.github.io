@@ -35,15 +35,13 @@ handlerů přímo z repozitáře pluginů.</span>
 
 ## Rychlý start
 
-Nejrychlejší způsob, jak si Hegemony vyzkoušet, je stáhnout připravené image,
-spustit celý stack a naimportovat ukázková data:
+Nejrychlejší způsob, jak si Hegemony vyzkoušet, je lokální demo. Jediný příkaz
+spustí platformu na vašem počítači vedle malé laboratoře se simulovanými
+routery a servery. Příkaz i požadavky najdete v části
+[Vyzkoušejte demo](/cs/#try-the-demo) na úvodní stránce.
 
-```bash
-task compose:demo:up
-```
-
-Webové rozhraní pak poběží na `http://localhost:8080` — přihlaste se jako
-`admin` / `hegemony`.
+Webové rozhraní pak běží na `http://localhost:8080`. Přihlaste se jako `noc`
+heslem, které vypíše instalátor.
 
 ## Další zdroje
 
