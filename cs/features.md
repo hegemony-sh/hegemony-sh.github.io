@@ -49,7 +49,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="shield" title="SSO a role">Přihlášení přes Keycloak. Šest rolí odděluje tvorbu, spouštění, schvalování a audit. Citlivé akce vyžadují nové přihlášení.</FeatureCard>
 <FeatureCard icon="users" title="Organizace">Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá organizace má vlastní workflow, zařízení a hesla. Workflow lze mezi organizacemi kopírovat.</FeatureCard>
 <FeatureCard icon="key" title="Hesla a citlivé údaje v trezoru">V databázi jsou jen odkazy na ně. Použijete přibalený OpenBao, HashiCorp Vault nebo 1Password. Ve výstupu kroků jsou hesla i další citlivé údaje skryté.</FeatureCard>
-<FeatureCard icon="lock" title="Důvěryhodné hosty a certifikáty">Každá organizace si spravuje SSH klíče hostů a interní certifikační autority, kterým důvěřuje.</FeatureCard>
+<FeatureCard icon="lock" title="Důvěryhodné SSH klíče a certifikáty">Každá organizace si spravuje SSH klíče hostů a interní certifikační autority, kterým důvěřuje.</FeatureCard>
 <FeatureCard icon="code" title="API tokeny">Tokeny, přes které skripty a další nástroje volají API.</FeatureCard>
 </div>
 
@@ -71,7 +71,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <div class="features-grid">
 <FeatureCard planned icon="upload" title="Upgrade softwaru zařízení">Kroky, které nahrají image, nainstalují ho, ověří běžící verzi a při chybě se vrátí k předchozí.</FeatureCard>
 <FeatureCard planned icon="server" title="Další platformy">Podpora dalších platforem: síťových zařízení, serverů a dalších systémů.</FeatureCard>
-<FeatureCard planned icon="monitor" title="Windows stroje">Vestavěná podpora WinRM (Windows Remote Management) pro spouštění příkazů na Windows strojích.</FeatureCard>
+<FeatureCard planned icon="monitor" title="Windows podpora">Vestavěná podpora WinRM (Windows Remote Management) pro spouštění příkazů na Windows zařízeních.</FeatureCard>
 <FeatureCard planned icon="key" title="Krátkodobé přihlašovací údaje">Přihlašovací údaje vydané jen pro jeden běh, například krátkodobé SSH certifikáty a jednorázová hesla.</FeatureCard>
 <FeatureCard planned icon="message" title="Schvalování z jiných nástrojů">Čekající běh schválíte nebo zamítnete přímo ze ServiceNow, Jiry nebo chatu.</FeatureCard>
 <FeatureCard planned icon="chart" title="Další kontroly">Kontrola SNMP a další kontroly konektivity, například TLS handshake, SSH banner a NETCONF.</FeatureCard>
