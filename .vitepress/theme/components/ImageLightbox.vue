@@ -17,7 +17,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 <script setup lang="ts">
 import { useRoute } from "vitepress";
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 const route = useRoute();
 const dialog = ref<HTMLDialogElement | null>(null);
@@ -26,7 +26,7 @@ const alt = ref("");
 
 const closeLabel = computed(() => (route.path.startsWith("/cs/") ? "Zavřít" : "Close"));
 
-function onDocumentClick(event: MouseEvent) {
+async function onDocumentClick(event: MouseEvent) {
   // Let modified clicks (new tab, new window, download) do what they normally do.
   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
     return;
@@ -39,7 +39,10 @@ function onDocumentClick(event: MouseEvent) {
   event.preventDefault();
   src.value = link.href;
   alt.value = link.querySelector("img")?.getAttribute("alt") ?? "";
-  dialog.value.showModal();
+  // Let Vue render the new image and the dialog's accessible name first, so
+  // assistive technology announces this screenshot, not an empty or old one.
+  await nextTick();
+  dialog.value?.showModal();
 }
 
 function close() {

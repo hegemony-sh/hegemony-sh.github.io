@@ -80,6 +80,9 @@ test.describe("Website smoke @smoke", () => {
     const dialog = page.locator("dialog.image-lightbox");
     await expect(dialog).toBeVisible();
     await expect(dialog.locator("img")).toHaveAttribute("src", /\/screenshots\/.+\.webp$/);
+    // The dialog is named after the screenshot it shows.
+    const alt = await shot.locator("img").getAttribute("alt");
+    await expect(dialog).toHaveAttribute("aria-label", alt ?? "");
     // The page did not navigate to the image.
     await expect(page).toHaveURL(/\/$/);
 
