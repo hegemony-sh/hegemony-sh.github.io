@@ -56,6 +56,18 @@ features:
     details: Událostmi řízené notifikace a webhooky propojí Hegemony s vašimi stávajícími nástroji pro alerting i automatizaci.
 ---
 
+<div class="showcase-section">
+  <p class="showcase-eyebrow">Ukázka z dema</p>
+  <h2 class="showcase-title">Jeden běh od žádosti po důkaz</h2>
+  <p class="showcase-lead">Tyto obrazovky pocházejí z demo laboratoře: fiktivní operátor v ní mění své routery pomocí Hegemony.</p>
+  <figure class="shot shot--hero"><a href="/screenshots/run-live.webp" target="_blank" rel="noopener"><img src="/screenshots/run-live.webp" alt="Běh servisního okna čekající na schválení, s grafem a živým výstupem z routerů" width="2400" height="1500" loading="lazy" decoding="async"></a><figcaption>Servisní okno na hraničních routerech v Delfách: provoz je odkloněný, dostupnost se sleduje a běh čeká na schválení, aby okno uzavřel. Vpravo je živý výstup z routerů.</figcaption></figure>
+  <div class="showcase-rows">
+    <div class="showcase-row"><div class="showcase-text"><h3>Navrhněte změnu</h3><p>Každá změna je workflow: důkazy před změnou, samotná změna, důkazy po ní a kontrola, že se povedla. Jakékoli selhání skončí na jednom jasném místě.</p></div><figure class="shot"><a href="/screenshots/flow-editor.webp" target="_blank" rel="noopener"><img src="/screenshots/flow-editor.webp" alt="Editor workflow s workflow Announce service prefix" width="2400" height="692" loading="lazy" decoding="async"></a></figure></div>
+    <div class="showcase-row"><div class="showcase-text"><h3>Druhý pár očí</h3><p>Běh se zastaví, dokud ho schvalovatel neschválí. Operátoři změny spouštějí, schvalovatelé je schvalují a nikdo nedělá obojí.</p></div><figure class="shot"><a href="/screenshots/approvals.webp" target="_blank" rel="noopener"><img src="/screenshots/approvals.webp" alt="Seznam schválení se dvěma čekajícími žádostmi" width="2400" height="710" loading="lazy" decoding="async"></a></figure></div>
+    <div class="showcase-row"><div class="showcase-text"><h3>Důkaz o tom, co se změnilo</h3><p>Hegemony uchová konfiguraci každého routeru před změnou i po ní a ukáže přesně, co změna přidala.</p></div><figure class="shot"><a href="/screenshots/evidence-diff.webp" target="_blank" rel="noopener"><img src="/screenshots/evidence-diff.webp" alt="Konfigurace hraničního routeru před změnou a po ní, se dvěma přidanými řádky" width="2400" height="982" loading="lazy" decoding="async"></a></figure></div>
+  </div>
+</div>
+
 <div class="demo-section" id="try-the-demo">
   <p class="demo-eyebrow">Vyzkoušejte demo</p>
   <div class="demo-card">
