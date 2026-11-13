@@ -47,8 +47,8 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <div class="features-grid">
 <FeatureCard icon="shield" title="SSO a role">Přihlášení přes Keycloak. Šest rolí odděluje tvorbu, spouštění, schvalování a audit. Citlivé akce vyžadují nové přihlášení.</FeatureCard>
-<FeatureCard icon="users" title="Organizace">Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá organizace má vlastní workflow, zařízení a secrety. Workflow lze mezi organizacemi kopírovat.</FeatureCard>
-<FeatureCard icon="key" title="Secrety zůstávají v trezoru">V databázi jsou jen odkazy na ně. Použijete přibalený OpenBao, HashiCorp Vault nebo 1Password. Ve výstupu kroků jsou secrety skryté.</FeatureCard>
+<FeatureCard icon="users" title="Organizace">Na jedné instalaci oddělíte více týmů nebo zákazníků. Každá organizace má vlastní workflow, zařízení a citlivé údaje. Workflow lze mezi organizacemi kopírovat.</FeatureCard>
+<FeatureCard icon="key" title="Citlivé údaje zůstávají v trezoru">V databázi jsou jen odkazy na ně. Použijete přibalený OpenBao, HashiCorp Vault nebo 1Password. Ve výstupu kroků jsou citlivé údaje skryté.</FeatureCard>
 <FeatureCard icon="lock" title="Důvěryhodné hosty a certifikáty">Každá organizace si spravuje SSH klíče hostů a interní certifikační autority, kterým důvěřuje.</FeatureCard>
 <FeatureCard icon="code" title="API tokeny">Tokeny, přes které skripty a další nástroje volají API.</FeatureCard>
 </div>
@@ -61,7 +61,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard icon="exchange" title="Import a export konfigurace">Konfiguraci platformy exportujete a importujete jako YAML a podle plánu ji zálohujete do Gitu.</FeatureCard>
 <FeatureCard icon="bell" title="Notifikace">E-mail, Slack, Microsoft Teams, Webex, Discord, Telegram, Pushover a odchozí webhooky.</FeatureCard>
 <FeatureCard icon="storage" title="Úložiště souborů">Velké soubory uložíte do úložiště kompatibilního s S3.</FeatureCard>
-<FeatureCard icon="zap" title="Pluginy">Kroky, zdroje inventáře, notifikační kanály i trezory secretů jsou pluginy. Můžete si přidat vlastní.</FeatureCard>
+<FeatureCard icon="zap" title="Pluginy">Kroky, zdroje inventáře, notifikační kanály i trezory pro citlivé údaje jsou pluginy. Můžete si přidat vlastní.</FeatureCard>
 </div>
 
 <h2 id="roadmap" class="features-heading">Roadmapa</h2>
