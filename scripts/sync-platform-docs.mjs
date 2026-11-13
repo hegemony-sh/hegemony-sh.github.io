@@ -331,9 +331,12 @@ function publicContract(contract) {
   const usedTags = new Set(
     remaining.flatMap((operation) => (Array.isArray(operation.tags) ? operation.tags : [])),
   );
+  // An operation without its own "security" inherits the contract's top-level
+  // requirements, so the schemes those name stay as well.
+  const requirements = [contract.security, ...remaining.map((operation) => operation.security)];
   const usedSchemes = new Set(
-    remaining.flatMap((operation) =>
-      (Array.isArray(operation.security) ? operation.security : [])
+    requirements.flatMap((security) =>
+      (Array.isArray(security) ? security : [])
         .filter(isObject)
         .flatMap((requirement) => Object.keys(requirement)),
     ),
@@ -345,10 +348,11 @@ function publicContract(contract) {
   if (Array.isArray(contract["x-tagGroups"])) {
     contract["x-tagGroups"] = contract["x-tagGroups"]
       .filter(isObject)
-      .map((group) => ({
-        ...group,
-        tags: (Array.isArray(group.tags) ? group.tags : []).filter((tag) => usedTags.has(tag)),
-      }))
+      .map((group) =>
+        Object.assign({}, group, {
+          tags: (Array.isArray(group.tags) ? group.tags : []).filter((tag) => usedTags.has(tag)),
+        }),
+      )
       .filter((group) => group.tags.length > 0);
   }
   const schemes = contract.components?.securitySchemes;

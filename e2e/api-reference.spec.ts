@@ -32,13 +32,15 @@ const contract = {
     { name: "Administration", tags: ["health"] },
     { name: "Internal", tags: ["worker"] },
   ],
+  // Inherited by operations that declare no security of their own.
+  security: [{ HTTPBearer: [] }],
   paths: {
     "/health": {
       get: {
         summary: "Check API health",
         operationId: "checkHealth",
         tags: ["health"],
-        security: [{ HTTPBearer: [] }],
+        security: [{ OAuth2: [] }],
         responses: ok,
       },
       post: {
@@ -47,6 +49,14 @@ const contract = {
         tags: ["worker"],
         security: [{ InternalToken: [] }],
         "x-internal": true,
+        responses: ok,
+      },
+    },
+    "/version": {
+      get: {
+        summary: "Read the version",
+        operationId: "readVersion",
+        tags: ["health"],
         responses: ok,
       },
     },
@@ -64,6 +74,7 @@ const contract = {
   components: {
     securitySchemes: {
       HTTPBearer: { type: "http", scheme: "bearer" },
+      OAuth2: { type: "http", scheme: "bearer", description: "Stand-in for the sign-in flow." },
       InternalToken: { type: "apiKey", in: "header", name: "X-Internal-Token" },
     },
   },
@@ -94,11 +105,12 @@ test("generated API reference renders the public contract @smoke", async ({ page
     syncFixture(root, contract);
 
     const published = JSON.parse(readFileSync(join(root, "public/api/openapi.json"), "utf8"));
-    expect(Object.keys(published.paths)).toEqual(["/health"]);
+    expect(Object.keys(published.paths)).toEqual(["/health", "/version"]);
     expect(Object.keys(published.paths["/health"])).toEqual(["get"]);
     expect(published.tags.map((tag: { name: string }) => tag.name)).toEqual(["health"]);
     expect(published["x-tagGroups"]).toEqual([{ name: "Administration", tags: ["health"] }]);
-    expect(Object.keys(published.components.securitySchemes)).toEqual(["HTTPBearer"]);
+    // HTTPBearer is used only through the top-level requirement, OAuth2 by an operation.
+    expect(Object.keys(published.components.securitySchemes)).toEqual(["HTTPBearer", "OAuth2"]);
     expect(published.servers.map((server: { url: string }) => server.url)).toEqual([
       "https://{host}/api",
     ]);
