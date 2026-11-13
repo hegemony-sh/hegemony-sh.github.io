@@ -61,7 +61,7 @@ features:
 
 <div class="showcase-section">
   <p class="showcase-eyebrow">From the demo</p>
-  <p class="showcase-title">One run, from request to proof</p>
+  <h2 class="showcase-title">One run, from request to proof</h2>
   <p class="showcase-lead">These screens come from the demo lab: a fictional operator changing its routers with Hegemony.</p>
   <figure class="shot shot--hero"><a href="/screenshots/run-live.webp" target="_blank" rel="noopener"><img src="/screenshots/run-live.webp" alt="A maintenance window run waiting for approval, with its graph and live router output" width="2400" height="1500" loading="lazy" decoding="async"></a><figcaption>A maintenance window on the Delphi edge routers: traffic drained, reachability watched, and the run waiting for approval to close. The live router output is on the right.</figcaption></figure>
   <div class="showcase-rows">

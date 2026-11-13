@@ -58,7 +58,7 @@ features:
 
 <div class="showcase-section">
   <p class="showcase-eyebrow">Ukázka z dema</p>
-  <p class="showcase-title">Jeden běh od žádosti po důkaz</p>
+  <h2 class="showcase-title">Jeden běh od žádosti po důkaz</h2>
   <p class="showcase-lead">Tyto obrazovky pocházejí z demo laboratoře: fiktivní operátor v ní mění své routery pomocí Hegemony.</p>
   <figure class="shot shot--hero"><a href="/screenshots/run-live.webp" target="_blank" rel="noopener"><img src="/screenshots/run-live.webp" alt="Běh servisního okna čekající na schválení, s grafem a živým výstupem z routerů" width="2400" height="1500" loading="lazy" decoding="async"></a><figcaption>Servisní okno na hraničních routerech v Delfách: provoz je odkloněný, dostupnost se sleduje a běh čeká na schválení, aby okno uzavřel. Vpravo je živý výstup z routerů.</figcaption></figure>
   <div class="showcase-rows">
