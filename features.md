@@ -75,7 +75,7 @@ description: What Hegemony can do today, and where it is heading.
 <FeatureCard planned icon="key" title="Short-lived credentials">Credentials issued for one run, such as short-lived SSH certificates and one-time passwords.</FeatureCard>
 <FeatureCard planned icon="message" title="Approvals from other tools">Approve or reject a waiting run from ServiceNow, Jira or a chat tool.</FeatureCard>
 <FeatureCard planned icon="chart" title="More checks">An SNMP check, and more connectivity checks such as TLS handshake, SSH banner and NETCONF.</FeatureCard>
-<FeatureCard planned icon="layers" title="Workers in separate network zones">Run steps on workers inside a separate network zone, such as a DMZ. The worker connects out to the platform; nothing connects into the zone.</FeatureCard>
+<FeatureCard planned icon="layers" title="Workers in separate network zones">Run steps on workers inside a separate network zone, such as a DMZ. The worker connects out to the platform, so the platform needs no inbound connection into the zone.</FeatureCard>
 <FeatureCard planned icon="storage" title="VM templates for vCenter">Build VMware VM templates in a flow, store them in Hegemony, and let vCenter subscribe to them as a Content Library.</FeatureCard>
 </div>
 

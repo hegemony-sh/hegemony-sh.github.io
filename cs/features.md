@@ -75,7 +75,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 <FeatureCard planned icon="key" title="Krátkodobé přihlašovací údaje">Přihlašovací údaje vydané jen pro jeden běh, například krátkodobé SSH certifikáty a jednorázová hesla.</FeatureCard>
 <FeatureCard planned icon="message" title="Schvalování z jiných nástrojů">Čekající běh schválíte nebo zamítnete přímo ze ServiceNow, Jiry nebo chatu.</FeatureCard>
 <FeatureCard planned icon="chart" title="Další kontroly">Kontrola SNMP a další kontroly konektivity, například TLS handshake, SSH banner a NETCONF.</FeatureCard>
-<FeatureCard planned icon="layers" title="Workery v oddělených síťových zónách">Kroky poběží na workerech v oddělené síťové zóně, třeba v DMZ. Worker se k platformě připojuje sám a do zóny se zvenku nic nepřipojuje.</FeatureCard>
+<FeatureCard planned icon="layers" title="Workery v oddělených síťových zónách">Kroky poběží na workerech v oddělené síťové zóně, třeba v DMZ. Worker se k platformě připojuje sám, takže platforma do zóny nepotřebuje žádné příchozí spojení.</FeatureCard>
 <FeatureCard planned icon="storage" title="VM šablony pro vCenter">VM šablony pro VMware sestavíte ve workflow, uložíte v Hegemony a vCenter si je bude odebírat jako Content Library.</FeatureCard>
 </div>
 
