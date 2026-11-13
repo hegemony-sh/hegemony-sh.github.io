@@ -70,11 +70,13 @@ description: What Hegemony can do today, and where it is heading.
 
 <div class="features-grid">
 <FeatureCard planned icon="upload" title="Device software upgrades">Steps that stage an image, install it, verify the running version, and roll back on failure.</FeatureCard>
-<FeatureCard planned icon="server" title="More device platforms">Support for more network device platforms.</FeatureCard>
+<FeatureCard planned icon="server" title="More platforms">Support for more platforms: network devices, servers and other systems.</FeatureCard>
 <FeatureCard planned icon="monitor" title="Windows hosts">Windows Remote Management (WinRM) as a built-in way to run commands on Windows hosts.</FeatureCard>
 <FeatureCard planned icon="key" title="Short-lived credentials">Credentials issued for one run, such as short-lived SSH certificates and one-time passwords.</FeatureCard>
 <FeatureCard planned icon="message" title="Approvals from other tools">Approve or reject a waiting run from ServiceNow, Jira or a chat tool.</FeatureCard>
 <FeatureCard planned icon="chart" title="More checks">An SNMP check, and more connectivity checks such as TLS handshake, SSH banner and NETCONF.</FeatureCard>
+<FeatureCard planned icon="layers" title="Workers in separate network zones">Run steps on workers inside a separate network zone, such as a DMZ. The worker connects out to the platform, and nothing connects into the zone.</FeatureCard>
+<FeatureCard planned icon="storage" title="VM template library">Build VMware virtual machine templates in a flow, store them in Hegemony, and let vCenter subscribe to them as a content library.</FeatureCard>
 </div>
 
 </div>

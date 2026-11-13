@@ -70,11 +70,13 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <div class="features-grid">
 <FeatureCard planned icon="upload" title="Upgrade softwaru zařízení">Kroky, které nahrají obraz, nainstalují ho, ověří běžící verzi a při chybě se vrátí k předchozí.</FeatureCard>
-<FeatureCard planned icon="server" title="Další platformy zařízení">Podpora dalších platforem síťových zařízení.</FeatureCard>
+<FeatureCard planned icon="server" title="Další platformy">Podpora dalších platforem: síťových zařízení, serverů a dalších systémů.</FeatureCard>
 <FeatureCard planned icon="monitor" title="Počítače s Windows">Windows Remote Management (WinRM) jako vestavěný způsob spouštění příkazů na počítačích s Windows.</FeatureCard>
 <FeatureCard planned icon="key" title="Krátkodobé přihlašovací údaje">Přihlašovací údaje vydané pro jeden běh, například krátkodobé SSH certifikáty a jednorázová hesla.</FeatureCard>
 <FeatureCard planned icon="message" title="Schvalování z jiných nástrojů">Čekající běh schválíte nebo zamítnete ze ServiceNow, Jiry nebo chatu.</FeatureCard>
 <FeatureCard planned icon="chart" title="Další kontroly">Kontrola SNMP a další kontroly konektivity, například TLS handshake, SSH banner a NETCONF.</FeatureCard>
+<FeatureCard planned icon="layers" title="Workery v oddělených síťových zónách">Kroky poběží na workerech uvnitř oddělené síťové zóny, například v DMZ. Worker se k platformě připojuje sám a do zóny se nic nepřipojuje.</FeatureCard>
+<FeatureCard planned icon="storage" title="Knihovna šablon virtuálních strojů">Šablony virtuálních strojů VMware sestavíte ve workflow, uložíte v Hegemony a vCenter je bude odebírat jako knihovnu obsahu.</FeatureCard>
 </div>
 
 </div>
