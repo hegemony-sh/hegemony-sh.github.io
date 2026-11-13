@@ -27,7 +27,9 @@
 //                               in-docs images (generated screenshots)
 //                               serve from the site itself
 // - .vitepress/generated/platform-sidebar.json   the sidebar tree
-// - public/api/openapi.json     the committed OpenAPI spec
+// - public/api/openapi.json     the committed OpenAPI spec, public part only:
+//                               operations marked x-internal are removed, and
+//                               the sync fails if an internal one survives
 // - public/api/index.html + redoc.standalone.js  the API reference (ReDoc)
 //
 // Every run first deletes the trees it generates, so pages deleted or
@@ -285,10 +287,150 @@ console.log(`sidebar: ${sections.length} sections`);
 
 // --- API reference (ReDoc over the committed spec) ---------------------------
 
+const httpMethods = new Set(["get", "put", "post", "delete", "options", "head", "patch", "trace"]);
+const isObject = (value) => typeof value === "object" && value !== null && !Array.isArray(value);
+
+/** Every [path, method, operation] of the contract. */
+function operationsOf(contract) {
+  if (!isObject(contract.paths)) {
+    return [];
+  }
+  return Object.entries(contract.paths).flatMap(([path, item]) =>
+    isObject(item)
+      ? Object.entries(item)
+          .filter(([method, operation]) => httpMethods.has(method) && isObject(operation))
+          .map(([method, operation]) => [path, method, operation])
+      : [],
+  );
+}
+
+/**
+ * Drop the operations marked x-internal (the platform's own worker and web UI
+ * use them; API users cannot). ReDoc does not hide them by itself. Paths,
+ * tags and tag groups left empty go with them, and so does a security scheme
+ * no remaining operation uses. Component schemas stay.
+ *
+ * Mirrors public_openapi() in the platform's apps/api/openapi_docs.py - keep
+ * the two in step.
+ */
+function publicContract(contract) {
+  for (const [path, method, operation] of operationsOf(contract)) {
+    if (operation["x-internal"] === true) {
+      delete contract.paths[path][method];
+    }
+  }
+  if (isObject(contract.paths)) {
+    for (const [path, item] of Object.entries(contract.paths)) {
+      if (!isObject(item) || !Object.keys(item).some((key) => httpMethods.has(key))) {
+        delete contract.paths[path];
+      }
+    }
+  }
+
+  const remaining = operationsOf(contract).map(([, , operation]) => operation);
+  const usedTags = new Set(
+    remaining.flatMap((operation) => (Array.isArray(operation.tags) ? operation.tags : [])),
+  );
+  // An operation without its own "security" inherits the contract's top-level
+  // requirements, so the schemes those name stay as well.
+  const requirements = [contract.security, ...remaining.map((operation) => operation.security)];
+  const usedSchemes = new Set(
+    requirements.flatMap((security) =>
+      (Array.isArray(security) ? security : [])
+        .filter(isObject)
+        .flatMap((requirement) => Object.keys(requirement)),
+    ),
+  );
+
+  if (Array.isArray(contract.tags)) {
+    contract.tags = contract.tags.filter((tag) => isObject(tag) && usedTags.has(tag.name));
+  }
+  if (Array.isArray(contract["x-tagGroups"])) {
+    contract["x-tagGroups"] = contract["x-tagGroups"]
+      .filter(isObject)
+      .map((group) =>
+        Object.assign({}, group, {
+          tags: (Array.isArray(group.tags) ? group.tags : []).filter((tag) => usedTags.has(tag)),
+        }),
+      )
+      .filter((group) => group.tags.length > 0);
+  }
+  const schemes = contract.components?.securitySchemes;
+  if (isObject(schemes)) {
+    for (const name of Object.keys(schemes)) {
+      if (!usedSchemes.has(name)) {
+        delete schemes[name];
+      }
+    }
+  }
+  return contract;
+}
+
+/**
+ * Adjust the contract for a page that is not served by a Hegemony instance.
+ *
+ * - A relative server URL ("/api") means "this instance". On the website it
+ *   would resolve to the documentation page itself, so only absolute servers
+ *   stay.
+ * - Between releases the platform's default branch carries the placeholder
+ *   version 0.0.0 (the real one is set at release). Name the build instead of
+ *   showing a version that never existed.
+ */
+function forWebsite(contract) {
+  if (Array.isArray(contract.servers)) {
+    contract.servers = contract.servers.filter(
+      (server) => isObject(server) && /^[a-z][a-z0-9+.-]*:\/\//i.test(server.url ?? ""),
+    );
+    if (contract.servers.length === 0) {
+      delete contract.servers;
+    }
+  }
+  if (isObject(contract.info) && contract.info.version === "0.0.0") {
+    contract.info.version = "development build";
+    const note =
+      `> **Development build.** This reference is built from the \`${platformRef}\` branch of ` +
+      `the [platform repository](${repoUrl}). It can describe changes that are not in a ` +
+      "release yet. Your own instance serves the reference for its exact version.";
+    contract.info.description = contract.info.description
+      ? `${note}\n\n${contract.info.description}`
+      : note;
+  }
+  return contract;
+}
+
+/** Fail the sync rather than publish something internal. */
+function assertPublic(contract) {
+  const leaks = operationsOf(contract)
+    .filter(
+      ([path, , operation]) => operation["x-internal"] === true || path.startsWith("/internal"),
+    )
+    .map(([path, method]) => `${method.toUpperCase()} ${path}`);
+  for (const path of Object.keys(contract.paths ?? {})) {
+    if (path.startsWith("/internal") && !leaks.some((leak) => leak.endsWith(` ${path}`))) {
+      leaks.push(path);
+    }
+  }
+  if (leaks.length > 0) {
+    console.error(`the public API contract still has ${leaks.length} internal entries:`);
+    for (const leak of leaks.slice(0, 20)) {
+      console.error(`  ${leak}`);
+    }
+    process.exit(1);
+  }
+}
+
 const spec = join(platformRoot, "apps", "api", "openapi.json");
 if (existsSync(spec)) {
+  const source = JSON.parse(readFileSync(spec, "utf8"));
+  const sourceCount = operationsOf(source).length;
+  const contract = forWebsite(publicContract(source));
+  assertPublic(contract);
   mkdirSync(apiDir, { recursive: true });
-  cpSync(spec, join(apiDir, "openapi.json"));
+  writeFileSync(join(apiDir, "openapi.json"), `${JSON.stringify(contract)}\n`);
+  console.log(
+    `api contract: ${operationsOf(contract).length} of ${sourceCount} operations are public, ` +
+      `${contract.tags?.length ?? 0} tags, ${contract["x-tagGroups"]?.length ?? 0} groups`,
+  );
   const redocBundle = join(siteRoot, "node_modules", "redoc", "bundles", "redoc.standalone.js");
   if (existsSync(redocBundle)) {
     cpSync(redocBundle, join(apiDir, "redoc.standalone.js"));
@@ -301,9 +443,36 @@ if (existsSync(spec)) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>API Reference - Hegemony.sh</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <style>body { margin: 0; padding: 0; }</style>
+    <style>
+      /* The site is dark by default (#131313, sky-blue accent); the page is
+         dark too until ReDoc paints its own background in either mode. */
+      html { background: #131313; }
+      body { margin: 0; padding: 0; }
+      :root:has(.redoc.dark) {
+        --bg-color: #131313;
+        --bg-color-raised: #1a1a1a;
+        --bg-color-tonal: #1a1a1a;
+        --layer-color: #1c1c1c;
+        --link-color-primary: #38bdf8;
+      }
+    </style>
+    <script>
+      // ReDoc follows the operating system unless the reader picked a mode.
+      // Start from the site's mode instead: dark, unless the reader switched
+      // the site to light. ReDoc's own switch then overrides and remembers it.
+      try {
+        if (!localStorage.getItem("redoc.colorMode")) {
+          const site = localStorage.getItem("vitepress-theme-appearance");
+          localStorage.setItem("redoc.colorMode", site === "light" ? "light" : "dark");
+        }
+      } catch {
+        // Storage is blocked: ReDoc falls back to the operating system's mode.
+      }
+    </script>
   </head>
   <body>
+    <!-- spec-url is the filtered contract, so ReDoc's download button serves
+         exactly what the page shows. -->
     <redoc spec-url="/api/openapi.json"></redoc>
     <script type="module" src="/api/redoc.standalone.js"></script>
   </body>
