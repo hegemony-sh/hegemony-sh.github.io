@@ -59,6 +59,18 @@ features:
     details: Event-driven notifications and webhooks integrate Hegemony with your existing alerting and automation pipelines.
 ---
 
+<div class="showcase-section">
+  <p class="showcase-eyebrow">From the demo</p>
+  <p class="showcase-title">One run, from request to proof</p>
+  <p class="showcase-lead">These screens come from the demo lab: a fictional operator changing its routers with Hegemony.</p>
+  <figure class="shot shot--hero"><a href="/screenshots/run-live.webp" target="_blank" rel="noopener"><img src="/screenshots/run-live.webp" alt="A maintenance window run waiting for approval, with its graph and live router output" width="2400" height="1500" loading="lazy" decoding="async"></a><figcaption>A maintenance window on the Delphi edge routers: traffic drained, reachability watched, and the run waiting for approval to close. The live router output is on the right.</figcaption></figure>
+  <div class="showcase-rows">
+    <div class="showcase-row"><div class="showcase-text"><h3>Draw the change</h3><p>Every change is a flow: evidence before, the change, evidence after, and a check that it worked. Any failure ends in one clear place.</p></div><figure class="shot"><a href="/screenshots/flow-editor.webp" target="_blank" rel="noopener"><img src="/screenshots/flow-editor.webp" alt="The flow editor showing the Announce service prefix flow" width="2400" height="692" loading="lazy" decoding="async"></a></figure></div>
+    <div class="showcase-row"><div class="showcase-text"><h3>A second pair of eyes</h3><p>The run stops until an approver signs off. Operators run changes, approvers approve them, and nobody does both.</p></div><figure class="shot"><a href="/screenshots/approvals.webp" target="_blank" rel="noopener"><img src="/screenshots/approvals.webp" alt="The approvals inbox with two pending requests" width="2400" height="710" loading="lazy" decoding="async"></a></figure></div>
+    <div class="showcase-row"><div class="showcase-text"><h3>Proof of what changed</h3><p>Hegemony keeps each router&#39;s configuration before and after the change, and shows exactly what the change added.</p></div><figure class="shot"><a href="/screenshots/evidence-diff.webp" target="_blank" rel="noopener"><img src="/screenshots/evidence-diff.webp" alt="Before and after configuration of an edge router, with the two added lines highlighted" width="2400" height="982" loading="lazy" decoding="async"></a></figure></div>
+  </div>
+</div>
+
 <div class="demo-section" id="try-the-demo">
   <p class="demo-eyebrow">Try the demo</p>
   <div class="demo-card">

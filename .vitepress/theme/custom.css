@@ -682,3 +682,111 @@ html[lang="cs-CZ"] .VPNavScreenTranslations {
   font-weight: 500;
   line-height: 24px;
 }
+
+/*
+ * Screenshots: the home page showcase (index.md, cs/index.md) and one image
+ * per group on the features pages. Each image links to its full-size file.
+ */
+.showcase-section {
+  margin: 0 auto;
+  padding: 32px 24px 0;
+  max-width: 1152px;
+}
+
+@media (width >= 640px) {
+  .showcase-section {
+    padding: 40px 48px 0;
+  }
+}
+
+@media (width >= 960px) {
+  .showcase-section {
+    padding: 48px 64px 0;
+  }
+}
+
+.showcase-eyebrow {
+  margin: 0 0 12px;
+  color: var(--vp-c-brand-1);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vp-doc p.showcase-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.vp-doc p.showcase-lead {
+  margin: 12px 0 24px;
+  max-width: 640px;
+  color: var(--vp-c-text-2);
+}
+
+.shot {
+  margin: 0;
+}
+
+.shot a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background-color: var(--vp-c-bg-soft);
+  box-shadow: 0 12px 40px rgb(0, 0, 0, 0.35);
+  transition: border-color 0.25s;
+}
+
+.shot a:hover {
+  border-color: var(--vp-c-brand-1);
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.vp-doc .shot figcaption,
+.shot figcaption {
+  margin-top: 12px;
+  color: var(--vp-c-text-2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.showcase-rows {
+  display: grid;
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.showcase-row {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+}
+
+@media (width >= 960px) {
+  .showcase-text {
+    max-width: 720px;
+  }
+}
+
+.vp-doc .showcase-text h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.vp-doc .showcase-text p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+}
+
+.shot--feature {
+  margin-bottom: 20px;
+}
