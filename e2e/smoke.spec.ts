@@ -70,6 +70,28 @@ test.describe("Website smoke @smoke", () => {
     );
   });
 
+  test("screenshots open in a popup and close again", async ({ page }) => {
+    await page.goto("/");
+
+    const shot = page.locator(".shot a").first();
+    await shot.scrollIntoViewIfNeeded();
+    await shot.click();
+
+    const dialog = page.locator("dialog.image-lightbox");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("img")).toHaveAttribute("src", /\/screenshots\/.+\.webp$/);
+    // The page did not navigate to the image.
+    await expect(page).toHaveURL(/\/$/);
+
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+
+    await shot.click();
+    await expect(dialog).toBeVisible();
+    await page.getByRole("button", { name: "Close" }).click();
+    await expect(dialog).toBeHidden();
+  });
+
   test("stored Czech preference redirects the visitor to the Czech locale", async ({ page }) => {
     await page.addInitScript((storageKey) => {
       window.localStorage.setItem(storageKey, "cs");

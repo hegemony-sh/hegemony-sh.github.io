@@ -14,7 +14,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <h2 class="features-group">Tvorba workflow</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/run-form.webp" target="_blank" rel="noopener"><img src="/screenshots/run-form.webp" alt="Vyplněný formulář pro spuštění workflow Announce service prefix" width="2400" height="906" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/run-form.webp"><img src="/screenshots/run-form.webp" alt="Vyplněný formulář pro spuštění workflow Announce service prefix" width="2400" height="906" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="workflow" title="Vizuální editor">Workflow nakreslíte jako graf kroků, nebo ho upravíte přímo v YAML. Rozpracované změny ukládáte jako draft, commitem z nich vznikne nová verze a verze můžete porovnávat.</FeatureCard>
@@ -27,7 +27,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <h2 class="features-group">Spolehlivé provádění</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/monitor.webp" target="_blank" rel="noopener"><img src="/screenshots/monitor.webp" alt="Živé grafy dostupnosti dvou hraničních routerů během servisního okna" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/monitor.webp"><img src="/screenshots/monitor.webp" alt="Živé grafy dostupnosti dvou hraničních routerů během servisního okna" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="repeat" title="Běhy, které přežijí restart">Workflow se provádí na Temporalu. Po restartu pokračuje tam, kde skončilo, a na servisní okno nebo reboot zařízení umí čekat i několik dní.</FeatureCard>
@@ -41,7 +41,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <h2 class="features-group">Přehled a důkazy</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/audit-log.webp" target="_blank" rel="noopener"><img src="/screenshots/audit-log.webp" alt="Auditní log se spuštěními běhů a schváleními" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/audit-log.webp"><img src="/screenshots/audit-log.webp" alt="Auditní log se spuštěními běhů a schváleními" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="activity" title="Živý průběh">Výstup každého kroku sledujete už během běhu.</FeatureCard>
@@ -51,7 +51,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <h2 class="features-group">Zabezpečení a přístup</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/organizations.webp" target="_blank" rel="noopener"><img src="/screenshots/organizations.webp" alt="Přepínač organizací se čtyřmi organizacemi" width="2400" height="938" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/organizations.webp"><img src="/screenshots/organizations.webp" alt="Přepínač organizací se čtyřmi organizacemi" width="2400" height="938" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="shield" title="SSO a role">Přihlášení přes Keycloak. Šest rolí odděluje tvorbu, spouštění, schvalování a audit. Citlivé akce vyžadují nové přihlášení.</FeatureCard>
@@ -63,7 +63,7 @@ description: Co Hegemony umí už dnes a kam směřuje.
 
 <h2 class="features-group">Inventář a integrace</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/inventory.webp" target="_blank" rel="noopener"><img src="/screenshots/inventory.webp" alt="Inventář zařízení z lokálního zdroje a z Gitu" width="2400" height="1062" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/inventory.webp"><img src="/screenshots/inventory.webp" alt="Inventář zařízení z lokálního zdroje a z Gitu" width="2400" height="1062" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="server" title="Inventář">Zařízení a lokality spravujete přímo v Hegemony, nebo je načtete z NetBoxu či z Git repozitáře. Cílová zařízení vyberete ručně nebo dotazem.</FeatureCard>
