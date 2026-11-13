@@ -750,6 +750,7 @@ html[lang="cs-CZ"] .VPNavScreenTranslations {
 
 .shot img {
   display: block;
+  cursor: zoom-in;
   width: 100%;
   height: auto;
 }

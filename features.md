@@ -14,7 +14,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <h2 class="features-group">Build workflows</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/run-form.webp" target="_blank" rel="noopener"><img src="/screenshots/run-form.webp" alt="The start form of the Announce service prefix flow, filled in" width="2400" height="906" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/run-form.webp"><img src="/screenshots/run-form.webp" alt="The start form of the Announce service prefix flow, filled in" width="2400" height="906" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="workflow" title="Visual flow editor">Draw a workflow as a graph of steps, or edit it directly as YAML. Work in a draft, commit it as a new version, and compare versions.</FeatureCard>
@@ -27,7 +27,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <h2 class="features-group">Run them reliably</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/monitor.webp" target="_blank" rel="noopener"><img src="/screenshots/monitor.webp" alt="Live reachability graphs for two edge routers during a maintenance window" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/monitor.webp"><img src="/screenshots/monitor.webp" alt="Live reachability graphs for two edge routers during a maintenance window" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="repeat" title="Runs that survive restarts">Runs execute on Temporal. They continue after a restart and can wait for days for a maintenance window or a device reload.</FeatureCard>
@@ -41,7 +41,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <h2 class="features-group">See and prove what happened</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/audit-log.webp" target="_blank" rel="noopener"><img src="/screenshots/audit-log.webp" alt="The audit log with run starts and approvals" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/audit-log.webp"><img src="/screenshots/audit-log.webp" alt="The audit log with run starts and approvals" width="2400" height="1500" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="activity" title="Live progress">Follow the output of every step while the run is in progress.</FeatureCard>
@@ -51,7 +51,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <h2 class="features-group">Security and access</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/organizations.webp" target="_blank" rel="noopener"><img src="/screenshots/organizations.webp" alt="The organization switcher with four organizations" width="2400" height="938" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/organizations.webp"><img src="/screenshots/organizations.webp" alt="The organization switcher with four organizations" width="2400" height="938" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="shield" title="Single sign-on and roles">Log in through Keycloak. Six roles separate building, running, approving and auditing. Sensitive actions ask for a fresh sign-in.</FeatureCard>
@@ -63,7 +63,7 @@ description: What Hegemony can do today, and where it is heading.
 
 <h2 class="features-group">Inventory and integrations</h2>
 
-<figure class="shot shot--feature"><a href="/screenshots/inventory.webp" target="_blank" rel="noopener"><img src="/screenshots/inventory.webp" alt="The device inventory with devices from a local and a Git source" width="2400" height="1062" loading="lazy" decoding="async"></a></figure>
+<figure class="shot shot--feature"><a href="/screenshots/inventory.webp"><img src="/screenshots/inventory.webp" alt="The device inventory with devices from a local and a Git source" width="2400" height="1062" loading="lazy" decoding="async"></a></figure>
 
 <div class="features-grid">
 <FeatureCard icon="server" title="Inventory">Manage devices and sites in Hegemony, or bring them in from NetBox or a Git repository. Target devices by hand or by a query.</FeatureCard>
