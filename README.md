@@ -64,7 +64,7 @@ release.
 - Sign off every commit (`git commit -s`) under the
   [Developer Certificate of Origin](https://developercertificate.org/); the DCO
   app checks every PR. See the platform's
-  [CONTRIBUTING.md](https://github.com/hegemony-sh/hegemony/blob/develop/CONTRIBUTING.md#licensing-and-dco).
+  [CONTRIBUTING.md](https://github.com/hegemony-sh/hegemony/blob/main/CONTRIBUTING.md#licensing-and-dco).
 - Run `npm run verify` before opening a PR.
 - Run `npm run test:e2e:smoke` for changes touching `.vitepress/`, localized
   routing, navigation, or static assets.
