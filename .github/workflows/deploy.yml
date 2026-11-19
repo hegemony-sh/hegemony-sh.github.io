@@ -48,7 +48,7 @@ jobs:
       # Deploy-only: pull request builds (fork PRs get no secrets) build the
       # site without the platform docs, and the internal link check skips the
       # synced trees when they are absent. The platform repository now lives
-      # at its final home, hegemony-sh/hegemony (default branch develop), but
+      # at its final home, hegemony-sh/hegemony (default branch main), but
       # is private until launch, so this checkout needs the secret
       # PLATFORM_REPO_TOKEN (fine-grained PAT, contents:read on that
       # repository); the repository variables PLATFORM_REPO (owner/name) and
@@ -67,7 +67,7 @@ jobs:
           repository: ${{ vars.PLATFORM_REPO || 'hegemony-sh/hegemony' }}
           # Same fallback as the sync step below, so the checked-out revision
           # and the links the sync script generates always name the same ref.
-          ref: ${{ vars.PLATFORM_REPO_REF || 'develop' }}
+          ref: ${{ vars.PLATFORM_REPO_REF || 'main' }}
           token: ${{ secrets.PLATFORM_REPO_TOKEN || github.token }}
           path: .platform
           fetch-depth: 1
@@ -76,7 +76,7 @@ jobs:
         if: github.event_name != 'pull_request'
         env:
           PLATFORM_REPO: ${{ vars.PLATFORM_REPO || 'hegemony-sh/hegemony' }}
-          PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'develop' }}
+          PLATFORM_REPO_REF: ${{ vars.PLATFORM_REPO_REF || 'main' }}
         run: node scripts/sync-platform-docs.mjs .platform --allow-missing-docs
 
       # Plugin documentation is owned by the step-plugin repository: every
